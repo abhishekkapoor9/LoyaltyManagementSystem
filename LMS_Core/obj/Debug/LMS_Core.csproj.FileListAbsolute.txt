@@ -1,0 +1,5 @@
+E:\LoyaltyManagementSystem\LoyaltyManagement\LMS_Core\bin\Debug\LMS_Core.dll
+E:\LoyaltyManagementSystem\LoyaltyManagement\LMS_Core\bin\Debug\LMS_Core.pdb
+E:\LoyaltyManagementSystem\LoyaltyManagement\LMS_Core\obj\Debug\LMS_Core.csprojResolveAssemblyReference.cache
+E:\LoyaltyManagementSystem\LoyaltyManagement\LMS_Core\obj\Debug\LMS_Core.dll
+E:\LoyaltyManagementSystem\LoyaltyManagement\LMS_Core\obj\Debug\LMS_Core.pdb
