@@ -6,9 +6,9 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using LMS_web.Models;
+using LMS_Web.Models;
 
-namespace LMS_web.Controllers
+namespace LMS_Web.Controllers
 {
     [Authorize]
     public class ManageController : Controller

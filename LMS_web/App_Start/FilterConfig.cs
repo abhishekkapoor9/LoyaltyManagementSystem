@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace LMS_web
+namespace LMS_Web
 {
     public class FilterConfig
     {

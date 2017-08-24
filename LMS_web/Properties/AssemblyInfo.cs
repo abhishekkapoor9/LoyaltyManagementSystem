@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("LMS_web")]
+[assembly: AssemblyTitle("LMS_Web")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("LMS_web")]
+[assembly: AssemblyProduct("LMS_Web")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("3244e813-8459-4013-b56d-01bd672a1c87")]
+[assembly: Guid("a2419235-2136-4f8c-98f0-16e8420e1a5a")]
 
 // Version information for an assembly consists of the following four values:
 //

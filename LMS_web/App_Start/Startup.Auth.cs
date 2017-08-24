@@ -5,9 +5,9 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using LMS_web.Models;
+using LMS_Web.Models;
 
-namespace LMS_web
+namespace LMS_Web
 {
     public partial class Startup
     {
