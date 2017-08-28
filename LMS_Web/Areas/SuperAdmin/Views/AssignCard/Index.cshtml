@@ -1,0 +1,353 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@*<link href="~/Content/Dashboard/css/bootstrap.min.css" rel="stylesheet" />*@
+<link href="~/Content/Dashboard/css/font-awesome.css" rel="stylesheet" />
+<link href="~/Content/Dashboard/css/ui.jqgrid.css" rel="stylesheet" />
+<link href="~/Content/Dashboard/css/ace.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/Content/Dashboard/css/chosen.css" />
+<link href="~/Content/Dashboard/css/chosen.css" rel="stylesheet" />
+<style type="text/css">
+    .chosen-single {
+        height: 33px !important;
+        text-align: center;
+    }
+</style>
+@*@using (@Html.BeginForm("Index", "Category", FormMethod.Post))
+    {*@
+<div class="col-sm-12">
+    <div class="widget-box transparent">
+        <div class="widget-header widget-header-flat">
+            <h4 class="widget-title lighter">
+                <i class="ace-icon fa fa-signal"></i>
+                Assign Card Details
+            </h4>
+
+            <div class="widget-toolbar">
+                <a href="#" data-action="collapse">
+                    <i class="ace-icon fa fa-chevron-up"></i>
+                </a>
+            </div>
+        </div>
+        <div class="widget-body">
+            <div class="row" style="margin-top:3% !important">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <select class="chosen-select form-control" id="form-field-select-3" data-placeholder="Choose Customer">
+                        <option value="AL">Choose Customer</option>
+                        <option value="AL">Alabama</option>
+                        <option value="AK">Alaska</option>
+                        <option value="AZ">Arizona</option>
+                        <option value="AR">Arkansas</option>
+                        <option value="CA">California</option>
+                        <option value="CO">Colorado</option>
+                        <option value="CT">Connecticut</option>
+                        <option value="DE">Delaware</option>
+                        <option value="FL">Florida</option>
+                        <option value="GA">Georgia</option>
+                        <option value="HI">Hawaii</option>
+                        <option value="ID">Idaho</option>
+                        <option value="IL">Illinois</option>
+                    </select>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <div class="row" style="margin-top:3% !important">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <select class="chosen-select form-control" id="form-field-select-3" data-placeholder="Choose Card">
+                        <option value="AL">Choose Card</option>
+                        <option value="AL">Alabama</option>
+                        <option value="AK">Alaska</option>
+                        <option value="AZ">Arizona</option>
+                        <option value="AR">Arkansas</option>
+                        <option value="CA">California</option>
+                        <option value="CO">Colorado</option>
+                        <option value="CT">Connecticut</option>
+                        <option value="DE">Delaware</option>
+                        <option value="FL">Florida</option>
+                        <option value="GA">Georgia</option>
+                        <option value="HI">Hawaii</option>
+                        <option value="ID">Idaho</option>
+                        <option value="IL">Illinois</option>
+                    </select>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <div class="row" style="margin-top:3% !important">
+                <div class="col-md-4"></div>
+                <div class="col-md-3">
+                    @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
+                    @Html.TextBox("Card Code", null, new { @id = "txt_VoucherCode", @class = "col-md-4", placeholder = "Generate Card Code", style = "width:100%" })
+                </div>
+                <div class="col-md-2">
+                    <input type="button" value="Generate Code" name="submit_login" class="btn btn-info" onclick='' style="width: 75%;" />
+                </div>
+                <div class="col-md-4"></div>
+                @*</div>*@
+            </div>
+            <div class="row" style="margin-top:3% !important">
+                <div class="col-md-4"></div>
+                <div class="col-md-2" style="width: 8%;">
+                    <div class="checkbox">
+                        <label>
+                            <input name="form-field-checkbox" type="checkbox" class="ace" />
+                            <span class="lbl"> Mail</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2" style="width: 8%;">
+                    <div class="checkbox">
+                        <label>
+                            <input name="form-field-checkbox" type="checkbox" class="ace" />
+                            <span class="lbl"> SMS</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <input type="submit" value="Submit" name="submit_login" class="btn btn-info" onclick='' />
+                    &nbsp; &nbsp; &nbsp;
+                    <input type="reset" value="Reset" name="reset_login" class="btn btn-info" onclick='' />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-sm-12">
+    <div class="widget-box transparent">
+        <div class="widget-header widget-header-flat">
+            <h4 class="widget-title lighter">
+                <i class="ace-icon fa fa-signal"></i>
+                Selected Card Details
+            </h4>
+            <div class="widget-toolbar">
+                <a href="#" data-action="collapse">
+                    <i class="ace-icon fa fa-chevron-up"></i>
+                </a>
+            </div>
+        </div>
+        <div class="widget-body">
+            <div class="row" style="margin-top:3% !important">
+                @*<div class="form-control">*@
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
+                    @Html.TextBox("Card Name", null, new { @id = "txt_clientName", @class = "col-md-4", placeholder = "Card Name", style = "width:100%" })
+                </div>
+                @*</div>*@
+            </div>
+            <div class="row" style="margin-top:3% !important">
+                @*<div class="form-control">*@
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
+                    <div class="input-daterange input-group">
+
+                        @Html.TextBox("start", null, new { @id = "txt_start", @class = "input-sm form-control", placeholder = "Valid From", style = "width:100%" })
+                        <span class="input-group-addon">
+                            <i class="fa fa-exchange"></i>
+                        </span>
+                        @Html.TextBox("end", null, new { @id = "txt_end", @class = "input-sm form-control", placeholder = "Valid To", style = "width:100%" })
+                    </div>
+                </div>
+                @*</div>*@
+            </div>
+            <div class="row" style="margin-top:3% !important">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
+                    @Html.TextArea("Card Description", null, new { @id = "txt_VoucherDescription", @class = "autosize-transition form-control", placeholder = "Card Description", style = "width:100%;border:1px solid" })
+                </div>
+                <div class="col-md-4">
+                    @Html.Label("lbl_active", "Active", new { @class = "control-label no-padding-right" })
+                </div>
+                <div class="col-md-4">
+                    <label>
+                        <input name="switch-field-1" class="ace ace-switch ace-switch-2" type="checkbox" />
+                        <span class="lbl"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-sm-12">
+    <div class="widget-box transparent">
+        <div class="widget-header widget-header-flat">
+            <h4 class="widget-title lighter">
+                <i class="ace-icon fa fa-signal"></i>
+                Data
+            </h4>
+
+            <div class="widget-toolbar">
+                <a href="#" data-action="collapse">
+                    <i class="ace-icon fa fa-chevron-up"></i>
+                </a>
+            </div>
+        </div>
+        <div class="widget-body">
+            <table id="jqGrid_category"></table>
+            <div id="jqControls_category"></div>
+        </div><!-- /.widget-body -->
+    </div>
+</div>
+
+@*}*@
+<script src="~/Content/Dashboard/js/jquery-1.9.1.min.js"></script>
+
+<script src="~/Content/Dashboard/js/ace-extra.min.js"></script>
+<script src="~/Content/Dashboard/js/jquery-ui-1.10.0.js"></script>
+<script src="~/Content/Dashboard/js/grid.locale-en.js"></script>
+<script src="~/Content/Dashboard/js/jquery.jqGrid.min.js"></script>
+<script src="~/Content/Dashboard/js/jquery.maskedinput.min.js"></script>
+<script src="~/Content/Dashboard/js/jquery.autosize.min.js"></script>
+<script src="~/Content/Dashboard/js/daterangepicker.min.js"></script>
+<script type="text/javascript">
+    jQuery(function ($) {
+
+        $('#id-input-file-1 , #id-input-file-2').ace_file_input({
+            no_file: 'No File ...',
+            btn_choose: 'Choose',
+            btn_change: 'Change',
+            droppable: false,
+            onchange: null,
+            thumbnail: false //| true | large
+            //whitelist:'gif|png|jpg|jpeg'
+            //blacklist:'exe|php'
+            //onchange:''
+            //
+        });
+        //autosize($('#form-field-tags'));
+    });
+</script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.input-daterange').datepicker({ autoclose: true });
+
+
+        //to translate the daterange picker, please copy the "examples/daterange-fr.js" contents here before initialization
+        $('input[name=date-range-picker]').daterangepicker({
+            'applyClass': 'btn-sm btn-success',
+            'cancelClass': 'btn-sm btn-default',
+            locale: {
+                applyLabel: 'Apply',
+                cancelLabel: 'Cancel',
+            }
+        })
+        $('input[name=date-range-picker]').daterangepicker({
+            'applyClass': 'btn-sm btn-success',
+            'cancelClass': 'btn-sm btn-default',
+            locale: {
+                applyLabel: 'Apply',
+                cancelLabel: 'Cancel',
+            }
+        })
+        $('.input-mask-phone').mask('(99) 99-9999-9999');
+        if (!ace.vars['touch']) {
+            $('.chosen-select').chosen({ allow_single_deselect: true });
+            //resize the chosen on window resize
+
+            $(window)
+            .off('resize.chosen')
+            .on('resize.chosen', function () {
+                $('.chosen-select').each(function () {
+                    var $this = $(this);
+                    $this.next().css({ 'width': $this.parent().width() });
+                })
+            }).trigger('resize.chosen');
+            //resize chosen on sidebar collapse/expand
+            $(document).on('settings.ace.chosen', function (e, event_name, event_val) {
+                if (event_name != 'sidebar_collapsed') return;
+                $('.chosen-select').each(function () {
+                    var $this = $(this);
+                    $this.next().css({ 'width': $this.parent().width() });
+                })
+            });
+
+
+            $('#chosen-multiple-style .btn').on('click', function (e) {
+                var target = $(this).find('input[type=radio]');
+                var which = parseInt(target.val());
+                if (which == 2) $('#form-field-select-4').addClass('tag-input-style');
+                else $('#form-field-select-4').removeClass('tag-input-style');
+            });
+        }
+        $('textarea[class*=autosize]').autosize({ append: "\n" });
+
+
+        $('#id-input-file-1 , #id-input-file-2').ace_file_input({
+            no_file: 'No File ...',
+            btn_choose: 'Choose',
+            btn_change: 'Change',
+            droppable: false,
+            onchange: null,
+            thumbnail: false //| true | large
+            //whitelist:'gif|png|jpg|jpeg'
+            //blacklist:'exe|php'
+            //onchange:''
+            //
+        });
+
+        $("#link").click(function () {
+
+        })
+        $("#jqGrid_category").jqGrid({
+            url: 'GetCategory',
+            datatype: 'json',
+            mtype: 'Get',
+            colNames: ['CategoryId', 'CategoryName'],
+            colModel: [
+                { key: true, hidden: false, name: 'CategoryId', index: 'CategoryId', editable: true },
+                { key: false, name: 'CategoryName', index: 'CategoryName', editable: true }
+            ],
+            pager: jQuery('#jqControls_category'),
+            rowNum: 10,
+            rowList: [10, 20, 30, 40, 50],
+            height: '100%',
+            viewrecords: true,
+            caption: 'Client Records',
+            emptyrecords: 'No Clients Records are Available to Display',
+            jsonReader: {
+                root: "rows",
+                page: "page",
+                total: "total",
+                records: "records",
+                repeatitems: false,
+                Id: "0"
+            },
+            autowidth: true,
+            multiselect: false
+        }).navGrid('#jqControls_category', { edit: true, add: false, del: true, search: false, refresh: true },
+            {
+                zIndex: 100,
+                url: "EditCategory",
+                closeOnEscape: true,
+                closeAfterEdit: true,
+                recreateForm: true,
+                afterComplete: function (response) {
+                    if (response.responseText) {
+                        alert(response.responseText);
+                    }
+                }
+            }, {},
+            {
+                zIndex: 100,
+                url: "DeleteCategory",
+                closeOnEscape: true,
+                closeAfterDelete: true,
+                recreateForm: true,
+                msg: "Are you sure you want to delete Student... ? ",
+                afterComplete: function (response) {
+                    if (response.responseText) {
+                        alert(response.responseText);
+                    }
+                }
+            });
+    });
+</script>
+
+

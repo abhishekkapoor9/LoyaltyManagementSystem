@@ -26,7 +26,7 @@
                 <a href="index.html" class="navbar-brand">
                     <small>
                         <i class="fa fa-leaf"></i>
-                        LMS Dashboard
+                        LMS Admin
                     </small>
                 </a>
             </div>
@@ -193,7 +193,7 @@
                             <li class="dropdown-content">
                                 <ul class="dropdown-menu dropdown-navbar">
                                     <li>
-
+                                        
                                         <a href="#" class="clearfix">
                                             <img src="~/Content/Dashboard/images/avatars/avatar3.png" class="msg-photo" alt="Alex's Avatar" />
                                             <span class="msg-body">
@@ -373,26 +373,18 @@
                     <b class="arrow"></b>
                 </li>
                 <li class="">
-                    <a href="@Url.Action("Index", "AddDesk")">
+                    <a href="@Url.Action("Index", "AddClient")">
                         <i class="menu-icon fa fa-tachometer"></i>
-                        <span class="menu-text">  New Desk </span>
+                        <span class="menu-text">  New Client </span>
                     </a>
 
                     <b class="arrow"></b>
                 </li>
                 <li class="">
-                    <a href="@Url.Action("Index", "TransactionDetails")">
-                        <i class="menu-icon fa fa-tachometer"></i>
-                        <span class="menu-text">  Transaction </span>
-                    </a>
-
-                    <b class="arrow"></b>
-                </li>
-                <li class="">
-                    <a href="#" class="dropdown-toggle">
+                     <a href="#" class="dropdown-toggle">
                         <i class="menu-icon fa fa-desktop"></i>
                         <span class="menu-text">
-                            Reports
+                           Vouchers
                         </span>
                         <b class="arrow fa fa-angle-down"></b>
                     </a>
@@ -423,7 +415,81 @@
                         </li>
                     </ul>
                 </li>
-                </ul>
+                <li class="">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-desktop"></i>
+                        <span class="menu-text">
+                            Cards
+                        </span>
+
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+                    <b class="arrow"></b>
+                    <ul class="submenu">
+                        <li class="">
+                            <a href="@Url.Action("Index", "AddCard")">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                New Card
+                                <b class="arrow fa fa-angle-down"></b>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="">
+                            <a href="@Url.Action("Index", "AssigndCard")">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Assign Card
+                            </a>
+
+                            <b class="arrow"></b>
+                        </li>
+                        
+                    </ul>
+                </li>
+                <li class="">
+                    <a href="@Url.Action("Index", "AddPackage")">
+                        <i class="menu-icon fa fa-tachometer"></i>
+                        <span class="menu-text"> New Package </span>
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+                <li class="">
+                    <a href="@Url.Action("Index", "AddPoints")">
+                        <i class="menu-icon fa fa-tachometer"></i>
+                        <span class="menu-text"> Add Points </span>
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+                <li class="">
+                    <a  href="@Url.Action("Index", "AddCustomer")">
+                        <i class="menu-icon fa fa-tachometer"></i>
+                        <span class="menu-text"> Add Customers </span>
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+                <li class="">
+                    <a href="@Url.Action("Index", "AddPaymentMode")">
+                        <i class="menu-icon fa fa-tachometer"></i>
+                        <span class="menu-text"> Add Payment Mode </span>
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+                <li class="">
+                    <a  href="@Url.Action("Index", "AddCountry")">
+                        <i class="menu-icon fa fa-tachometer"></i>
+                        <span class="menu-text"> Add Country </span>
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+            </ul><!-- /.nav-list -->
+
+            <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+                <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+            </div>
         </div>
 
         <!-- /.main-content -->
@@ -460,14 +526,14 @@
             <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
         </a>
     </div><!-- /.main-container -->
-
+    
     <script src="~/Content/Dashboard/js/ace-elements.min.js"></script>
     <script src="~/Content/Dashboard/js/ace-extra.min.js"></script>
     <script src="~/Content/Dashboard/js/ace.min.js"></script>
     <script src="~/Content/Dashboard/js/autosize.min.js"></script>
     <script src="~/Content/Dashboard/js/bootbox.js"></script>
     <script src="~/Content/Dashboard/js/bootstrap-colorpicker.min.js"></script>
-
+  
     <script src="~/Content/Dashboard/js/bootstrap-editable.min.js"></script>
     <script src="~/Content/Dashboard/js/bootstrap-markdown.min.js"></script>
     <script src="~/Content/Dashboard/js/bootstrap-multiselect.min.js"></script>
