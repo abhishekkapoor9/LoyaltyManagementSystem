@@ -3,3 +3,13 @@ E:\LoyaltyManagementSystem\LoyaltyManagement\LMS_Core\bin\Debug\LMS_Core.pdb
 E:\LoyaltyManagementSystem\LoyaltyManagement\LMS_Core\obj\Debug\LMS_Core.csprojResolveAssemblyReference.cache
 E:\LoyaltyManagementSystem\LoyaltyManagement\LMS_Core\obj\Debug\LMS_Core.dll
 E:\LoyaltyManagementSystem\LoyaltyManagement\LMS_Core\obj\Debug\LMS_Core.pdb
+E:\LMS\LoyaltyManagementSystem\LMS_Core\bin\Debug\LMS_Core.dll.config
+E:\LMS\LoyaltyManagementSystem\LMS_Core\bin\Debug\LMS_Core.dll
+E:\LMS\LoyaltyManagementSystem\LMS_Core\bin\Debug\LMS_Core.pdb
+E:\LMS\LoyaltyManagementSystem\LMS_Core\bin\Debug\EntityFramework.dll
+E:\LMS\LoyaltyManagementSystem\LMS_Core\bin\Debug\EntityFramework.SqlServer.dll
+E:\LMS\LoyaltyManagementSystem\LMS_Core\bin\Debug\EntityFramework.xml
+E:\LMS\LoyaltyManagementSystem\LMS_Core\bin\Debug\EntityFramework.SqlServer.xml
+E:\LMS\LoyaltyManagementSystem\LMS_Core\obj\Debug\LMS_Core.csprojResolveAssemblyReference.cache
+E:\LMS\LoyaltyManagementSystem\LMS_Core\obj\Debug\LMS_Core.dll
+E:\LMS\LoyaltyManagementSystem\LMS_Core\obj\Debug\LMS_Core.pdb

@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/SuperAdmin/Views/Shared/_Layout.cshtml";
 }
 
 @*<link href="~/Content/Dashboard/css/bootstrap.min.css" rel="stylesheet" />*@
@@ -169,6 +169,79 @@
                         <input name="switch-field-1" class="ace ace-switch ace-switch-2" type="checkbox" />
                         <span class="lbl"></span>
                     </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-sm-12">
+    <div class="widget-box transparent">
+        <div class="widget-header widget-header-flat">
+            <h4 class="widget-title lighter">
+                <i class="ace-icon fa fa-signal"></i>
+                Recharge
+            </h4>
+
+            <div class="widget-toolbar">
+                <a href="#" data-action="collapse">
+                    <i class="ace-icon fa fa-chevron-up"></i>
+                </a>
+            </div>
+        </div>
+        <div class="widget-body">
+            <div class="row" style="margin-top:3% !important">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <select class="chosen-select form-control" id="form-field-select-3" data-placeholder="CHoose Reccharge Option">
+                        <option value="AL">CHoose Reccharge Option</option>
+                        <option value="AL">Single</option>
+                        <option value="AK">Couple</option>
+                        <option value="AZ">Group</option>
+                    </select>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <div class="row" style="margin-top:3% !important">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <select class="chosen-select form-control" id="form-field-select-3" data-placeholder="CHoose Payment Mode">
+                        <option value="AL">CHoose Payment Mode</option>
+                        <option value="AL">Money</option>
+                        <option value="AK">Online</option>
+                    </select>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <div class="row" style="margin-top:3% !important">
+                <div class="col-md-4"></div>
+                <div class="col-md-3">
+                    @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
+                    @Html.TextBox("Amount", null, new { @id = "txt_Amount", @class = "col-md-4", placeholder = "Recharge Amount", style = "width:100%" })
+                </div>
+                @*</div>*@
+            </div>
+            <div class="row" style="margin-top:3% !important">
+                <div class="col-md-4"></div>
+                <div class="col-md-2" style="width: 8%;">
+                    <div class="checkbox">
+                        <label>
+                            <input name="form-field-checkbox" type="checkbox" class="ace" />
+                            <span class="lbl"> Mail</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2" style="width: 8%;">
+                    <div class="checkbox">
+                        <label>
+                            <input name="form-field-checkbox" type="checkbox" class="ace" />
+                            <span class="lbl"> SMS</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <input type="submit" value="Submit" name="submit_login" class="btn btn-info" onclick='' />
+                    &nbsp; &nbsp; &nbsp;
+                    <input type="reset" value="Reset" name="reset_login" class="btn btn-info" onclick='' />
                 </div>
             </div>
         </div>

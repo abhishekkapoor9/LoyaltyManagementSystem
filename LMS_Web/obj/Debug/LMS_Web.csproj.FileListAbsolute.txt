@@ -17,3 +17,6 @@ E:\LMS\LoyaltyManagementSystem\LMS_Web\bin\LMS_Web.pdb
 E:\LMS\LoyaltyManagementSystem\LMS_Web\obj\Debug\LMS_Web.dll
 E:\LMS\LoyaltyManagementSystem\LMS_Web\obj\Debug\LMS_Web.pdb
 E:\LMS\LoyaltyManagementSystem\LMS_Web\obj\Debug\LMS_Web.csprojResolveAssemblyReference.cache
+E:\LMS\LoyaltyManagementSystem\LMS_Web\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\LMS\LoyaltyManagementSystem\LMS_Web\bin\LMS_Datas.dll
+E:\LMS\LoyaltyManagementSystem\LMS_Web\bin\LMS_Datas.pdb

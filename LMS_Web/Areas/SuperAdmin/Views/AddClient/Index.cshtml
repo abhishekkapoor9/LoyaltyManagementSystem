@@ -1,7 +1,7 @@
-﻿
+﻿@model LMS_Web.ViewModel.AdminViewModel
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/SuperAdmin/Views/Shared/_Layout.cshtml";
 }
 
 @*<link href="~/Content/Dashboard/css/bootstrap.min.css" rel="stylesheet" />*@
@@ -16,8 +16,8 @@
         text-align: center;
     }
 </style>
-@*@using (@Html.BeginForm("Index", "Category", FormMethod.Post))
-    {*@
+@using (Html.BeginForm("Index", "AddClient", FormMethod.Post))
+{
 <div class="col-sm-12">
     <div class="widget-box transparent">
         <div class="widget-header widget-header-flat">
@@ -51,11 +51,13 @@
                 <div class="form-control">
                     <div class="col-md-4">
                         @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
-                        @Html.TextBox("Client Name", null, new { @id = "txt_clientName", @class = "col-md-4", placeholder = "Client Name", style = "width:100%" })
+                        @*@Html.TextBox("Client Name", null, new { @id = "txt_clientName", @class = "col-md-4", placeholder = "Client Name", style = "width:100%" })*@
+                        @Html.TextBoxFor(m => m.Name, null, new { @id = "txt_clientName", @class = "col-md-4", placeholder = "Enter Client Name", style = "width:100%" })
                     </div>
                     <div class="col-md-4">
                         @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
-                        @Html.TextBox("EmailId", null, new { @id = "txt_EmailId", @class = "col-md-4", placeholder = "EmailId", style = "width:100%" })
+                        @*@Html.TextBox("EmailId", null, new { @id = "txt_EmailId", @class = "col-md-4", placeholder = "EmailId", style = "width:100%" })*@
+                        @Html.TextBoxFor(m => m.EmailId, null, new { @id = "txt_EmailId", @class = "col-md-4", placeholder = "Enter EmailId", style = "width:100%" })
                     </div>
                     <div class="col-md-4">
                         @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
@@ -63,7 +65,8 @@
                             <span class="input-group-addon">
                                 <i class="ace-icon fa fa-phone"></i>
                             </span>
-                            @Html.TextBox("Mobile No.", null, new { @id = "form-field-mask-2", @class = "form-control input-mask-phone", placeholder = "MobileNO.", style = "width:100%" })
+                           @* @Html.TextBox("Mobile No.", null, new { @id = "form-field-mask-2", @class = "form-control input-mask-phone", placeholder = "MobileNO.", style = "width:100%" })*@
+                            @Html.TextBoxFor(m => m.MobileNo, null, new { @id = "txt_MobileNo", @class = "form-control input-mask-phone", placeholder = "Enter Mobile No.", style = "width:100%" })
                         </div>
 
                     </div>
@@ -72,65 +75,21 @@
             </div>
             <div class="row" style="margin-top:3% !important">
                 <div class="col-md-4">
-                    <select class="chosen-select form-control" id="form-field-select-3" data-placeholder="Choose a Country">
-                        <option value="AL">Choose a Country</option>
-                        <option value="AL">Alabama</option>
-                        <option value="AK">Alaska</option>
-                        <option value="AZ">Arizona</option>
-                        <option value="AR">Arkansas</option>
-                        <option value="CA">California</option>
-                        <option value="CO">Colorado</option>
-                        <option value="CT">Connecticut</option>
-                        <option value="DE">Delaware</option>
-                        <option value="FL">Florida</option>
-                        <option value="GA">Georgia</option>
-                        <option value="HI">Hawaii</option>
-                        <option value="ID">Idaho</option>
-                        <option value="IL">Illinois</option>
-                    </select>
+                    @Html.DropDownListFor(model => model.countryId, new SelectList(ViewBag.CountryDd, "Value", "Text"), "- Please Select Country -", new { @class = "chosen-select form-control", @id = "form-field-select-3" })
                 </div>
                 <div class="col-md-4">
-                    <select class="chosen-select form-control" id="form-field-select-3" data-placeholder="Choose a State">
-                        <option value="AL">Choose a State...</option>
-                        <option value="AL">Alabama</option>
-                        <option value="AK">Alaska</option>
-                        <option value="AZ">Arizona</option>
-                        <option value="AR">Arkansas</option>
-                        <option value="CA">California</option>
-                        <option value="CO">Colorado</option>
-                        <option value="CT">Connecticut</option>
-                        <option value="DE">Delaware</option>
-                        <option value="FL">Florida</option>
-                        <option value="GA">Georgia</option>
-                        <option value="HI">Hawaii</option>
-                        <option value="ID">Idaho</option>
-                        <option value="IL">Illinois</option>
-                    </select>
+                    @Html.DropDownListFor(model => model.stateId, new SelectList(ViewBag.stateDd, "Value", "Text"), "- Please Select State -", new { @class = "chosen-select form-control" ,@id = "form-field-select-3" })
                 </div>
                 <div class="col-md-4">
-                    <select class="chosen-select form-control" id="form-field-select-3" data-placeholder="Choose a City">
-                        <option value="AL">Choose a City...</option>
-                        <option value="AL">Alabama</option>
-                        <option value="AK">Alaska</option>
-                        <option value="AZ">Arizona</option>
-                        <option value="AR">Arkansas</option>
-                        <option value="CA">California</option>
-                        <option value="CO">Colorado</option>
-                        <option value="CT">Connecticut</option>
-                        <option value="DE">Delaware</option>
-                        <option value="FL">Florida</option>
-                        <option value="GA">Georgia</option>
-                        <option value="HI">Hawaii</option>
-                        <option value="ID">Idaho</option>
-                        <option value="IL">Illinois</option>
-                    </select>
+                    @Html.DropDownListFor(model => model.cityId, new SelectList(ViewBag.cityDd, "Value", "Text"), "- Please SelectC City -", new { @class = "chosen-select form-control", @id = "form-field-select-3" })
                 </div>
 
             </div>
             <div class="row" style="margin-top:3% !important">
                 <div class="col-md-4">
                     @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
-                    @Html.TextArea("Client Address", null, new { @id = "txt_clientName", @class = "autosize-transition form-control", placeholder = "Client Address", style = "width:100%;border:1px solid" });
+                   @* @Html.TextArea("Client Address", null, new { @id = "txt_clientName", @class = "autosize-transition form-control", placeholder = "Client Address", style = "width:100%;border:1px solid" });*@
+                    @Html.TextAreaFor(m=>m.Address, new { @id = "txt_clientName", @class = "autosize-transition form-control", placeholder = "Client Address", style = "width:100%;border:1px solid" });
                 </div>
             </div>
             <div class="row">
@@ -138,12 +97,13 @@
                     <div class="col-md-6">
                         <div class="col-md-4"></div>
                         <div class="col-md-4">
-                            @Html.Label("lbl_active", "Active", new { @class = "control-label no-padding-right" })
-
+                            @*@Html.Label("lbl_active", "Active", new { @class = "control-label no-padding-right" })*@
+                            @Html.LabelFor(i => i.Active, "false", new { @class = "control-label no-padding-right" })
                         </div>
                         <div class="col-md-4">
                             <label>
-                                <input name="switch-field-1" class="ace ace-switch ace-switch-2" type="checkbox" />
+                                @Html.CheckBoxFor(i => i.Active.Value, new{ @class="ace ace-switch ace-switch-2" })
+                                @*<input name="switch-field-1" class="ace ace-switch ace-switch-2" type="checkbox" />*@
                                 <span class="lbl"></span>
                             </label>
 
@@ -200,7 +160,8 @@
                 <div class="form-control">
                     <div class="col-md-4"></div>
                     <div class="col-md-4">
-                        <select class="chosen-select form-control" id="form-field-select-3" data-placeholder="Choose a Country">
+                        @Html.DropDownListFor(model => model.AdminId, new SelectList(ViewBag.AdminDd, "Value", "Text"), "- Please Select Client -", new { @class = "chosen-select form-control", @id = "form-field-select-3" })
+                        @*<select class="chosen-select form-control" id="form-field-select-3" data-placeholder="Choose a Country">
                             <option value="AL">Choose Client</option>
                             <option value="AL">Alabama</option>
                             <option value="AK">Alaska</option>
@@ -215,7 +176,7 @@
                             <option value="HI">Hawaii</option>
                             <option value="ID">Idaho</option>
                             <option value="IL">Illinois</option>
-                        </select>
+                        </select>*@
                     </div>
                 </div>
 
@@ -225,7 +186,8 @@
                     <div class="col-md-4"></div>
                     <div class="col-md-4">
                         @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
-                        @Html.TextBox("UserName", null, new { @id = "txt_UserName", @class = "col-md-4", placeholder = "Enter UserName", style = "width:100%" })
+                        @*@Html.TextBox("UserName", null, new { @id = "txt_UserName", @class = "col-md-4", placeholder = "Enter UserName", style = "width:100%" })*@
+                        @Html.TextBoxFor(m => m.UserName, null, new { @id = "txt_UserName", @class = "col-md-4", placeholder = "Enter UserName", style = "width:100%" })
                     </div>
                 </div>
 
@@ -235,11 +197,12 @@
                     <div class="col-md-4"></div>
                     <div class="col-md-4">
                         @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
-                        @Html.TextBox("Password", null, new { @id = "txt_Password", @class = "col-md-4", placeholder = "Enter Password", style = "width:100%" })
-                    </div>
-                </div>
+                        @*@Html.TextBox("Password", null, new { @id = "txt_Password", @class = "col-md-4", placeholder = "Enter Password", style = "width:100%" })*@
+@Html.TextBoxFor(m => m.Password, null, new { @id = "txt_Password", @class = "col-md-4", placeholder = "Enter Password", style = "width:100%" })
+                    </div >
+                </div >
 
-            </div>
+            </div >
             <div class="row">
                 <div class="form-control">
                     <div class="col-md-4"></div>
@@ -288,7 +251,7 @@
         </div><!-- /.widget-body -->
     </div>
 </div>
-@*}*@
+}
 <script src="~/Content/Dashboard/js/jquery-1.9.1.min.js"></script>
 
 <script src="~/Content/Dashboard/js/ace-extra.min.js"></script>
