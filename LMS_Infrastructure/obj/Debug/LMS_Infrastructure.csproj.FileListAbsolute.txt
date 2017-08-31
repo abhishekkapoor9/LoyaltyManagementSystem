@@ -1,5 +1,0 @@
-E:\LoyaltyManagementSystem\LoyaltyManagement\LMS_Infrastructure\bin\Debug\LMS_Infrastructure.dll
-E:\LoyaltyManagementSystem\LoyaltyManagement\LMS_Infrastructure\bin\Debug\LMS_Infrastructure.pdb
-E:\LoyaltyManagementSystem\LoyaltyManagement\LMS_Infrastructure\obj\Debug\LMS_Infrastructure.csprojResolveAssemblyReference.cache
-E:\LoyaltyManagementSystem\LoyaltyManagement\LMS_Infrastructure\obj\Debug\LMS_Infrastructure.dll
-E:\LoyaltyManagementSystem\LoyaltyManagement\LMS_Infrastructure\obj\Debug\LMS_Infrastructure.pdb
