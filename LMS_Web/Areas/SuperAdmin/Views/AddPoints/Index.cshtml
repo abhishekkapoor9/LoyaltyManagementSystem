@@ -1,0 +1,196 @@
+﻿@model LMS_Datas.Point
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/SuperAdmin/Views/Shared/_Layout.cshtml";
+}
+
+
+@*<link href="~/Content/Dashboard/css/bootstrap.min.css" rel="stylesheet" />*@
+<link href="~/Content/Dashboard/css/font-awesome.css" rel="stylesheet" />
+<link href="~/Content/Dashboard/css/ui.jqgrid.css" rel="stylesheet" />
+<link href="~/Content/Dashboard/css/ace.css" rel="stylesheet" />
+@*<link rel="stylesheet" href="~/Content/Dashboard/css/chosen.css" />
+    <link href="~/Content/Dashboard/css/chosen.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/Dashboard/css/datepicker.min.css" />*@
+<style type="text/css">
+    .chosen-single {
+        height: 33px !important;
+        text-align: center;
+    }
+</style>
+@using (Html.BeginForm("Index", "AddPoints", FormMethod.Post))
+{
+    if (ViewBag.alert == "Success")
+    {
+        <div class="alert alert-success fade in">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>Success!</strong> Data Saved successfully.
+        </div>
+    }
+
+    if (ViewBag.alert == "Error")
+    {
+        <div class="alert alert-danger fade in">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>Error!</strong>  while submitting your data.
+        </div>
+    }
+
+
+<div class="col-sm-12">
+    <div class="widget-box transparent">
+        <div class="widget-header widget-header-flat">
+            <h4 class="widget-title lighter">
+                <i class="ace-icon fa fa-signal"></i>
+                Points Details
+            </h4>
+
+            <div class="widget-toolbar">
+                <a href="#" data-action="collapse">
+                    <i class="ace-icon fa fa-chevron-up"></i>
+                </a>
+            </div>
+        </div>
+        <div class="widget-body">
+            <div class="row" style="margin-top:3% !important">
+                @*<div class="form-control">*@
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
+                    @*@Html.TextBox("Amount", null, new { @id = "txt_amount", @class = "col-md-4", placeholder = "Enter Amount", style = "width:100%" })*@
+                    @Html.TextBoxFor(m => m.Amount, null, new { @id = "txt_amount", @class = "col-md-4", placeholder = "Enter Amount", style = "width:100%", required = "required" })
+                </div>
+                @*</div>*@
+            </div>
+            <div class="row" style="margin-top:3% !important">
+                @*<div class="form-control">*@
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
+                  @*  @Html.TextBox("Point", null, new { @id = "txt_amount", @class = "col-md-4", placeholder = "Enter Points", style = "width:100%" })*@
+                    @Html.TextBoxFor(m => m.Amount, null, new { @id = "txt_point", @class = "col-md-4", placeholder = "Enter Points", style = "width:100%", required = "required" })
+                </div>
+                @*</div>*@
+            </div>
+            <div class="row" style="margin-top:3% !important">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    @Html.DropDownList("Statusddl", new List<SelectListItem>
+{
+    new SelectListItem{ Text="Choose Package Status", Value = "0" },
+    new SelectListItem{ Text="Active", Value = "true" },
+    new SelectListItem{ Text="Inactive", Value = "false" },
+ }, new { @class = "chosen-select form-control", @id = "statudddl", @name = "Statusddl" })
+                </div>
+            </div>
+            <div class="row" style="margin-top:3% !important">
+                   <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <input type="submit" value="Submit" name="submit_login" class="btn btn-info" onclick='' />
+
+                        &nbsp; &nbsp; &nbsp;
+                        <input type="reset" value="Reset" name="reset_login" class="btn btn-info" onclick='' />
+                    </div>
+                </div>
+    </div>
+</div>
+    </div>
+<div class="col-sm-12">
+        <div class="widget-box transparent">
+            <div class="widget-header widget-header-flat">
+                <h4 class="widget-title lighter">
+                    <i class="ace-icon fa fa-signal"></i>
+                    Data
+                </h4>
+
+                <div class="widget-toolbar">
+                    <a href="#" data-action="collapse">
+                        <i class="ace-icon fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="widget-body">
+                <table id="jqGrid_points"></table>
+                <div id="jqControls_points"></div>
+            </div><!-- /.widget-body -->
+        </div>
+    </div>
+}
+<script src="~/Content/Dashboard/js/jquery-1.9.1.min.js"></script>
+<script src="~/Content/Dashboard/js/ace-extra.min.js"></script>
+<script src="~/Content/Dashboard/js/jquery-ui-1.10.0.js"></script>
+<script src="~/Content/Dashboard/js/grid.locale-en.js"></script>
+<script src="~/Content/Dashboard/js/jquery.jqGrid.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(window).on("resize", function () {
+           
+            var $grid = $("#list"),newWidth = $grid.closest(".ui-jqgrid").parent().width();
+            $grid.jqGrid("setGridWidth", newWidth, true);
+        });
+        $("#jqGrid_points").jqGrid({
+            url: 'GetPoints',
+            datatype: 'json',
+            mtype: 'Get',
+            colNames: ['SNo','Amount', 'Points'],
+            colModel: [
+                { key: true, hidden: true, name: 'PointsId', index: 'PointsId', editable: true },
+                { key: false, name: 'Amount', index: 'Amount', editable: true },
+                { key: false, name: 'Points', index: 'Points', editable: true }
+            ],
+            pager: jQuery('#jqControls_points'),
+            rowNum: 10,
+            rowList: [10, 20, 30, 40, 50],
+            height: '100%',
+            viewrecords: true,
+            caption: 'Points Records',
+            emptyrecords: 'No Points are Available to Display',
+            jsonReader: {
+                root: "rows",
+                page: "page",
+                total: "total",
+                records: "records",
+                repeatitems: false,
+                Id: "0"
+            },
+            autowidth: true,
+            multiselect: false
+        }).navGrid('#jqControls_points', { edit: true, add: false, del: true, search: true,searchText:"Search Text", refresh: true },
+            {
+                zIndex: 100,
+                url: "EditCategory",
+                closeOnEscape: true,
+                closeAfterEdit: true,
+                recreateForm: true,
+                afterComplete: function (response) {
+                    if (response.responseText) {
+                        alert(response.responseText);
+                    }
+                }
+            }, {},
+            {
+                zIndex: 100,
+                url: "DeleteCategory",
+                closeOnEscape: true,
+                closeAfterDelete: true,
+                recreateForm: true,
+                msg: "Are you sure you want to delete Points... ? ",
+                afterComplete: function (response) {
+                    if (response.responseText) {
+                        alert(response.responseText);
+                    }
+                }
+            },
+            
+            {
+                zIndex: 100,
+                caption: "Search Clients",
+                sopt: [{ oper:'eq', text:'equal'},{oper:'le', text:'less or equal'},{oper:'ne',text:'not equal'}]
+            });
+    });
+</script>
+
+
+
+
