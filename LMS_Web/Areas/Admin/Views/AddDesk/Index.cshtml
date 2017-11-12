@@ -1,0 +1,299 @@
+﻿@model LMS_Datas.Desk
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@*<link href="~/Content/Dashboard/css/bootstrap.min.css" rel="stylesheet" />*@
+<link href="~/Content/Dashboard/css/font-awesome.css" rel="stylesheet" />
+<link href="~/Content/Dashboard/css/ui.jqgrid.css" rel="stylesheet" />
+<link href="~/Content/Dashboard/css/ace.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/Content/Dashboard/css/chosen.css" />
+<link href="~/Content/Dashboard/css/chosen.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/Content/Dashboard/css/datepicker.min.css" />
+<style type="text/css">
+    .chosen-single {
+        height: 33px !important;
+        text-align: center;
+    }
+</style>
+@using (@Html.BeginForm("Index", "AddDesk", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    if (ViewBag.alert == "Success")
+    {
+        <div class="alert alert-success fade in">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>Success!</strong> Data Saved successfully.
+        </div>
+    }
+
+    if (ViewBag.alert == "Error")
+    {
+        <div class="alert alert-danger fade in">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>Error!</strong>  while submitting your data.
+        </div>
+    }
+<div class="col-sm-12">
+    <div class="widget-box transparent">
+        <div class="widget-header widget-header-flat">
+            <h4 class="widget-title lighter">
+                <i class="ace-icon fa fa-signal"></i>
+                Desk  Details
+            </h4>
+
+            <div class="widget-toolbar">
+                <a href="#" data-action="collapse">s
+                    <i class="ace-icon fa fa-chevron-up"></i>
+                </a>
+            </div>
+        </div>
+        <div class="widget-body">
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-3" style="margin-left:3%">
+                    <img src="~/Content/Dashboard/images/avatars/default-avatar.png" width="260" height="250" style="border: 1px solid #438EB9;padding: 19px;" id="profile" /> 
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-3" style="margin-left:3%">
+                    <input type="file" id="id-input-file-2" name="files" />
+                </div>
+                <div class="col-md-5"></div>
+            </div>
+            <div class="row">
+                <div class="form-control">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        @*@Html.TextBox("DeskName", null, new { @id = "txt_DeskName", @class = "col-md-4", placeholder = "Enter DeskName", style = "width:100%" })*@
+                        @Html.TextBoxFor(m => m.DeskName, new { @id = "txt_DeskName", @class = "form-control", placeholder = "Enter DeskName", style = "width:100%;" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-control">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
+                        @*@Html.TextBox("UserName", null, new { @id = "txt_UserName", @class = "col-md-4", placeholder = "Enter UserName", style = "width:100%" })*@
+                        @Html.TextBoxFor(m => m.UserName, new { @id = "txt_UserName", @class = "col-md-4", placeholder = "Enter UserName", style = "width:100%;" })
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="form-control">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.Password, new { @id = "txt_Password", @class = "col-md-4", placeholder = "Enter Password", style = "width:100%;" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-control">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        @Html.TextBox("ConformPassword", null, new { @id = "txt_confirmPassword", @class = "col-md-4", placeholder = "Enter Confirm-Password", style = "width:100%" })
+                       </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:3% !important">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <input type="submit" value="Submit" name="submit_login" class="btn btn-info" onclick='' />
+                    &nbsp; &nbsp; &nbsp;
+                    <input type="reset" value="Reset" name="reset_login" class="btn btn-info" onclick='' />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-sm-12">
+    <div class="widget-box transparent">
+        <div class="widget-header widget-header-flat">
+            <h4 class="widget-title lighter">
+                <i class="ace-icon fa fa-signal"></i>
+                Data
+            </h4>
+
+            <div class="widget-toolbar">
+                <a href="#" data-action="collapse">
+                    <i class="ace-icon fa fa-chevron-up"></i>
+                </a>
+            </div>
+        </div>
+        <div class="widget-body">
+            <table id="jqGrid_category"></table>
+            <div id="jqControls_category"></div>
+        </div><!-- /.widget-body -->
+    </div>
+</div>
+}
+<script src="~/Content/Dashboard/js/jquery-1.9.1.min.js"></script>
+<script src="~/Content/Dashboard/js/ace-extra.min.js"></script>
+<script src="~/Content/Dashboard/js/jquery-ui-1.10.0.js"></script>
+<script src="~/Content/Dashboard/js/grid.locale-en.js"></script>
+<script src="~/Content/Dashboard/js/jquery.jqGrid.min.js"></script>
+<script src="~/Content/Dashboard/js/jquery.maskedinput.min.js"></script>
+<script src="~/Content/Dashboard/js/jquery.autosize.min.js"></script>
+<script src="~/Content/Dashboard/js/bootstrap-datepicker.min.js"></script>
+<script src="~/Content/Dashboard/js/bootstrap-datepicker.min.js"></script>
+<script src="~/Content/Dashboard/js/bootstrap-datetimepicker.min.js"></script>
+
+<script type="text/javascript">
+    jQuery(function ($) {
+
+        $('#id-input-file-1 , #id-input-file-2').ace_file_input({
+            no_file: 'No File ...',
+            btn_choose: 'Choose',
+            btn_change: 'Change',
+            droppable: false,
+            onchange: null,
+            thumbnail: false //| true | large
+            //whitelist:'gif|png|jpg|jpeg'
+            //blacklist:'exe|php'
+            //onchange:''
+            //
+        });
+        //autosize($('#form-field-tags'));
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.date-picker').datepicker({
+            autoclose: true,
+            todayHighlight: true
+        })
+                 //show datepicker when clicking on the icon
+                 .next().on(ace.click_event, function () {
+                     $(this).prev().focus();
+                 });
+
+        $('.input-mask-phone').mask('(99) 99-9999-9999');
+        if (!ace.vars['touch']) {
+            $('.chosen-select').chosen({ allow_single_deselect: true });
+            //resize the chosen on window resize
+
+            $(window)
+            .off('resize.chosen')
+            .on('resize.chosen', function () {
+                $('.chosen-select').each(function () {
+                    var $this = $(this);
+                    $this.next().css({ 'width': $this.parent().width() });
+                })
+            }).trigger('resize.chosen');
+            //resize chosen on sidebar collapse/expand
+            $(document).on('settings.ace.chosen', function (e, event_name, event_val) {
+                if (event_name != 'sidebar_collapsed') return;
+                $('.chosen-select').each(function () {
+                    var $this = $(this);
+                    $this.next().css({ 'width': $this.parent().width() });
+                })
+            });
+
+
+            $('#chosen-multiple-style .btn').on('click', function (e) {
+                var target = $(this).find('input[type=radio]');
+                var which = parseInt(target.val());
+                if (which == 2) $('#form-field-select-4').addClass('tag-input-style');
+                else $('#form-field-select-4').removeClass('tag-input-style');
+            });
+        }
+        $('textarea[class*=autosize]').autosize({ append: "\n" });
+
+
+        $('#id-input-file-1 , #id-input-file-2').ace_file_input({
+            no_file: 'No File ...',
+            btn_choose: 'Choose',
+            btn_change: 'Change',
+            droppable: false,
+            onchange: null,
+            thumbnail: false //| true | large
+            //whitelist:'gif|png|jpg|jpeg'
+            //blacklist:'exe|php'
+            //onchange:''
+            //
+        });
+
+        $("#link").click(function () {
+
+        })
+        $("#jqGrid_category").jqGrid({
+            url: 'GetCategory',
+            datatype: 'json',
+            mtype: 'Get',
+            colNames: ['CategoryId', 'CategoryName'],
+            colModel: [
+                { key: true, hidden: false, name: 'CategoryId', index: 'CategoryId', editable: true },
+                { key: false, name: 'CategoryName', index: 'CategoryName', editable: true }
+            ],
+            pager: jQuery('#jqControls_category'),
+            rowNum: 10,
+            rowList: [10, 20, 30, 40, 50],
+            height: '100%',
+            viewrecords: true,
+            caption: 'Client Records',
+            emptyrecords: 'No Clients Records are Available to Display',
+            jsonReader: {
+                root: "rows",
+                page: "page",
+                total: "total",
+                records: "records",
+                repeatitems: false,
+                Id: "0"
+            },
+            autowidth: true,
+            multiselect: false
+        }).navGrid('#jqControls_category', { edit: true, add: false, del: true, search: false, refresh: true },
+            {
+                zIndex: 100,
+                url: "EditCategory",
+                closeOnEscape: true,
+                closeAfterEdit: true,
+                recreateForm: true,
+                afterComplete: function (response) {
+                    if (response.responseText) {
+                        alert(response.responseText);
+                    }
+                }
+            }, {},
+            {
+                zIndex: 100,
+                url: "DeleteCategory",
+                closeOnEscape: true,
+                closeAfterDelete: true,
+                recreateForm: true,
+                msg: "Are you sure you want to delete Student... ? ",
+                afterComplete: function (response) {
+                    if (response.responseText) {
+                        alert(response.responseText);
+                    }
+                }
+            });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#id-input-file-2').change(function() {
+            //var fileName = e.target.files[0].name;
+            //alert(e.target.files[0].name);
+            //$("#profile").prop("src", e.target.result);
+            readURL(this);
+        })
+        $('a.remove').click(function () {
+            $('#profile').attr('src', '../../Content/Dashboard/images/avatars/default-avatar.png');
+        })
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#profile').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    })
+</script>
