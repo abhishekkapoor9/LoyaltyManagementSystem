@@ -200,6 +200,7 @@
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\TransactionDetailsController.cs" />
     <Compile Include="Areas\Admin\Models\AddDeskModel.cs" />
+    <Compile Include="Areas\Desk\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Desk\Controllers\NewTransactionController.cs" />
     <Compile Include="Areas\Desk\DeskAreaRegistration.cs" />
     <Compile Include="Areas\SuperAdmin\Controllers\DiscountPerController.cs" />
@@ -699,6 +700,7 @@
     <Content Include="Areas\SuperAdmin\Views\Recharge\Index.cshtml" />
     <Content Include="Areas\SuperAdmin\Views\DiscountPer\Index.cshtml" />
     <Content Include="Areas\SuperAdmin\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\Desk\Views\Dashboard\Index.cshtml" />
     <None Include="bin\LMS_Web.dll.config" />
     <Content Include="bin\roslyn\Microsoft.CSharp.Core.targets" />
     <Content Include="bin\roslyn\Microsoft.VisualBasic.Core.targets" />
