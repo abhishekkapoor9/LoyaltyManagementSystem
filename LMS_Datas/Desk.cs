@@ -18,7 +18,6 @@ namespace LMS_Datas
         public Desk()
         {
             this.CustomerCards = new HashSet<CustomerCard>();
-            this.CustomerVouchers = new HashSet<CustomerVoucher>();
             this.TransactionDetails = new HashSet<TransactionDetail>();
         }
     
@@ -28,11 +27,10 @@ namespace LMS_Datas
         public string Password { get; set; }
         public Nullable<bool> Active { get; set; }
         public string DeskName { get; set; }
+        public Nullable<int> DeskNo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CustomerCard> CustomerCards { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CustomerVoucher> CustomerVouchers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TransactionDetail> TransactionDetails { get; set; }
     }

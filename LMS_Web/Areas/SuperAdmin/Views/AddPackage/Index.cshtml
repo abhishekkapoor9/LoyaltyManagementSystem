@@ -1,4 +1,4 @@
-﻿
+﻿@model LMS_Datas.Package
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/SuperAdmin/Views/Shared/_Layout.cshtml";
@@ -17,8 +17,23 @@
         text-align: center;
     }
 </style>
-@*@using (@Html.BeginForm("Index", "Category", FormMethod.Post))
-    {*@
+@using (Html.BeginForm("Index", "AddPackage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    if (ViewBag.alert == "Success")
+    {
+        <div class="alert alert-success fade in">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>Success!</strong> Data Saved successfully.
+        </div>
+    }
+
+    if (ViewBag.alert == "Error")
+    {
+        <div class="alert alert-danger fade in">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>Error!</strong>  while submitting your data.
+        </div>
+    }
 
 <div class="col-sm-12">
     <div class="widget-box transparent">
@@ -37,11 +52,9 @@
         <div class="widget-body">
 
             <div class="row" style="margin-top:3% !important">
-                @*<div class="form-control">*@
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
-                    @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
-                    @Html.TextBox("Package Name", null, new { @id = "txt_clientName", @class = "col-md-4", placeholder = "Package Name", style = "width:100%" })
+                    @Html.TextBoxFor(m => m.PackageName, null, new { @id = "txt_packageName", @class = "col-md-4", placeholder = "Package Name", style = "width:100%", required = "required" })
                 </div>
                 @*</div>*@
             </div>
@@ -49,16 +62,20 @@
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
                     @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
-                    @Html.TextArea("Package Description", null, new { @id = "txt_VoucherDescription", @class = "autosize-transition form-control", placeholder = "Package Description", style = "width:100%;border:1px solid" })
+                   @* @Html.TextArea("Package Description", null, new { @id = "txt_VoucherDescription", @class = "autosize-transition form-control", placeholder = "Package Description", style = "width:100%;border:1px solid" })*@
+                    @Html.TextAreaFor(m => m.Description, new { @id = "txt_packageDescrition", @class = "col-md-4", placeholder = "Package Description", style = "width:100%", required = "required" })
                 </div>
+               
+            </div>
+            <div class="row" style="margin-top:3% !important">
+                <div class="col-md-4"></div>
                 <div class="col-md-4">
-                    @Html.Label("lbl_active", "Active", new { @class = "control-label no-padding-right" })
-                </div>
-                <div class="col-md-4">
-                    <label>
-                        <input name="switch-field-1" class="ace ace-switch ace-switch-2" type="checkbox" />
-                        <span class="lbl"></span>
-                    </label>
+                    @Html.DropDownList("Statusddl", new List<SelectListItem>
+{
+    new SelectListItem{ Text="Choose Package Status", Value = "0" },
+    new SelectListItem{ Text="Active", Value = "true" },
+    new SelectListItem{ Text="Inactive", Value = "false" },
+ }, new { @class = "chosen-select form-control", @id = "statudddl", @name = "Statusddl" })
                 </div>
             </div>
             <div class="row" style="margin-top:3% !important">
@@ -90,12 +107,12 @@
             </div>
         </div>
         <div class="widget-body">
-            <table id="jqGrid_category"></table>
-            <div id="jqControls_category"></div>
+            <table id="jqGrid_package"></table>
+            <div id="jqControls_package"></div>
         </div><!-- /.widget-body -->
     </div>
 </div>
-
+}
 
 <script src="~/Content/Dashboard/js/jquery-1.9.1.min.js"></script>
 <script src="~/Content/Dashboard/js/ace-extra.min.js"></script>
@@ -108,26 +125,63 @@
 <script src="~/Content/Dashboard/js/bootstrap-datepicker.min.js"></script>
 <script src="~/Content/Dashboard/js/bootstrap-datetimepicker.min.js"></script>*@
 
+<script type="text/javascript">
 
+    $(document).ready(function () {
+        if (!ace.vars['touch']) {
+            $('.chosen-select').chosen({ allow_single_deselect: true });
+            //resize the chosen on window resize
+
+            $(window)
+            .off('resize.chosen')
+            .on('resize.chosen', function () {
+                $('.chosen-select').each(function () {
+                    var $this = $(this);
+                    $this.next().css({ 'width': $this.parent().width() });
+                })
+            }).trigger('resize.chosen');
+            //resize chosen on sidebar collapse/expand
+            $(document).on('settings.ace.chosen', function (e, event_name, event_val) {
+                if (event_name != 'sidebar_collapsed') return;
+                $('.chosen-select').each(function () {
+                    var $this = $(this);
+                    $this.next().css({ 'width': $this.parent().width() });
+                })
+            });
+
+
+            $('#chosen-multiple-style .btn').on('click', function (e) {
+                var target = $(this).find('input[type=radio]');
+                var which = parseInt(target.val());
+                if (which == 2) $('#form-field-select-4').addClass('tag-input-style');
+                else $('#form-field-select-4').removeClass('tag-input-style');
+            });
+        }
+        $('textarea[class*=autosize]').autosize({ append: "\n" });
+
+
+    });
+</script>
 <script type="text/javascript">
     $(document).ready(function () {
 
-        $("#jqGrid_category").jqGrid({
-            url: 'GetCategory',
+        $("#jqGrid_package").jqGrid({
+            url: 'GetPackage',
             datatype: 'json',
             mtype: 'Get',
-            colNames: ['CategoryId', 'CategoryName'],
+            colNames: ['Sno','PackageName', 'Description'],
             colModel: [
-                { key: true, hidden: false, name: 'CategoryId', index: 'CategoryId', editable: true },
-                { key: false, name: 'CategoryName', index: 'CategoryName', editable: true }
+                { key: true, hidden: true, name: 'PackagesId', index: 'PackagesId', editable: true },
+                { key: false, name: 'PackageName', index: 'PackageName', editable: true },
+                { key: false, name: 'Description', index: 'Description', editable: true }
             ],
-            pager: jQuery('#jqControls_category'),
+            pager: jQuery('#jqControls_package'),
             rowNum: 10,
             rowList: [10, 20, 30, 40, 50],
             height: '100%',
             viewrecords: true,
-            caption: 'Client Records',
-            emptyrecords: 'No Clients Records are Available to Display',
+            caption: 'Package Records',
+            emptyrecords: 'No Package Records are Available to Display',
             jsonReader: {
                 root: "rows",
                 page: "page",
@@ -138,10 +192,10 @@
             },
             autowidth: true,
             multiselect: false
-        }).navGrid('#jqControls_category', { edit: true, add: false, del: true, search: false, refresh: true },
+        }).navGrid('#jqControls_package', { edit: true, add: false, del: true, search: true,searchText:"Search Text", refresh: true },
             {
                 zIndex: 100,
-                url: "EditCategory",
+                url: "EditPackage",
                 closeOnEscape: true,
                 closeAfterEdit: true,
                 recreateForm: true,
@@ -153,16 +207,21 @@
             }, {},
             {
                 zIndex: 100,
-                url: "DeleteCategory",
+                url: "DeletePackage",
                 closeOnEscape: true,
                 closeAfterDelete: true,
                 recreateForm: true,
-                msg: "Are you sure you want to delete Student... ? ",
+                msg: "Are you sure you want to delete Package... ? ",
                 afterComplete: function (response) {
                     if (response.responseText) {
                         alert(response.responseText);
                     }
                 }
+            },
+            {
+                zIndex: 100,
+                caption: "Search Clients",
+                sopt: ['cn']
             });
     });
 </script>

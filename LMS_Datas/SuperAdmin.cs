@@ -11,41 +11,23 @@ namespace LMS_Datas
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class SuperAdmin
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public SuperAdmin()
-        {
-            this.SuperAdminLogins = new HashSet<SuperAdminLogin>();
-        }
-    
         public int SuperAdminId { get; set; }
-        [Display(Name = "Full Name:")]
         public string Name { get; set; }
-        [Display(Name = "Address:")]
         public string Address { get; set; }
-        [Required]
-        [Display(Name = "Mobile No:")]
         public string MobileNo { get; set; }
-        [RegularExpression(@"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z",
-        ErrorMessage = "Please enter correct email address")]
         public string EmailId { get; set; }
-        [Display(Name = "Gender:")]
         public string Gender { get; set; }
         public Nullable<System.DateTime> DOB { get; set; }
         public Nullable<int> countryid { get; set; }
         public Nullable<int> cityId { get; set; }
         public Nullable<int> stateId { get; set; }
-        
+    
         public virtual city city { get; set; }
-       
         public virtual country country { get; set; }
-        
         public virtual state state { get; set; }
         public virtual state state1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SuperAdminLogin> SuperAdminLogins { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿
+﻿@model LMS_Web.ViewModel.CustomerViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -11,311 +11,179 @@
 <link href="~/Content/Dashboard/css/ace.css" rel="stylesheet" />
 <link rel="stylesheet" href="~/Content/Dashboard/css/chosen.css" />
 <link href="~/Content/Dashboard/css/chosen.css" rel="stylesheet" />
-<link rel="stylesheet" href="~/Content/Dashboard/css/datepicker.min.css" />
 <style type="text/css">
     .chosen-single {
         height: 33px !important;
         text-align: center;
     }
 </style>
-@*@using (@Html.BeginForm("Index", "Category", FormMethod.Post))
-    {*@
-<div class="col-sm-12">
-    <div class="widget-box transparent">
-        <div class="widget-header widget-header-flat">
-            <h4 class="widget-title lighter">
-                <i class="ace-icon fa fa-signal"></i>
-                Customer General Details
-            </h4>
 
-            <div class="widget-toolbar">
-                <a href="#" data-action="collapse">
-                    <i class="ace-icon fa fa-chevron-up"></i>
-                </a>
-            </div>
+@using (Html.BeginForm("Index", "AddCustomer", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    if (ViewBag.alert == "Success")
+    {
+        <div class="alert alert-success fade in">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>Success!</strong> Data Saved successfully.
         </div>
-        <div class="widget-body">
-            <div class="row">
-                <div class="col-md-5"></div>
-                <div class="col-md-3">
-                    <img src="~/Content/Dashboard/images/avatars/default-avatar.png" width="260" height="250" style="border: 1px solid #438EB9;padding: 19px;" />
+    }
+
+    if (ViewBag.alert == "Error")
+    {
+        <div class="alert alert-danger fade in">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>Error!</strong>  while submitting your data.
+        </div>
+    }
+    <div class="col-sm-12">
+        <div class="widget-box transparent">
+            <div class="widget-header widget-header-flat">
+                <h4 class="widget-title lighter">
+                    <i class="ace-icon fa fa-signal"></i>
+                    Customer General Details
+                </h4>
+                <div class="widget-toolbar">
+                    <a href="#" data-action="collapse">
+                        <i class="ace-icon fa fa-chevron-up"></i>
+                    </a>
                 </div>
-                <div class="col-md-4"></div>
             </div>
-            <div class="row">
-                <div class="col-md-5"></div>
-                <div class="col-md-3">
-                    <input type="file" id="id-input-file-2" />
+            <div class="widget-body">
+                <div class="row">
+                    <div class="col-md-5"></div>
+                    <div class="col-md-3">
+                        <img src="~/Content/Dashboard/images/avatars/default-avatar.png" width="260" height="250" style="border: 1px solid #438EB9;padding: 19px;" id="profile" />
+                    </div>
+                    <div class="col-md-4"></div>
                 </div>
-                <div class="col-md-5"></div>
-            </div>
-            <div class="row">
-                    <div class="col-md-4">
-                        @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
-                        @Html.TextBox("Customer Name", null, new { @id = "txt_customerName", @class = "col-md-4", placeholder = "Customer Name", style = "width:100%" })
+                <div class="row">
+                    <div class="col-md-5"></div>
+                    <div class="col-md-3">
+                        <input type="file" id="id-input-file-2" name="files" />
                     </div>
-                    <div class="col-md-4">
-                        @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
-                        @Html.TextBox("EmailId", null, new { @id = "txt_EmailId", @class = "col-md-4", placeholder = "EmailId", style = "width:100%" })
-                    </div>
-                    <div class="col-md-4">
-                        @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="ace-icon fa fa-phone"></i>
-                            </span>
-                            @Html.TextBox("Mobile No.", null, new { @id = "form-field-mask-2", @class = "form-control input-mask-phone", placeholder = "MobileNO.", style = "width:100%" })
+                    <div class="col-md-5"></div>
+                </div>
+                <div class="row">
+                    <div class="form-control">
+                        <div class="col-md-4">
+                            @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
+                            @*@Html.TextBox("Client Name", null, new { @id = "txt_clientName", @class = "col-md-4", placeholder = "Client Name", style = "width:100%" })*@
+                            @Html.TextBoxFor(m => m.CustomerName, null, new { @id = "txt_customerName", @class = "col-md-4", placeholder = "Enter Customer Name", style = "width:100%" })
                         </div>
+                        <div class="col-md-4">
+                            @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
+                            @*@Html.TextBox("EmailId", null, new { @id = "txt_EmailId", @class = "col-md-4", placeholder = "EmailId", style = "width:100%" })*@
+                            @Html.TextBoxFor(m => m.EmailId, null, new { @id = "txt_EmailId", @class = "col-md-4", placeholder = "Enter EmailId", style = "width:100%", required = "required" })
+                        </div>
+                        <div class="col-md-4">
+                            @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="ace-icon fa fa-phone"></i>
+                                </span>
+                                @* @Html.TextBox("Mobile No.", null, new { @id = "form-field-mask-2", @class = "form-control input-mask-phone", placeholder = "MobileNO.", style = "width:100%" })*@
+                                @Html.TextBoxFor(m => m.MobileNo, null, new { @id = "txt_MobileNo", @class = "form-control input-mask-phone", placeholder = "Enter Mobile No.", style = "width:100%", required = "required" })
+                                @*@Html.ValidationMessageFor(model=>model.MobileNo, "Please enter Mobile No.", new { @class = "text-danger" })*@
+                            </div>
 
+                        </div>
                     </div>
 
-            </div>
-            <div class="row" style="margin-top:3% !important">
-                <div class="col-md-4">
-                    <select class="chosen-select form-control" id="form-field-select-3" data-placeholder="Choose a Country">
-                        <option value="AL">Choose a Country</option>
-                        <option value="AL">Alabama</option>
-                        <option value="AK">Alaska</option>
-                        <option value="AZ">Arizona</option>
-                        <option value="AR">Arkansas</option>
-                        <option value="CA">California</option>
-                        <option value="CO">Colorado</option>
-                        <option value="CT">Connecticut</option>
-                        <option value="DE">Delaware</option>
-                        <option value="FL">Florida</option>
-                        <option value="GA">Georgia</option>
-                        <option value="HI">Hawaii</option>
-                        <option value="ID">Idaho</option>
-                        <option value="IL">Illinois</option>
-                    </select>
                 </div>
-                <div class="col-md-4">
-                    <select class="chosen-select form-control" id="form-field-select-3" data-placeholder="Choose a State">
-                        <option value="AL">Choose a State...</option>
-                        <option value="AL">Alabama</option>
-                        <option value="AK">Alaska</option>
-                        <option value="AZ">Arizona</option>
-                        <option value="AR">Arkansas</option>
-                        <option value="CA">California</option>
-                        <option value="CO">Colorado</option>
-                        <option value="CT">Connecticut</option>
-                        <option value="DE">Delaware</option>
-                        <option value="FL">Florida</option>
-                        <option value="GA">Georgia</option>
-                        <option value="HI">Hawaii</option>
-                        <option value="ID">Idaho</option>
-                        <option value="IL">Illinois</option>
-                    </select>
-                </div>
-                <div class="col-md-4">
-                    <select class="chosen-select form-control" id="form-field-select-3" data-placeholder="Choose a City">
-                        <option value="AL">Choose a City...</option>
-                        <option value="AL">Alabama</option>
-                        <option value="AK">Alaska</option>
-                        <option value="AZ">Arizona</option>
-                        <option value="AR">Arkansas</option>
-                        <option value="CA">California</option>
-                        <option value="CO">Colorado</option>
-                        <option value="CT">Connecticut</option>
-                        <option value="DE">Delaware</option>
-                        <option value="FL">Florida</option>
-                        <option value="GA">Georgia</option>
-                        <option value="HI">Hawaii</option>
-                        <option value="ID">Idaho</option>
-                        <option value="IL">Illinois</option>
-                    </select>
-                </div>
+                <div class="row" style="margin-top:3% !important">
+                    <div class="form-control">
+                        <div class="col-md-4">
 
-            </div>
-            <div class="row" style="margin-top:3% !important">
-               <div class="col-md-4">
-                    @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
-                    @Html.TextArea("Customer Address", null, new { @id = "txt_customeraddress", @class = "autosize-transition form-control", placeholder = "Client Address", style = "width:100%;border:1px solid" });
-                </div>
-               <div class="col-md-4">
-                   <div class="input-group">
-                       <input class="form-control date-picker" id="id-date-picker-1" type="text" data-date-format="dd-mm-yyyy" />
-                       <span class="input-group-addon">
-                           <i class="fa fa-calendar bigger-110"></i>
-                       </span>
-                   </div>
-               </div>
-               <div class="col-md-4">
-                    <select class="chosen-select form-control" id="form-field-select-3" data-placeholder="Choose a City">
-                        <option value="SG">Select Gender</option>
-                        <option value="MALE">Male</option>
-                        <option value="Female">Female</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                                <div class="col-md-6">
-                                    <div class="col-md-4"></div>
-                                    <div class="col-md-4">
-                                        @Html.Label("lbl_active", "Active", new { @class = "control-label no-padding-right" })
-
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>
-                                            <input name="switch-field-1" class="ace ace-switch ace-switch-2" type="checkbox" />
-                                            <span class="lbl"></span>
-                                        </label>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                <div class="col-md-8">
-                                <input type="submit" value="Submit" name="submit_login" class="btn btn-info" onclick='' />
-
-                                &nbsp; &nbsp; &nbsp;
-                                <input type="reset" value="Reset" name="reset_login" class="btn btn-info" onclick='' />
-                            </div>
+                            @Html.DropDownListFor(model => model.countryId, new SelectList(ViewBag.CountryDd, "Value", "Text"), "- Please Select Country -", new { @class = "chosen-select form-control", @id = "countryddl" })
+                        </div>
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(model => model.stateId, Enumerable.Empty<SelectListItem>(), "- Please Select State -", new { @class = "chosen-select form-control", @id = "stateddl" })
+                        </div>
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(model => model.cityId, Enumerable.Empty<SelectListItem>(), "- Please Select City -", new { @class = "chosen-select form-control", @id = "cityddl" })
                         </div>
                     </div>
                 </div>
-            </div>
-<div class="col-sm-12">
-    <div class="widget-box transparent">
-        <div class="widget-header widget-header-flat">
-            <h4 class="widget-title lighter">
-                <i class="ace-icon fa fa-signal"></i>
-                Data
-            </h4>
+                <div class="row" style="margin-top:3% !important">
+                    <div class="form-control">
+                        <div class="col-md-4">
+                            @Html.TextAreaFor(m => m.Address, new { @id = "txt_customerAddress", @class = "autosize-transition form-control", placeholder = "Customer Address", style = "width:100%;border:1px solid;height: 40px;" })
+                        </div>
+                        <div class="col-md-4">
+                            @Html.DropDownList("genderddl", new List<SelectListItem>
+{
+    new SelectListItem{ Text="Choose Client Gender", Value = "0" },
+    new SelectListItem{ Text="Male", Value = "Male" },
+    new SelectListItem{ Text="Female", Value = "Female" },
+ }, new { @class = "chosen-select form-control", @id = "genderdddl", @name = "genderddl" })
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                @*<input class="form-control date-picker" id="id-date-picker-1" type="text" data-date-format="dd-mm-yyyy" />*@
+                                @Html.TextBoxFor(m => m.dob, null, new { @id = "id-date-picker-1", @class = "form-control date-picker", placeholder = "Enter Customer DOB", style = "width:100%" })
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar bigger-110"></i>
+                                </span>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                <div class="row" style="margin-top:3% !important">
+                    <div class="form-control">
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.UserName, null, new { @id = "txt_UserName", @class = "col-md-4", placeholder = "Enter UserName", style = "width:100%", required = "required" })
+                        </div>
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.Password, null, new { @id = "txt_Password", @class = "col-md-4", placeholder = "Enter Password", style = "width:100%", required = "required" })
+                        </div>
+                        <div class="col-md-4">
+                            @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
+                            @* @Html.TextArea("Client Address", null, new { @id = "txt_clientName", @class = "autosize-transition form-control", placeholder = "Client Address", style = "width:100%;border:1px solid" });*@
+                            @Html.DropDownList("Statusddl", new List<SelectListItem>
+{
+    new SelectListItem{ Text="Choose Client Status", Value = "0" },
+    new SelectListItem{ Text="Active", Value = "true" },
+    new SelectListItem{ Text="Inactive", Value = "false" },
+ }, new { @class = "chosen-select form-control", @id = "statudddl", @name = "Statusddl" })
+                        </div>
+                        </div>
+                    </div>
+                <div class="row" style="margin-top:3% !important">
+                    <div class="form-control">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-8">
+                            <input type="submit" value="Submit" name="submit_login" class="btn btn-info" onclick='' />
 
-            <div class="widget-toolbar">
-                <a href="#" data-action="collapse">
-                    <i class="ace-icon fa fa-chevron-up"></i>
-                </a>
+                            &nbsp; &nbsp; &nbsp;
+                            <input type="reset" value="Reset" name="reset_login" class="btn btn-info" onclick='' />
+                        </div>
+                    </div>
+                    </div>
             </div>
         </div>
-        <div class="widget-body">
-            <table id="jqGrid_category"></table>
-            <div id="jqControls_category"></div>
-        </div><!-- /.widget-body -->
     </div>
-</div>
-<div class="col-sm-12">
-    <div class="widget-box transparent">
-        <div class="widget-header widget-header-flat">
-            <h4 class="widget-title lighter">
-                <i class="ace-icon fa fa-signal"></i>
-                Customer Loginin Details
-            </h4>
 
-            <div class="widget-toolbar">
-                <a href="#" data-action="collapse">
-                    <i class="ace-icon fa fa-chevron-up"></i>
-                </a>
+    <div class="col-sm-12">
+        <div class="widget-box transparent">
+            <div class="widget-header widget-header-flat">
+                <h4 class="widget-title lighter">
+                    <i class="ace-icon fa fa-signal"></i>
+                    Data
+                </h4>
+
+                <div class="widget-toolbar">
+                    <a href="#" data-action="collapse">
+                        <i class="ace-icon fa fa-chevron-up"></i>
+                    </a>
+                </div>
             </div>
+            <div class="widget-body">
+                <table id="jqGrid_Customer"></table>
+                <div id="jqControls_Customer"></div>
+            </div><!-- /.widget-body -->
         </div>
-        <div class="widget-body">
-            <div class="row">
-                <div class="form-control">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4">
-                        <select class="chosen-select form-control" id="form-field-select-3" data-placeholder="Choose a Country">
-                            <option value="AL">Choose Customer</option>
-                            <option value="AL">Alabama</option>
-                            <option value="AK">Alaska</option>
-                            <option value="AZ">Arizona</option>
-                            <option value="AR">Arkansas</option>
-                            <option value="CA">California</option>
-                            <option value="CO">Colorado</option>
-                            <option value="CT">Connecticut</option>
-                            <option value="DE">Delaware</option>
-                            <option value="FL">Florida</option>
-                            <option value="GA">Georgia</option>
-                            <option value="HI">Hawaii</option>
-                            <option value="ID">Idaho</option>
-                            <option value="IL">Illinois</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-control">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4">
-                        @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
-                        @Html.TextBox("UserName", null, new { @id = "txt_UserName", @class = "col-md-4", placeholder = "Enter UserName", style = "width:100%" })
-                    </div>
-                </div>
-
-            </div>
-            <div class="row">
-                <div class="form-control">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4">
-                        @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
-                        @Html.TextBox("Password", null, new { @id = "txt_Password", @class = "col-md-4", placeholder = "Enter Password", style = "width:100%" })
-                    </div>
-                </div>
-
-            </div>
-            <div class="row">
-                <div class="form-control">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4">
-                        @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
-                        @Html.TextBox("ConformPassword", null, new { @id = "txt_confirmPassword", @class = "col-md-4", placeholder = "Enter Confirm-Password", style = "width:100%" })
-                    </div>
-                </div>
-
-            </div>
-            <div class="row" style="margin-top:3% !important">
-                <div class="col-md-4"></div>
-                <div class="col-md-2" style="width: 8%;">
-                            <div class="checkbox">
-                                <label>
-                                    <input name="form-field-checkbox" type="checkbox" class="ace" />
-                                    <span class="lbl"> Mail</span>
-                                </label>
-                            </div>
-
-                        </div>
-                <div class="col-md-2" style="width: 8%;">
-                            <div class="checkbox">
-                                <label>
-                                    <input name="form-field-checkbox" type="checkbox" class="ace" />
-                                    <span class="lbl"> SMS</span>
-                                </label>
-                            </div>
-
-                        </div>
-                <div class="col-md-4">
-                    <input type="submit" value="Submit" name="submit_login" class="btn btn-info" onclick='' />
-
-                    &nbsp; &nbsp; &nbsp;
-                    <input type="reset" value="Reset" name="reset_login" class="btn btn-info" onclick='' />
-                </div>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-<div class="col-sm-12">
-    <div class="widget-box transparent">
-        <div class="widget-header widget-header-flat">
-            <h4 class="widget-title lighter">
-                <i class="ace-icon fa fa-signal"></i>
-                Data
-            </h4>
-
-            <div class="widget-toolbar">
-                <a href="#" data-action="collapse">
-                    <i class="ace-icon fa fa-chevron-up"></i>
-                </a>
-            </div>
-        </div>
-        <div class="widget-body">
-            <table id="jqGrid_category"></table>
-            <div id="jqControls_category"></div>
-        </div><!-- /.widget-body -->
     </div>
-</div>
-@*}*@
+}
 <script src="~/Content/Dashboard/js/jquery-1.9.1.min.js"></script>
 
 <script src="~/Content/Dashboard/js/ace-extra.min.js"></script>
@@ -324,13 +192,17 @@
 <script src="~/Content/Dashboard/js/jquery.jqGrid.min.js"></script>
 <script src="~/Content/Dashboard/js/jquery.maskedinput.min.js"></script>
 <script src="~/Content/Dashboard/js/jquery.autosize.min.js"></script>
-<script src="~/Content/Dashboard/js/bootstrap-datepicker.min.js"></script>
-<script src="~/Content/Dashboard/js/bootstrap-datepicker.min.js"></script>
-<script src="~/Content/Dashboard/js/bootstrap-datetimepicker.min.js"></script>
 
 <script type="text/javascript">
     jQuery(function ($) {
-
+        $('.date-picker').datepicker({
+            autoclose: true,
+            todayHighlight: true
+        })
+                    //show datepicker when clicking on the icon
+                    .next().on(ace.click_event, function () {
+                        $(this).prev().focus();
+                    });
         $('#id-input-file-1 , #id-input-file-2').ace_file_input({
             no_file: 'No File ...',
             btn_choose: 'Choose',
@@ -347,16 +219,11 @@
     });
 </script>
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('.date-picker').datepicker({
-            autoclose: true,
-            todayHighlight: true
-        })
-                 //show datepicker when clicking on the icon
-                 .next().on(ace.click_event, function () {
-                     $(this).prev().focus();
-                 });
 
+    $(document).ready(function () {
+        $('a.remove').click(function () {
+            $('#profile').attr('src', '../../Content/Dashboard/images/avatars/default-avatar.png');
+        })
         $('.input-mask-phone').mask('(99) 99-9999-9999');
         if (!ace.vars['touch']) {
             $('.chosen-select').chosen({ allow_single_deselect: true });
@@ -403,25 +270,32 @@
             //
         });
 
-        $("#link").click(function () {
-
-        })
-        $("#jqGrid_category").jqGrid({
-            url: 'GetCategory',
+        
+        $("#jqGrid_Customer").jqGrid({
+            url: 'GetCustomer',
             datatype: 'json',
             mtype: 'Get',
-            colNames: ['CategoryId', 'CategoryName'],
+            colNames: ['CustomerId', 'CustomerName', 'MobileNo', 'EmailId', 'dob', 'CountryName', 'StateName', 'CityName', 'UserName', 'Password'],
             colModel: [
-                { key: true, hidden: false, name: 'CategoryId', index: 'CategoryId', editable: true },
-                { key: false, name: 'CategoryName', index: 'CategoryName', editable: true }
+               
+                { key: true, hidden: true, name: 'CustomerId', index: 'CustomerId', editable: true },
+                { key: false, name: 'CustomerName', index: 'CustomerName', editable: true },
+                { key: false, name: 'MobileNo', index: 'MobileNo', editable: true },
+                { key: false, name: 'EmailId', index: 'EmailId', editable: true },
+                { key: false, name: 'dob', index: 'dob', editable: false },
+                { key: false, name: 'CountryName', index: 'CountryName', editable: false },
+                { key: false, name: 'StateName', index: 'StateName', editable: false },
+                { key: false, name: 'CityName', index: 'CityName', editable: false },
+                { key: false, name: 'UserName', index: 'UserName', editable: true},
+                { key: false, name: 'Password', index: 'Password', editable: true }
             ],
-            pager: jQuery('#jqControls_category'),
+            pager: jQuery('#jqControls_Customer'),
             rowNum: 10,
             rowList: [10, 20, 30, 40, 50],
             height: '100%',
             viewrecords: true,
-            caption: 'Client Records',
-            emptyrecords: 'No Clients Records are Available to Display',
+            caption: 'Customer Records',
+            emptyrecords: 'No Customer Records are Available to Display',
             jsonReader: {
                 root: "rows",
                 page: "page",
@@ -432,10 +306,10 @@
             },
             autowidth: true,
             multiselect: false
-        }).navGrid('#jqControls_category', { edit: true, add: false, del: true, search: false, refresh: true },
+        }).navGrid('#jqControls_Customer', { edit: true, add: false, del: true, search: true, searchText: "Search Text", refresh: true },
             {
                 zIndex: 100,
-                url: "EditCategory",
+                url: "EditCustomer",
                 closeOnEscape: true,
                 closeAfterEdit: true,
                 recreateForm: true,
@@ -447,16 +321,124 @@
             }, {},
             {
                 zIndex: 100,
-                url: "DeleteCategory",
+                url: "DeleteCustomer",
                 closeOnEscape: true,
                 closeAfterDelete: true,
                 recreateForm: true,
-                msg: "Are you sure you want to delete Student... ? ",
+                msg: "Are you sure you want to delete Customer ? ",
                 afterComplete: function (response) {
                     if (response.responseText) {
                         alert(response.responseText);
                     }
-                }
+                },
+
+            },
+            {
+                zIndex: 100,
+                caption: "Search Clients",
+                sopt: ['cn']
             });
     });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#countryddl").change(function () {
+            var countryId = $("#countryddl").val();
+            $.ajax
+            ({
+                url: '/AddCustomer/GetStateDdl',
+                type: 'POST',
+                datatype: 'application/json',
+                rownumbers: true,
+                beforeSend: function () { $("#stateddl").html(""); },
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    countryId: +countryId
+                }),
+                success: function (result) {
+
+                    $("#stateddl").html("");
+                    $('.chosen-drop ul.chosen-results').append('<li class="active-result"> Please Choose State </li>');
+                    $("#stateddl").append($('<option></option>').val(0).html('Please Choose State'));
+                    $.each((result), function (i, state) {
+                        //alert(state.StateName);
+                        //$("#stateddl option:eq(0)").append($('<option></option>').val(state.Stateid).html(state.StateName));
+                        //$("#stateddl option:last").before("<option>hi</option>").val(state.Stateid).html(state.StateName);
+                        $('.chosen-drop ul.chosen-results').append('<li class="active-result">' + state.Stateid + '</li>');
+                        $("#stateddl").append($('<option></option>').val(state.Stateid).html(state.StateName));
+                        //$("<option></option>").val(state.Stateid).html(state.StateName).after('#stateddl');
+                        //$("#stateddl option:eq(0)").after("<option></option>").val(state.Stateid);
+                        //$("#stateddl_chosen a.chosen-single span:eq(0) ").after($('<span></span>').val(state.Stateid).html(state.StateName));
+                        //$("#stateddl_chosen div.chosen-drop:eq(0) ").append($('<ul class="chosen-results"></ul>').append($('<li class="active-result" data-option-array-index=' + state.Stateid + '></li>').val(state.Stateid).html(state.StateName)));
+
+                        $('#stateddl').trigger("chosen:updated");
+                    })
+                },
+                error: function (result) {
+                    alert("Whooaaa! Something went wrong..")
+                },
+            });
+
+        });
+        $("#stateddl").change(function () {
+            var countryId = $("#countryddl").val();
+            var stateId = $("#stateddl").val();
+            $.ajax
+            ({
+                url: '/AddCustomer/GetCityDdl',
+                type: 'POST',
+                datatype: 'application/json',
+                rownumbers: true,
+                beforeSend: function () { $("#cityddl").html(""); },
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    countryId: +countryId,
+                    stateId: +stateId
+                }),
+                success: function (result) {
+                    $("#cityddl").html("");
+                    $('.chosen-drop ul.chosen-results').append('<li class="active-result"> Please Choose City </li>');
+                    $("#cityddl").append($('<option></option>').val(0).html('Please Choose City'));
+                    $.each((result), function (i, city) {
+                        //alert(state.StateName);
+                        //$("#stateddl option:eq(0)").append($('<option></option>').val(state.Stateid).html(state.StateName));
+                        //$("#stateddl option:last").before("<option>hi</option>").val(state.Stateid).html(state.StateName);
+                        $('.chosen-drop ul.chosen-results').append('<li class="active-result">' + city.CityId + '</li>');
+                        $("#cityddl").append($('<option></option>').val(city.CityId).html(city.CityName));
+                        //$("<option></option>").val(state.Stateid).html(state.StateName).after('#stateddl');
+                        //$("#stateddl option:eq(0)").after("<option></option>").val(state.Stateid);
+                        //$("#stateddl_chosen a.chosen-single span:eq(0) ").after($('<span></span>').val(state.Stateid).html(state.StateName));
+                        //$("#stateddl_chosen div.chosen-drop:eq(0) ").append($('<ul class="chosen-results"></ul>').append($('<li class="active-result" data-option-array-index=' + state.Stateid + '></li>').val(state.Stateid).html(state.StateName)));
+
+                        $('#cityddl').trigger("chosen:updated");
+                    })
+                },
+                error: function (result) {
+                    alert("Whooaaa! Something went wrong..")
+                },
+            });
+
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#id-input-file-2').change(function() {
+            //var fileName = e.target.files[0].name;
+            //alert(e.target.files[0].name);
+            //$("#profile").prop("src", e.target.result);
+            readURL(this);
+        })
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#profile').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    })
 </script>

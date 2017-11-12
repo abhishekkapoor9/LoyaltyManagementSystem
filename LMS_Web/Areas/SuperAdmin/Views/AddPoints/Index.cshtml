@@ -1,4 +1,4 @@
-﻿
+﻿@model LMS_Datas.Point
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/SuperAdmin/Views/Shared/_Layout.cshtml";
@@ -18,8 +18,24 @@
         text-align: center;
     }
 </style>
-@*@using (@Html.BeginForm("Index", "Category", FormMethod.Post))
-    {*@
+@using (Html.BeginForm("Index", "AddPoints", FormMethod.Post))
+{
+    if (ViewBag.alert == "Success")
+    {
+        <div class="alert alert-success fade in">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>Success!</strong> Data Saved successfully.
+        </div>
+    }
+
+    if (ViewBag.alert == "Error")
+    {
+        <div class="alert alert-danger fade in">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>Error!</strong>  while submitting your data.
+        </div>
+    }
+
 
 <div class="col-sm-12">
     <div class="widget-box transparent">
@@ -41,7 +57,8 @@
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
                     @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
-                    @Html.TextBox("Amount", null, new { @id = "txt_amount", @class = "col-md-4", placeholder = "Enter Amount", style = "width:100%" })
+                    @*@Html.TextBox("Amount", null, new { @id = "txt_amount", @class = "col-md-4", placeholder = "Enter Amount", style = "width:100%" })*@
+                    @Html.TextBoxFor(m => m.Amount, null, new { @id = "txt_amount", @class = "col-md-4", placeholder = "Enter Amount", style = "width:100%", required = "required" })
                 </div>
                 @*</div>*@
             </div>
@@ -50,21 +67,24 @@
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
                     @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
-                    @Html.TextBox("Point", null, new { @id = "txt_amount", @class = "col-md-4", placeholder = "Enter Points", style = "width:100%" })
+                  @*  @Html.TextBox("Point", null, new { @id = "txt_amount", @class = "col-md-4", placeholder = "Enter Points", style = "width:100%" })*@
+                    @Html.TextBoxFor(m => m.Amount, null, new { @id = "txt_point", @class = "col-md-4", placeholder = "Enter Points", style = "width:100%", required = "required" })
                 </div>
                 @*</div>*@
             </div>
             <div class="row" style="margin-top:3% !important">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    @Html.DropDownList("Statusddl", new List<SelectListItem>
+{
+    new SelectListItem{ Text="Choose Package Status", Value = "0" },
+    new SelectListItem{ Text="Active", Value = "true" },
+    new SelectListItem{ Text="Inactive", Value = "false" },
+ }, new { @class = "chosen-select form-control", @id = "statudddl", @name = "Statusddl" })
+                </div>
+            </div>
+            <div class="row" style="margin-top:3% !important">
                    <div class="col-md-4"></div>
-                    <div class="col-md-1">
-                        @Html.Label("lbl_active", "Active", new { @class = "control-label no-padding-right" })
-                    </div>
-                    <div class="col-md-2">
-                        <label>
-                            <input name="switch-field-1" class="ace ace-switch ace-switch-2" type="checkbox" />
-                            <span class="lbl"></span>
-                        </label>
-                    </div>
                     <div class="col-md-4">
                         <input type="submit" value="Submit" name="submit_login" class="btn btn-info" onclick='' />
 
@@ -74,38 +94,33 @@
                 </div>
     </div>
 </div>
-<div class="row">
-    <div class="widget-box transparent">
-        <div class="widget-header widget-header-flat">
-            <h4 class="widget-title lighter">
-                <i class="ace-icon fa fa-signal"></i>
-                Data
-            </h4>
-
-            <div class="widget-toolbar">
-                <a href="#" data-action="collapse">
-                    <i class="ace-icon fa fa-chevron-up"></i>
-                </a>
-            </div>
-        </div>
-        <div class="widget-body">
-                <table id="jqGrid_category"></table>
-                <div id="jqControls_category"></div>
-        </div><!-- /.widget-body -->
     </div>
-</div>
+<div class="col-sm-12">
+        <div class="widget-box transparent">
+            <div class="widget-header widget-header-flat">
+                <h4 class="widget-title lighter">
+                    <i class="ace-icon fa fa-signal"></i>
+                    Data
+                </h4>
 
+                <div class="widget-toolbar">
+                    <a href="#" data-action="collapse">
+                        <i class="ace-icon fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="widget-body">
+                <table id="jqGrid_points"></table>
+                <div id="jqControls_points"></div>
+            </div><!-- /.widget-body -->
+        </div>
+    </div>
+}
 <script src="~/Content/Dashboard/js/jquery-1.9.1.min.js"></script>
 <script src="~/Content/Dashboard/js/ace-extra.min.js"></script>
 <script src="~/Content/Dashboard/js/jquery-ui-1.10.0.js"></script>
 <script src="~/Content/Dashboard/js/grid.locale-en.js"></script>
 <script src="~/Content/Dashboard/js/jquery.jqGrid.min.js"></script>
-@*<script src="~/Content/Dashboard/js/jquery.maskedinput.min.js"></script>*@
-@*<script src="~/Content/Dashboard/js/jquery.autosize.min.js"></script>*@
-@*<script src="~/Content/Dashboard/js/bootstrap-datepicker.min.js"></script>
-<script src="~/Content/Dashboard/js/bootstrap-datepicker.min.js"></script>
-<script src="~/Content/Dashboard/js/bootstrap-datetimepicker.min.js"></script>*@
-
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -114,22 +129,23 @@
             var $grid = $("#list"),newWidth = $grid.closest(".ui-jqgrid").parent().width();
             $grid.jqGrid("setGridWidth", newWidth, true);
         });
-        $("#jqGrid_category").jqGrid({
-            url: 'GetCategory',
+        $("#jqGrid_points").jqGrid({
+            url: 'GetPoints',
             datatype: 'json',
             mtype: 'Get',
-            colNames: ['CategoryId', 'CategoryName'],
+            colNames: ['SNo','Amount', 'Points'],
             colModel: [
-                { key: true, hidden: false, name: 'CategoryId', index: 'CategoryId', editable: true },
-                { key: false, name: 'CategoryName', index: 'CategoryName', editable: true }
+                { key: true, hidden: true, name: 'PointsId', index: 'PointsId', editable: true },
+                { key: false, name: 'Amount', index: 'Amount', editable: true },
+                { key: false, name: 'Points', index: 'Points', editable: true }
             ],
-            pager: jQuery('#jqControls_category'),
+            pager: jQuery('#jqControls_points'),
             rowNum: 10,
             rowList: [10, 20, 30, 40, 50],
             height: '100%',
             viewrecords: true,
-            caption: 'Client Records',
-            emptyrecords: 'No Clients Records are Available to Display',
+            caption: 'Points Records',
+            emptyrecords: 'No Points are Available to Display',
             jsonReader: {
                 root: "rows",
                 page: "page",
@@ -140,7 +156,7 @@
             },
             autowidth: true,
             multiselect: false
-        }).navGrid('#jqControls_category', { edit: true, add: false, del: true, search: false, refresh: true },
+        }).navGrid('#jqControls_points', { edit: true, add: false, del: true, search: true,searchText:"Search Text", refresh: true },
             {
                 zIndex: 100,
                 url: "EditCategory",
@@ -159,12 +175,18 @@
                 closeOnEscape: true,
                 closeAfterDelete: true,
                 recreateForm: true,
-                msg: "Are you sure you want to delete Student... ? ",
+                msg: "Are you sure you want to delete Points... ? ",
                 afterComplete: function (response) {
                     if (response.responseText) {
                         alert(response.responseText);
                     }
                 }
+            },
+            
+            {
+                zIndex: 100,
+                caption: "Search Clients",
+                sopt: [{ oper:'eq', text:'equal'},{oper:'le', text:'less or equal'},{oper:'ne',text:'not equal'}]
             });
     });
 </script>

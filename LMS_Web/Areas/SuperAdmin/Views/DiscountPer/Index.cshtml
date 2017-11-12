@@ -1,4 +1,4 @@
-﻿
+﻿@model LMS_Datas.Discountper
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/SuperAdmin/Views/Shared/_Layout.cshtml";
@@ -16,8 +16,8 @@
         text-align: center;
     }
 </style>
-@*@using (@Html.BeginForm("Index", "Category", FormMethod.Post))
-    {*@
+@using (Html.BeginForm("Index", "DiscountPer", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
 <div class="col-sm-12">
     <div class="widget-box transparent">
         <div class="widget-header widget-header-flat">
@@ -33,167 +33,47 @@
             </div>
         </div>
         <div class="widget-body">
-            <div class="row">
+            <div class="row" style="margin-top:3% !important">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
                     @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
-                    @Html.TextBox("No. Of Person", null, new { @id = "txt_noofperson", @class = "col-md-4", placeholder = "No. Of Person", style = "width:100%" })
+                    @*@Html.TextBox("No. Of Person", null, new { @id = "txt_noofperson", @class = "col-md-4", placeholder = "No. Of Person", style = "width:100%" })*@
+                    @Html.TextBoxFor(m => m.Persons, null, new { @id = "txt_noofperson", @class = "col-md-4", placeholder = "No. Of Person", style = "width:100%", required = "required" })
                 </div>
                 <div class="col-md-4"></div>
             </div>
-            <div class="row">
+            <div class="row"  style="margin-top:3% !important"> 
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
                     @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
-                    @Html.TextBox("DiscountRate%", null, new { @id = "txt_DiscountRate%", @class = "col-md-4", placeholder = "Enter DiscountRate%", style = "width:100%" })
+                    @Html.TextBoxFor(m => m.DiscountRate, null, new { @id = "txt_DiscountRate", @class = "col-md-4", placeholder = "DiscountRate%", style = "width:100%", required = "required" })
+                   @* @Html.TextBox("DiscountRate%", null, new { @id = "txt_DiscountRate%", @class = "col-md-4", placeholder = "Enter DiscountRate%", style = "width:100%" })*@
                 </div>
                 <div class="col-md-4"></div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="col-md-6">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4">
-                            @Html.Label("lbl_active", "Active", new { @class = "control-label no-padding-right" })
-
-                        </div>
-                        <div class="col-md-4">
-                            <label>
-                                <input name="switch-field-1" class="ace ace-switch ace-switch-2" type="checkbox" />
-                                <span class="lbl"></span>
-                            </label>
-
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-md-8">
-                    <input type="submit" value="Submit" name="submit_login" class="btn btn-info" onclick='' />
-
-                    &nbsp; &nbsp; &nbsp;
-                    <input type="reset" value="Reset" name="reset_login" class="btn btn-info" onclick='' />
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="col-sm-12">
-    <div class="widget-box transparent">
-        <div class="widget-header widget-header-flat">
-            <h4 class="widget-title lighter">
-                <i class="ace-icon fa fa-signal"></i>
-                Data
-            </h4>
-
-            <div class="widget-toolbar">
-                <a href="#" data-action="collapse">
-                    <i class="ace-icon fa fa-chevron-up"></i>
-                </a>
-            </div>
-        </div>
-        <div class="widget-body">
-            <table id="jqGrid_category"></table>
-            <div id="jqControls_category"></div>
-        </div><!-- /.widget-body -->
-    </div>
-</div>
-<div class="col-sm-12">
-    <div class="widget-box transparent">
-        <div class="widget-header widget-header-flat">
-            <h4 class="widget-title lighter">
-                <i class="ace-icon fa fa-signal"></i>
-                Customer Loginin Details
-            </h4>
-
-            <div class="widget-toolbar">
-                <a href="#" data-action="collapse">
-                    <i class="ace-icon fa fa-chevron-up"></i>
-                </a>
-            </div>
-        </div>
-        <div class="widget-body">
-            <div class="row">
-                <div class="form-control">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4">
-                        <select class="chosen-select form-control" id="form-field-select-3" data-placeholder="Choose a Country">
-                            <option value="AL">Choose Customer</option>
-                            <option value="AL">Alabama</option>
-                            <option value="AK">Alaska</option>
-                            <option value="AZ">Arizona</option>
-                            <option value="AR">Arkansas</option>
-                            <option value="CA">California</option>
-                            <option value="CO">Colorado</option>
-                            <option value="CT">Connecticut</option>
-                            <option value="DE">Delaware</option>
-                            <option value="FL">Florida</option>
-                            <option value="GA">Georgia</option>
-                            <option value="HI">Hawaii</option>
-                            <option value="ID">Idaho</option>
-                            <option value="IL">Illinois</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-control">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4">
-                        @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
-                        @Html.TextBox("UserName", null, new { @id = "txt_UserName", @class = "col-md-4", placeholder = "Enter UserName", style = "width:100%" })
-                    </div>
-                </div>
-
-            </div>
-            <div class="row">
-                <div class="form-control">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4">
-                        @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
-                        @Html.TextBox("Password", null, new { @id = "txt_Password", @class = "col-md-4", placeholder = "Enter Password", style = "width:100%" })
-                    </div>
-                </div>
-
-            </div>
-            <div class="row">
-                <div class="form-control">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4">
-                        @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
-                        @Html.TextBox("ConformPassword", null, new { @id = "txt_confirmPassword", @class = "col-md-4", placeholder = "Enter Confirm-Password", style = "width:100%" })
-                    </div>
-                </div>
-
             </div>
             <div class="row" style="margin-top:3% !important">
                 <div class="col-md-4"></div>
-                <div class="col-md-2" style="width: 8%;">
-                    <div class="checkbox">
-                        <label>
-                            <input name="form-field-checkbox" type="checkbox" class="ace" />
-                            <span class="lbl"> Mail</span>
-                        </label>
-                    </div>
-
+                <div class="col-md-4">
+                    @Html.DropDownList("Statusddl", new List<SelectListItem>
+{
+    new SelectListItem{ Text="Choose Package Status", Value = "0" },
+    new SelectListItem{ Text="Active", Value = "true" },
+    new SelectListItem{ Text="Inactive", Value = "false" },
+ }, new { @class = "chosen-select form-control", @id = "statudddl", @name = "Statusddl" })
                 </div>
-                <div class="col-md-2" style="width: 8%;">
-                    <div class="checkbox">
-                        <label>
-                            <input name="form-field-checkbox" type="checkbox" class="ace" />
-                            <span class="lbl"> SMS</span>
-                        </label>
-                    </div>
-
-                </div>
+            </div>
+            <div class="row" style="margin-top:3% !important">
+                <div class="col-md-4"></div>
                 <div class="col-md-4">
                     <input type="submit" value="Submit" name="submit_login" class="btn btn-info" onclick='' />
 
                     &nbsp; &nbsp; &nbsp;
                     <input type="reset" value="Reset" name="reset_login" class="btn btn-info" onclick='' />
                 </div>
+                <div class="col-md-4"></div>
+
             </div>
         </div>
-
     </div>
 </div>
 <div class="col-sm-12">
@@ -211,14 +91,14 @@
             </div>
         </div>
         <div class="widget-body">
-            <table id="jqGrid_category"></table>
-            <div id="jqControls_category"></div>
+            <table id="jqGrid_discount"></table>
+            <div id="jqControls_discount"></div>
         </div><!-- /.widget-body -->
     </div>
 </div>
-@*}*@
-<script src="~/Content/Dashboard/js/jquery-1.9.1.min.js"></script>
 
+}
+<script src="~/Content/Dashboard/js/jquery-1.9.1.min.js"></script>
 <script src="~/Content/Dashboard/js/ace-extra.min.js"></script>
 <script src="~/Content/Dashboard/js/jquery-ui-1.10.0.js"></script>
 <script src="~/Content/Dashboard/js/grid.locale-en.js"></script>
@@ -307,22 +187,23 @@
         $("#link").click(function () {
 
         })
-        $("#jqGrid_category").jqGrid({
-            url: 'GetCategory',
+        $("#jqGrid_discount").jqGrid({
+            url: 'GetDiscount',
             datatype: 'json',
             mtype: 'Get',
-            colNames: ['CategoryId', 'CategoryName'],
+            colNames: ['Sno','Persons', 'DiscountRate'],
             colModel: [
-                { key: true, hidden: false, name: 'CategoryId', index: 'CategoryId', editable: true },
-                { key: false, name: 'CategoryName', index: 'CategoryName', editable: true }
+                 { key: true, hidden: true, name: 'DiscountPerId', index: 'DiscountPerId', editable: true },
+                { key: false, hidden: false, name: 'Persons', index: 'Persons', editable: true },
+                { key: false, name: 'DiscountRate', index: 'DiscountRate', editable: true }
             ],
-            pager: jQuery('#jqControls_category'),
+            pager: jQuery('#jqControls_discount'),
             rowNum: 10,
             rowList: [10, 20, 30, 40, 50],
             height: '100%',
             viewrecords: true,
-            caption: 'Client Records',
-            emptyrecords: 'No Clients Records are Available to Display',
+            caption: 'Discount Records',
+            emptyrecords: 'No Discount Records are Available to Display',
             jsonReader: {
                 root: "rows",
                 page: "page",
@@ -333,10 +214,10 @@
             },
             autowidth: true,
             multiselect: false
-        }).navGrid('#jqControls_category', { edit: true, add: false, del: true, search: false, refresh: true },
+        }).navGrid('#jqControls_discount', { edit: true, add: false, del: true, search: false, refresh: true },
             {
                 zIndex: 100,
-                url: "EditCategory",
+                url: "EditDiscount",
                 closeOnEscape: true,
                 closeAfterEdit: true,
                 recreateForm: true,
@@ -348,7 +229,7 @@
             }, {},
             {
                 zIndex: 100,
-                url: "DeleteCategory",
+                url: "DeleteDiscount",
                 closeOnEscape: true,
                 closeAfterDelete: true,
                 recreateForm: true,

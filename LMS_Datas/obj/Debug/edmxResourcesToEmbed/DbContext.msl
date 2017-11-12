@@ -1,0 +1,432 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LoyaltyManagementSystemModelStoreContainer" CdmEntityContainer="LoyaltyManagementSystemEntities">
+    <EntitySetMapping Name="Admins">
+      <EntityTypeMapping TypeName="LoyaltyManagementSystemModel.Admin">
+        <MappingFragment StoreEntitySet="Admin">
+          <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="dob" ColumnName="dob" />
+          <ScalarProperty Name="countryId" ColumnName="countryId" />
+          <ScalarProperty Name="cityId" ColumnName="cityId" />
+          <ScalarProperty Name="stateId" ColumnName="stateId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cards">
+      <EntityTypeMapping TypeName="LoyaltyManagementSystemModel.Card">
+        <MappingFragment StoreEntitySet="Card">
+          <ScalarProperty Name="CardId" ColumnName="CardId" />
+          <ScalarProperty Name="CardName" ColumnName="CardName" />
+          <ScalarProperty Name="ValidFrom" ColumnName="ValidFrom" />
+          <ScalarProperty Name="ValidTo" ColumnName="ValidTo" />
+          <ScalarProperty Name="discountPer" ColumnName="discountPer" />
+          <ScalarProperty Name="Activate" ColumnName="Activate" />
+          <ScalarProperty Name="PackagesId" ColumnName="PackagesId" />
+          <ScalarProperty Name="persons" ColumnName="persons" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CardRecharges">
+      <EntityTypeMapping TypeName="LoyaltyManagementSystemModel.CardRecharge">
+        <MappingFragment StoreEntitySet="CardRecharge">
+          <ScalarProperty Name="CardRechargeId" ColumnName="CardRechargeId" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="TodayDate" ColumnName="TodayDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cities">
+      <EntityTypeMapping TypeName="LoyaltyManagementSystemModel.city">
+        <MappingFragment StoreEntitySet="city">
+          <ScalarProperty Name="cityId" ColumnName="cityId" />
+          <ScalarProperty Name="stateId" ColumnName="stateId" />
+          <ScalarProperty Name="countryId" ColumnName="countryId" />
+          <ScalarProperty Name="cityName" ColumnName="cityName" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="countries">
+      <EntityTypeMapping TypeName="LoyaltyManagementSystemModel.country">
+        <MappingFragment StoreEntitySet="country">
+          <ScalarProperty Name="countryId" ColumnName="countryId" />
+          <ScalarProperty Name="countryName" ColumnName="countryName" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="LoyaltyManagementSystemModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="dob" ColumnName="dob" />
+          <ScalarProperty Name="countryId" ColumnName="countryId" />
+          <ScalarProperty Name="stateId" ColumnName="stateId" />
+          <ScalarProperty Name="cityId" ColumnName="cityId" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerCards">
+      <EntityTypeMapping TypeName="LoyaltyManagementSystemModel.CustomerCard">
+        <MappingFragment StoreEntitySet="CustomerCard">
+          <ScalarProperty Name="CustomerCardId" ColumnName="CustomerCardId" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="Cardid" ColumnName="Cardid" />
+          <ScalarProperty Name="DeskId" ColumnName="DeskId" />
+          <ScalarProperty Name="Adminid" ColumnName="Adminid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerPoints">
+      <EntityTypeMapping TypeName="LoyaltyManagementSystemModel.CustomerPoint">
+        <MappingFragment StoreEntitySet="CustomerPoints">
+          <ScalarProperty Name="CustomerPointsId" ColumnName="CustomerPointsId" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="PointsDate" ColumnName="PointsDate" />
+          <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+          <ScalarProperty Name="Points" ColumnName="Points" />
+          <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerVouchers">
+      <EntityTypeMapping TypeName="LoyaltyManagementSystemModel.CustomerVoucher">
+        <MappingFragment StoreEntitySet="CustomerVouchers">
+          <ScalarProperty Name="CustomerVoucherId" ColumnName="CustomerVoucherId" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="VoucherId" ColumnName="VoucherId" />
+          <ScalarProperty Name="AssignNo" ColumnName="AssignNo" />
+          <ScalarProperty Name="AssignOn" ColumnName="AssignOn" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Desks">
+      <EntityTypeMapping TypeName="LoyaltyManagementSystemModel.Desk">
+        <MappingFragment StoreEntitySet="Desk">
+          <ScalarProperty Name="DeskNo" ColumnName="DeskNo" />
+          <ScalarProperty Name="DeskId" ColumnName="DeskId" />
+          <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="DeskName" ColumnName="DeskName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Discountpers">
+      <EntityTypeMapping TypeName="LoyaltyManagementSystemModel.Discountper">
+        <MappingFragment StoreEntitySet="Discountper">
+          <ScalarProperty Name="DiscountPerId" ColumnName="DiscountPerId" />
+          <ScalarProperty Name="Persons" ColumnName="Persons" />
+          <ScalarProperty Name="DiscountRate" ColumnName="DiscountRate" />
+          <ScalarProperty Name="Activate" ColumnName="Activate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Packages">
+      <EntityTypeMapping TypeName="LoyaltyManagementSystemModel.Package">
+        <MappingFragment StoreEntitySet="Packages">
+          <ScalarProperty Name="PackagesId" ColumnName="PackagesId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="PackageName" ColumnName="PackageName" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PayModes">
+      <EntityTypeMapping TypeName="LoyaltyManagementSystemModel.PayMode">
+        <MappingFragment StoreEntitySet="PayMode">
+          <ScalarProperty Name="PayModeId" ColumnName="PayModeId" />
+          <ScalarProperty Name="PayMode1" ColumnName="PayMode" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Points">
+      <EntityTypeMapping TypeName="LoyaltyManagementSystemModel.Point">
+        <MappingFragment StoreEntitySet="Points">
+          <ScalarProperty Name="PointsId" ColumnName="PointsId" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Points" ColumnName="Points" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="states">
+      <EntityTypeMapping TypeName="LoyaltyManagementSystemModel.state">
+        <MappingFragment StoreEntitySet="state">
+          <ScalarProperty Name="stateId" ColumnName="stateId" />
+          <ScalarProperty Name="countryId" ColumnName="countryId" />
+          <ScalarProperty Name="stateName" ColumnName="stateName" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SuperAdmins">
+      <EntityTypeMapping TypeName="LoyaltyManagementSystemModel.SuperAdmin">
+        <MappingFragment StoreEntitySet="SuperAdmin">
+          <ScalarProperty Name="SuperAdminId" ColumnName="SuperAdminId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="countryid" ColumnName="countryid" />
+          <ScalarProperty Name="cityId" ColumnName="cityId" />
+          <ScalarProperty Name="stateId" ColumnName="stateId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TransactionDetails">
+      <EntityTypeMapping TypeName="LoyaltyManagementSystemModel.TransactionDetail">
+        <MappingFragment StoreEntitySet="TransactionDetails">
+          <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+          <ScalarProperty Name="Total_Amount" ColumnName="Total_Amount" />
+          <ScalarProperty Name="PayModeId" ColumnName="PayModeId" />
+          <ScalarProperty Name="CardId" ColumnName="CardId" />
+          <ScalarProperty Name="Payable_Amount" ColumnName="Payable_Amount" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="DeskId" ColumnName="DeskId" />
+          <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TransferVouchers">
+      <EntityTypeMapping TypeName="LoyaltyManagementSystemModel.TransferVoucher">
+        <MappingFragment StoreEntitySet="TransferVoucher">
+          <ScalarProperty Name="TransferVoucherID" ColumnName="TransferVoucherID" />
+          <ScalarProperty Name="VoucherID" ColumnName="VoucherID" />
+          <ScalarProperty Name="TranferDate" ColumnName="TranferDate" />
+          <ScalarProperty Name="TransferFromCustomerID" ColumnName="TransferFromCustomerID" />
+          <ScalarProperty Name="TransferToCustomerID" ColumnName="TransferToCustomerID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vouchers">
+      <EntityTypeMapping TypeName="LoyaltyManagementSystemModel.Voucher">
+        <MappingFragment StoreEntitySet="Vouchers">
+          <ScalarProperty Name="VoucherId" ColumnName="VoucherId" />
+          <ScalarProperty Name="VoucherName" ColumnName="VoucherName" />
+          <ScalarProperty Name="ValidFrom" ColumnName="ValidFrom" />
+          <ScalarProperty Name="ValidTo" ColumnName="ValidTo" />
+          <ScalarProperty Name="Activate" ColumnName="Activate" />
+          <ScalarProperty Name="PackagesId" ColumnName="PackagesId" />
+          <ScalarProperty Name="DiscountperId" ColumnName="DiscountperId" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="InsertUpdateSelectAdmin" FunctionName="LoyaltyManagementSystemModel.Store.InsertUpdateSelectAdmin">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LoyaltyManagementSystemModel.InsertUpdateSelectAdmin_Result">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="countryid" ColumnName="countryid" />
+          <ScalarProperty Name="stateId" ColumnName="stateId" />
+          <ScalarProperty Name="cityId" ColumnName="cityId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertUpdateSelectAdminLogin" FunctionName="LoyaltyManagementSystemModel.Store.InsertUpdateSelectAdminLogin">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LoyaltyManagementSystemModel.InsertUpdateSelectAdminLogin_Result">
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertUpdateSelectCard" FunctionName="LoyaltyManagementSystemModel.Store.InsertUpdateSelectCard">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LoyaltyManagementSystemModel.InsertUpdateSelectCard_Result">
+          <ScalarProperty Name="CardName" ColumnName="CardName" />
+          <ScalarProperty Name="ValidFrom" ColumnName="ValidFrom" />
+          <ScalarProperty Name="ValidTo" ColumnName="ValidTo" />
+          <ScalarProperty Name="PackageName" ColumnName="PackageName" />
+          <ScalarProperty Name="Discountper" ColumnName="Discountper" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertUpdateSelectCardRecharge" FunctionName="LoyaltyManagementSystemModel.Store.InsertUpdateSelectCardRecharge">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LoyaltyManagementSystemModel.InsertUpdateSelectCardRecharge_Result">
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="TodayDate" ColumnName="TodayDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertUpdateSelectCity" FunctionName="LoyaltyManagementSystemModel.Store.InsertUpdateSelectCity">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LoyaltyManagementSystemModel.InsertUpdateSelectCity_Result">
+          <ScalarProperty Name="cityName" ColumnName="cityName" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="countryName" ColumnName="countryName" />
+          <ScalarProperty Name="stateName" ColumnName="stateName" />
+          <ScalarProperty Name="Active1" ColumnName="Active1" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertUpdateSelectCountry" FunctionName="LoyaltyManagementSystemModel.Store.InsertUpdateSelectCountry">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LoyaltyManagementSystemModel.InsertUpdateSelectCountry_Result">
+          <ScalarProperty Name="countryName" ColumnName="countryName" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertUpdateSelectCustomer" FunctionName="LoyaltyManagementSystemModel.Store.InsertUpdateSelectCustomer">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LoyaltyManagementSystemModel.InsertUpdateSelectCustomer_Result">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="countryid" ColumnName="countryid" />
+          <ScalarProperty Name="stateId" ColumnName="stateId" />
+          <ScalarProperty Name="Column1" ColumnName="Column1" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertUpdateSelectCustomerCard" FunctionName="LoyaltyManagementSystemModel.Store.InsertUpdateSelectCustomerCard">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LoyaltyManagementSystemModel.InsertUpdateSelectCustomerCard_Result">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Name1" ColumnName="Name1" />
+          <ScalarProperty Name="Name2" ColumnName="Name2" />
+          <ScalarProperty Name="DeskName" ColumnName="DeskName" />
+          <ScalarProperty Name="CardName" ColumnName="CardName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertUpdateSelectCustomerLogin" FunctionName="LoyaltyManagementSystemModel.Store.InsertUpdateSelectCustomerLogin">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LoyaltyManagementSystemModel.InsertUpdateSelectCustomerLogin_Result">
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertUpdateSelectCustomerPoints" FunctionName="LoyaltyManagementSystemModel.Store.InsertUpdateSelectCustomerPoints" />
+    <FunctionImportMapping FunctionImportName="InsertUpdateSelectCustomerVoucher" FunctionName="LoyaltyManagementSystemModel.Store.InsertUpdateSelectCustomerVoucher" />
+    <FunctionImportMapping FunctionImportName="InsertUpdateSelectDesk" FunctionName="LoyaltyManagementSystemModel.Store.InsertUpdateSelectDesk">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LoyaltyManagementSystemModel.InsertUpdateSelectDesk_Result">
+          <ScalarProperty Name="DeskName" ColumnName="DeskName" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertUpdateSelectPackage" FunctionName="LoyaltyManagementSystemModel.Store.InsertUpdateSelectPackage">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LoyaltyManagementSystemModel.InsertUpdateSelectPackage_Result">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="PackageName" ColumnName="PackageName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertUpdateSelectPaymode" FunctionName="LoyaltyManagementSystemModel.Store.InsertUpdateSelectPaymode">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LoyaltyManagementSystemModel.InsertUpdateSelectPaymode_Result">
+          <ScalarProperty Name="PayMode" ColumnName="PayMode" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertUpdateSelectPoints" FunctionName="LoyaltyManagementSystemModel.Store.InsertUpdateSelectPoints">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LoyaltyManagementSystemModel.InsertUpdateSelectPoints_Result">
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Points" ColumnName="Points" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertUpdateSelectState" FunctionName="LoyaltyManagementSystemModel.Store.InsertUpdateSelectState">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LoyaltyManagementSystemModel.InsertUpdateSelectState_Result">
+          <ScalarProperty Name="stateName" ColumnName="stateName" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="countryName" ColumnName="countryName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertUpdateSelectSuperAdmin" FunctionName="LoyaltyManagementSystemModel.Store.InsertUpdateSelectSuperAdmin">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LoyaltyManagementSystemModel.InsertUpdateSelectSuperAdmin_Result">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="countryid" ColumnName="countryid" />
+          <ScalarProperty Name="stateId" ColumnName="stateId" />
+          <ScalarProperty Name="cityId" ColumnName="cityId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertUpdateSelectSuperAdminLogin" FunctionName="LoyaltyManagementSystemModel.Store.InsertUpdateSelectSuperAdminLogin">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LoyaltyManagementSystemModel.InsertUpdateSelectSuperAdminLogin_Result">
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertUpdateSelectTransaction" FunctionName="LoyaltyManagementSystemModel.Store.InsertUpdateSelectTransaction">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LoyaltyManagementSystemModel.InsertUpdateSelectTransaction_Result">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+          <ScalarProperty Name="Total_Amount" ColumnName="Total_Amount" />
+          <ScalarProperty Name="PayMode" ColumnName="PayMode" />
+          <ScalarProperty Name="Name1" ColumnName="Name1" />
+          <ScalarProperty Name="Payable_Amount" ColumnName="Payable_Amount" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="DeskName" ColumnName="DeskName" />
+          <ScalarProperty Name="Name2" ColumnName="Name2" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertUpdateSelectVoucher" FunctionName="LoyaltyManagementSystemModel.Store.InsertUpdateSelectVoucher" />
+    <EntitySetMapping Name="Logins">
+      <EntityTypeMapping TypeName="LoyaltyManagementSystemModel.Login">
+        <MappingFragment StoreEntitySet="Login">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Activate" ColumnName="Activate" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

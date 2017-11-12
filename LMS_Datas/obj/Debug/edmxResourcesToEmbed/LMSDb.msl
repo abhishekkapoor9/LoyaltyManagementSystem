@@ -123,18 +123,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CustomerVouchers">
-      <EntityTypeMapping TypeName="LoyaltyManagementSystemModel.CustomerVoucher">
-        <MappingFragment StoreEntitySet="CustomerVouchers">
-          <ScalarProperty Name="CustomerVoucherId" ColumnName="CustomerVoucherId" />
-          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-          <ScalarProperty Name="VoucherId" ColumnName="VoucherId" />
-          <ScalarProperty Name="DeskId" ColumnName="DeskId" />
-          <ScalarProperty Name="AdminId" ColumnName="AdminId" />
-          <ScalarProperty Name="AssignNo" ColumnName="AssignNo" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Desks">
       <EntityTypeMapping TypeName="LoyaltyManagementSystemModel.Desk">
         <MappingFragment StoreEntitySet="Desk">
@@ -150,6 +138,7 @@
     <EntitySetMapping Name="Discountpers">
       <EntityTypeMapping TypeName="LoyaltyManagementSystemModel.Discountper">
         <MappingFragment StoreEntitySet="Discountper">
+          <ScalarProperty Name="Activate" ColumnName="Activate" />
           <ScalarProperty Name="DiscountPerId" ColumnName="DiscountPerId" />
           <ScalarProperty Name="Persons" ColumnName="Persons" />
           <ScalarProperty Name="DiscountRate" ColumnName="DiscountRate" />
@@ -240,6 +229,7 @@
     <EntitySetMapping Name="Vouchers">
       <EntityTypeMapping TypeName="LoyaltyManagementSystemModel.Voucher">
         <MappingFragment StoreEntitySet="Vouchers">
+          <ScalarProperty Name="description" ColumnName="description" />
           <ScalarProperty Name="VoucherId" ColumnName="VoucherId" />
           <ScalarProperty Name="VoucherName" ColumnName="VoucherName" />
           <ScalarProperty Name="ValidFrom" ColumnName="ValidFrom" />
@@ -301,7 +291,7 @@
           <ScalarProperty Name="Active" ColumnName="Active" />
           <ScalarProperty Name="countryName" ColumnName="countryName" />
           <ScalarProperty Name="stateName" ColumnName="stateName" />
-          <ScalarProperty Name="Active1" ColumnName="Active1" />
+          <!--<ScalarProperty Name="Active" ColumnName="Active" />-->
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -453,5 +443,28 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="CustomerVoucher1">
+      <EntityTypeMapping TypeName="LoyaltyManagementSystemModel.CustomerVoucher1">
+        <MappingFragment StoreEntitySet="CustomerVouchers">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="AssignOn" ColumnName="AssignOn" />
+          <ScalarProperty Name="AssignNo" ColumnName="AssignNo" />
+          <ScalarProperty Name="VoucherId" ColumnName="VoucherId" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="CustomerVoucherId" ColumnName="CustomerVoucherId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TransferVouchers">
+      <EntityTypeMapping TypeName="LoyaltyManagementSystemModel.TransferVoucher">
+        <MappingFragment StoreEntitySet="TransferVoucher">
+          <ScalarProperty Name="TransferToCustomerID" ColumnName="TransferToCustomerID" />
+          <ScalarProperty Name="TransferFromCustomerID" ColumnName="TransferFromCustomerID" />
+          <ScalarProperty Name="TranferDate" ColumnName="TranferDate" />
+          <ScalarProperty Name="VoucherID" ColumnName="VoucherID" />
+          <ScalarProperty Name="TransferVoucherID" ColumnName="TransferVoucherID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

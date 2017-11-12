@@ -5,6 +5,6 @@ E:\LMS\LoyaltyManagementSystem\LMS_Datas\bin\Debug\EntityFramework.dll
 E:\LMS\LoyaltyManagementSystem\LMS_Datas\bin\Debug\EntityFramework.SqlServer.dll
 E:\LMS\LoyaltyManagementSystem\LMS_Datas\bin\Debug\EntityFramework.xml
 E:\LMS\LoyaltyManagementSystem\LMS_Datas\bin\Debug\EntityFramework.SqlServer.xml
-E:\LMS\LoyaltyManagementSystem\LMS_Datas\obj\Debug\LMS_Datas.csprojResolveAssemblyReference.cache
 E:\LMS\LoyaltyManagementSystem\LMS_Datas\obj\Debug\LMS_Datas.dll
 E:\LMS\LoyaltyManagementSystem\LMS_Datas\obj\Debug\LMS_Datas.pdb
+E:\LMS\LoyaltyManagementSystem\LMS_Datas\obj\Debug\LMS_Datas.csprojResolveAssemblyReference.cache

@@ -1,4 +1,5 @@
-﻿
+﻿@model LMS_Datas.PayMode
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/SuperAdmin/Views/Shared/_Layout.cshtml";
@@ -17,9 +18,23 @@
         text-align: center;
     }
 </style>
-@*@using (@Html.BeginForm("Index", "Category", FormMethod.Post))
-    {*@
+@using (Html.BeginForm("Index", "AddPaymentMode", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    if (ViewBag.alert == "Success")
+    {
+        <div class="alert alert-success fade in">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>Success!</strong> Data Saved successfully.
+        </div>
+    }
 
+    if (ViewBag.alert == "Error")
+    {
+        <div class="alert alert-danger fade in">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>Error!</strong>  while submitting your data.
+        </div>
+    }
 <div class="col-sm-12">
     <div class="widget-box transparent">
         <div class="widget-header widget-header-flat">
@@ -40,8 +55,9 @@
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
                     @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
-                    @Html.TextBox("Payment Mode Name", null, new { @id = "txt_clientName", @class = "col-md-4", placeholder = "Payment Mode Name", style = "width:100%" })
-                </div>
+                    @*@Html.TextBox("Payment Mode Name", null, new { @id = "txt_clientName", @class = "col-md-4", placeholder = "Payment Mode Name", style = "width:100%" })*@
+                    @Html.TextBoxFor(m => m.PayMode1, null, new { @id = "txt_paymode", @class = "col-md-4", placeholder = "Enter PayMode", style = "width:100%", required = "required" })
+                 </div>
                 @*</div>*@
             </div>
             <div class="row" style="margin-top:3% !important">
@@ -73,43 +89,37 @@
             </div>
         </div>
         <div class="widget-body">
-            <table id="jqGrid_category"></table>
-            <div id="jqControls_category"></div>
+            <table id="jqGrid_payMode"></table>
+            <div id="jqControls_payMode"></div>
         </div><!-- /.widget-body -->
     </div>
 </div>
-
+}
 <script src="~/Content/Dashboard/js/jquery-1.9.1.min.js"></script>
 <script src="~/Content/Dashboard/js/ace-extra.min.js"></script>
-<script src="~/Content/Dashboard/js/jquery-ui-1.10.0.js"></script>
 <script src="~/Content/Dashboard/js/grid.locale-en.js"></script>
 <script src="~/Content/Dashboard/js/jquery.jqGrid.min.js"></script>
-@*<script src="~/Content/Dashboard/js/jquery.maskedinput.min.js"></script>*@
-@*<script src="~/Content/Dashboard/js/jquery.autosize.min.js"></script>*@
-@*<script src="~/Content/Dashboard/js/bootstrap-datepicker.min.js"></script>
-    <script src="~/Content/Dashboard/js/bootstrap-datepicker.min.js"></script>
-    <script src="~/Content/Dashboard/js/bootstrap-datetimepicker.min.js"></script>*@
-
-
+<script src="~/Content/Dashboard/js/jquery.maskedinput.min.js"></script>
+<script src="~/Content/Dashboard/js/jquery.autosize.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
 
-        $("#jqGrid_category").jqGrid({
-            url: 'GetCategory',
+        $("#jqGrid_payMode").jqGrid({
+            url: 'GetPayMent',
             datatype: 'json',
             mtype: 'Get',
-            colNames: ['CategoryId', 'CategoryName'],
+            colNames: ['SNo.', 'PaymentName'],
             colModel: [
-                { key: true, hidden: false, name: 'CategoryId', index: 'CategoryId', editable: true },
-                { key: false, name: 'CategoryName', index: 'CategoryName', editable: true }
+                { key: true, hidden: false, name: 'PayModeId', index: 'PayModeId', editable: true },
+                { key: false, name: 'PayMode1', index: 'PayMode1', editable: true }
             ],
-            pager: jQuery('#jqControls_category'),
+            pager: jQuery('#jqControls_payMode'),
             rowNum: 10,
             rowList: [10, 20, 30, 40, 50],
             height: '100%',
             viewrecords: true,
             caption: 'Client Records',
-            emptyrecords: 'No Clients Records are Available to Display',
+            emptyrecords: 'No PayMode Records are Available to Display',
             jsonReader: {
                 root: "rows",
                 page: "page",
@@ -120,10 +130,10 @@
             },
             autowidth: true,
             multiselect: false
-        }).navGrid('#jqControls_category', { edit: true, add: false, del: true, search: false, refresh: true },
+        }).navGrid('#jqControls_payMode', { edit: true, add: false, del: true, search: true,searchText:"Search Text", refresh: true },
             {
                 zIndex: 100,
-                url: "EditCategory",
+                url: "EditPayment",
                 closeOnEscape: true,
                 closeAfterEdit: true,
                 recreateForm: true,
@@ -135,16 +145,21 @@
             }, {},
             {
                 zIndex: 100,
-                url: "DeleteCategory",
+                url: "DeletePayment",
                 closeOnEscape: true,
                 closeAfterDelete: true,
                 recreateForm: true,
-                msg: "Are you sure you want to delete Student... ? ",
+                msg: "Are you sure you want to delete PayMode... ? ",
                 afterComplete: function (response) {
                     if (response.responseText) {
                         alert(response.responseText);
                     }
                 }
+            },
+            {
+                zIndex: 100,
+                caption: "Search PayMode",
+                sopt: ['cn']
             });
     });
 </script>

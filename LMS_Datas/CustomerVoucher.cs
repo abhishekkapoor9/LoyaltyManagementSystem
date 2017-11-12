@@ -17,13 +17,10 @@ namespace LMS_Datas
         public int CustomerVoucherId { get; set; }
         public Nullable<int> CustomerId { get; set; }
         public Nullable<int> VoucherId { get; set; }
-        public Nullable<int> DeskId { get; set; }
-        public Nullable<int> AdminId { get; set; }
-        public Nullable<int> AssignNo { get; set; }
+        public string AssignNo { get; set; }
+        public Nullable<System.DateTime> AssignOn { get; set; }
+        public Nullable<bool> Active { get; set; }
     
-        public virtual Admin Admin { get; set; }
         public virtual Customer Customer { get; set; }
-        public virtual Desk Desk { get; set; }
-        public virtual Voucher Voucher { get; set; }
     }
 }

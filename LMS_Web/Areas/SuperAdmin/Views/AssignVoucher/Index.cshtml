@@ -1,5 +1,5 @@
-﻿
-@{
+﻿@model LMS_Datas.CustomerVoucher
+    @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/SuperAdmin/Views/Shared/_Layout.cshtml";
 }
@@ -14,10 +14,15 @@
     .chosen-single {
         height: 33px !important;
         text-align: center;
-    }
+}
+    #Status {
+    width: 61%;
+    height: 32px;
+    border: 2px black;
+}
 </style>
-@*@using (@Html.BeginForm("Index", "Category", FormMethod.Post))
-    {*@
+@using (@Html.BeginForm("Index", "AssignVoucher", FormMethod.Post))
+    {
 <div class="col-sm-12">
     <div class="widget-box transparent">
         <div class="widget-header widget-header-flat">
@@ -36,44 +41,14 @@
             <div class="row" style="margin-top:3% !important">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
-                    <select class="chosen-select form-control" id="form-field-select-3" data-placeholder="Choose Customer">
-                        <option value="AL">Choose Customer</option>
-                        <option value="AL">Alabama</option>
-                        <option value="AK">Alaska</option>
-                        <option value="AZ">Arizona</option>
-                        <option value="AR">Arkansas</option>
-                        <option value="CA">California</option>
-                        <option value="CO">Colorado</option>
-                        <option value="CT">Connecticut</option>
-                        <option value="DE">Delaware</option>
-                        <option value="FL">Florida</option>
-                        <option value="GA">Georgia</option>
-                        <option value="HI">Hawaii</option>
-                        <option value="ID">Idaho</option>
-                        <option value="IL">Illinois</option>
-                    </select>
+                    @Html.DropDownListFor(model => model.CustomerId, new SelectList(ViewBag.CustomerId, "Value", "Text"), "- Please Choose Customer -", new { @class = "chosen-select form-control", @id = "customerddl",@name="customerid" })
                 </div>
                 <div class="col-md-4"></div>
             </div>
             <div class="row" style="margin-top:3% !important">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
-                        <select class="chosen-select form-control" id="form-field-select-3" data-placeholder="Choose Voucher">
-                            <option value="AL">Choose Voucher</option>
-                            <option value="AL">Alabama</option>
-                            <option value="AK">Alaska</option>
-                            <option value="AZ">Arizona</option>
-                            <option value="AR">Arkansas</option>
-                            <option value="CA">California</option>
-                            <option value="CO">Colorado</option>
-                            <option value="CT">Connecticut</option>
-                            <option value="DE">Delaware</option>
-                            <option value="FL">Florida</option>
-                            <option value="GA">Georgia</option>
-                            <option value="HI">Hawaii</option>
-                            <option value="ID">Idaho</option>
-                            <option value="IL">Illinois</option>
-                        </select>
+                    @Html.DropDownListFor(model => model.VoucherId, new SelectList(ViewBag.VoucherId, "Value", "Text"), "- Please Choose Voucher -", new { @class = "chosen-select form-control", @id = "voucherddl", @name = "voucherid" })
                 </div>
                 <div class="col-md-4"></div>
             </div>
@@ -81,32 +56,17 @@
                 <div class="col-md-4"></div>
                 <div class="col-md-3">
                     @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
-                    @Html.TextBox("Voucher Code", null, new { @id = "txt_VoucherCode", @class = "col-md-4", placeholder = "Generate Voucher Code", style = "width:100%" })
+                    @Html.TextBoxFor(m=>m.AssignNo, null, new { @id = "txt_VoucherNo", @class = "col-md-4", placeholder = "Generate Voucher Code", style = "width:100%", @readonly = true })
                 </div>
                 <div class="col-md-2">
-                    <input type="button" value="Generate Code" name="submit_login" class="btn btn-info" onclick=''  style="width: 75%;" />
+                    <input type="button" value="Generate Code" name="get_code" id="getcode" class="btn btn-info" onclick=''  style="width: 75%;" />
                 </div>
                 <div class="col-md-4"></div>
                 @*</div>*@
             </div>
             <div class="row" style="margin-top:3% !important">
                 <div class="col-md-4"></div>
-                <div class="col-md-2" style="width: 8%;">
-                    <div class="checkbox">
-                        <label>
-                            <input name="form-field-checkbox" type="checkbox" class="ace" />
-                            <span class="lbl"> Mail</span>
-                        </label>
-                    </div>
-                </div>
-                <div class="col-md-2" style="width: 8%;">
-                    <div class="checkbox">
-                        <label>
-                            <input name="form-field-checkbox" type="checkbox" class="ace" />
-                            <span class="lbl"> SMS</span>
-                        </label>
-                    </div>
-                </div>
+              
                 <div class="col-md-4">
                     <input type="submit" value="Submit" name="submit_login" class="btn btn-info" onclick='' />
                     &nbsp; &nbsp; &nbsp;
@@ -131,13 +91,13 @@
             </div>
         </div>
         <div class="widget-body">
-            <table id="jqGrid_category"></table>
-            <div id="jqControls_category"></div>
+            <table id="jqGrid_voucher"></table>
+            <div id="jqControls_voucher"></div>
         </div><!-- /.widget-body -->
     </div>
 </div>
 
-@*}*@
+}
 <script src="~/Content/Dashboard/js/jquery-1.9.1.min.js"></script>
 
 <script src="~/Content/Dashboard/js/ace-extra.min.js"></script>
@@ -149,7 +109,6 @@
 <script src="~/Content/Dashboard/js/daterangepicker.min.js"></script>
 <script type="text/javascript">
     jQuery(function ($) {
-
         $('#id-input-file-1 , #id-input-file-2').ace_file_input({
             no_file: 'No File ...',
             btn_choose: 'Choose',
@@ -166,10 +125,12 @@
     });
 </script>
 <script type="text/javascript">
-
     $(document).ready(function () {
         $('.input-daterange').datepicker({ autoclose: true });
-
+        $('#getcode').click(function () {
+           var numbers= (Math.random() + ' ').substring(2, 10) + (Math.random() + ' ').substring(2, 10);
+           $('#txt_VoucherNo').val(numbers);
+        })
 
         //to translate the daterange picker, please copy the "examples/daterange-fr.js" contents here before initialization
         $('input[name=date-range-picker]').daterangepicker({
@@ -237,22 +198,27 @@
         $("#link").click(function () {
 
         })
-        $("#jqGrid_category").jqGrid({
-            url: 'GetCategory',
+        $("#jqGrid_voucher").jqGrid({
+            url: 'GetCustomerVoucher',
             datatype: 'json',
             mtype: 'Get',
-            colNames: ['CategoryId', 'CategoryName'],
+            colNames: ['CustomerVoucherId', 'VoucherName', 'CustomerName', 'VoucherNo', 'Status'],
             colModel: [
-                { key: true, hidden: false, name: 'CategoryId', index: 'CategoryId', editable: true },
-                { key: false, name: 'CategoryName', index: 'CategoryName', editable: true }
+                { key: true, hidden: true, name: 'CustomerVoucherId', index: 'CustomerVoucherId', editable: true },
+                { key: false, name: 'VoucherName', index: 'VoucherName', editable: true },
+                { key: false, name: 'CustomerName', index: 'CustomerName', editable: true },
+                { key: false, name: 'VoucherNo', index: 'VoucherNo', editable: true },
+                { key: false, name: 'Status', index: 'Status', width: 200, sortable: true, align: 'center', editable: true, cellEdit: true, edittype: 'select', formatter: 'select', editoptions: { value: getAllSelectOptions() }
+                },
+
             ],
-            pager: jQuery('#jqControls_category'),
+            pager: jQuery('#jqControls_voucher'),
             rowNum: 10,
             rowList: [10, 20, 30, 40, 50],
             height: '100%',
             viewrecords: true,
-            caption: 'Client Records',
-            emptyrecords: 'No Clients Records are Available to Display',
+            caption: 'Customer Voucher Records',
+            emptyrecords: 'No Records are Available to Display',
             jsonReader: {
                 root: "rows",
                 page: "page",
@@ -263,10 +229,10 @@
             },
             autowidth: true,
             multiselect: false
-        }).navGrid('#jqControls_category', { edit: true, add: false, del: true, search: false, refresh: true },
+        }).navGrid('#jqControls_voucher', { edit: true, add: false, del: true, search: false, refresh: true },
             {
                 zIndex: 100,
-                url: "EditCategory",
+                url: "EditCustomerVoucher",
                 closeOnEscape: true,
                 closeAfterEdit: true,
                 recreateForm: true,
@@ -278,7 +244,7 @@
             }, {},
             {
                 zIndex: 100,
-                url: "DeleteCategory",
+                url: "DeleteCustomerVoucher",
                 closeOnEscape: true,
                 closeAfterDelete: true,
                 recreateForm: true,
@@ -290,4 +256,10 @@
                 }
             });
     });
+    function getAllSelectOptions() {
+        var status = {
+            '0': 'Select Status', '1': 'Active', '2': 'Inactive'
+        };
+        return status;
+    }
 </script>

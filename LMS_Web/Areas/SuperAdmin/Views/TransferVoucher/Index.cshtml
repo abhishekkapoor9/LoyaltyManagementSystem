@@ -1,7 +1,8 @@
-﻿
+﻿@model LMS_Datas.TransferVoucher
+
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/SuperAdmin/Views/Shared/_Layout.cshtml";
 }
 
 @*<link href="~/Content/Dashboard/css/bootstrap.min.css" rel="stylesheet" />*@
@@ -17,202 +18,207 @@
         text-align: center;
     }
 </style>
-@*@using (@Html.BeginForm("Index", "Category", FormMethod.Post))
-    {*@
-<div class="col-sm-12">
-    <div class="widget-box transparent">
-        <div class="widget-header widget-header-flat">
-            <h4 class="widget-title lighter">
-                <i class="ace-icon fa fa-signal"></i>
-                Transfer Voucher Details
-            </h4>
-            <div class="widget-toolbar">
-                <a href="#" data-action="collapse">
-                    <i class="ace-icon fa fa-chevron-up"></i>
-                </a>
+  <!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="widget-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="form-control">
+                                    <div class="col-md-12">
+                                        @Html.TextBox("Txtbx", null, new { @id = "txt_clientName", @class = "col-md-4", placeholder = "Enter Client Name", style = "width:100%", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:3% !important">
+                                <div class="form-control">
+                                    <div class="col-md-12">
+
+                                        @Html.TextBox("Txtbx", null, new { @id = "txt_clientMobileNumber", @class = "col-md-4", placeholder = "Enter Client Mobile Number", style = "width:100%", @readonly = "readonly" })
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:3% !important">
+                                <div class="form-control">
+                                    <div class="col-md-12">
+                                        @Html.TextArea("Txtbx", null, new { @id = "txt_clientAddress", @class = "col-md-4", placeholder = "Enter Client Address", style = "width:100%", @readonly = "readonly" })
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <object data="http://stackoverflow.com/does-not-exist.png" type="image/png">
+                                <img src="~/Content/Dashboard/images/avatars/default-avatar.png" width="170" height="170" style="border: 1px solid #438EB9;padding: 10px;" id="profile" />
+                            </object>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
-        <div class="widget-body">
-            <div class="row">
-                <div class="form-control">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4">
-                        <select class="chosen-select form-control" id="form-field-select-3" data-placeholder="Transfer From Customer">
-                            <option value="AL">Transfer From Customer</option>
-                            <option value="AP">Alabama</option>
-                            <option value="AK">Alaska</option>
-                            <option value="AZ">Arizona</option>
-                            <option value="AR">Arkansas</option>
-                            <option value="CA">California</option>
-                            <option value="CO">Colorado</option>
-                            <option value="CT">Connecticut</option>
-                            <option value="DE">Delaware</option>
-                            <option value="FL">Florida</option>
-                            <option value="GA">Georgia</option>
-                            <option value="HI">Hawaii</option>
-                            <option value="ID">Idaho</option>
-                            <option value="IL">Illinois</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-control">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4">
-                        <select class="chosen-select form-control" id="form-field-select-3" data-placeholder="Transfer To Customer">
-                            <option value="AL">Transfer To Customer</option>
-                            <option value="AP">Alabama</option>
-                            <option value="AK">Alaska</option>
-                            <option value="AZ">Arizona</option>
-                            <option value="AR">Arkansas</option>
-                            <option value="CA">California</option>
-                            <option value="CO">Colorado</option>
-                            <option value="CT">Connecticut</option>
-                            <option value="DE">Delaware</option>
-                            <option value="FL">Florida</option>
-                            <option value="GA">Georgia</option>
-                            <option value="HI">Hawaii</option>
-                            <option value="ID">Idaho</option>
-                            <option value="IL">Illinois</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-control">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4">
-                        <select class="chosen-select form-control" id="form-field-select-3" data-placeholder="Choose Voucher">
-                            <option value="AL">Choose Voucher</option>
-                            <option value="AP">Alabama</option>
-                            <option value="AK">Alaska</option>
-                            <option value="AZ">Arizona</option>
-                            <option value="AR">Arkansas</option>
-                            <option value="CA">California</option>
-                            <option value="CO">Colorado</option>
-                            <option value="CT">Connecticut</option>
-                            <option value="DE">Delaware</option>
-                            <option value="FL">Florida</option>
-                            <option value="GA">Georgia</option>
-                            <option value="HI">Hawaii</option>
-                            <option value="ID">Idaho</option>
-                            <option value="IL">Illinois</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row" style="margin-top:3% !important">
-                <div class="col-md-4"></div>
-                <div class="col-md-2" style="width: 8%;">
-                    <div class="checkbox">
-                        <label>
-                            <input name="form-field-checkbox" type="checkbox" class="ace" />
-                            <span class="lbl"> Mail</span>
-                        </label>
-                    </div>
 
-                </div>
-                <div class="col-md-2" style="width: 8%;">
-                    <div class="checkbox">
-                        <label>
-                            <input name="form-field-checkbox" type="checkbox" class="ace" />
-                            <span class="lbl"> SMS</span>
-                        </label>
-                    </div>
-
-                </div>
-                <div class="col-md-4">
-                    <input type="submit" value="Submit" name="submit_login" class="btn btn-info" onclick='' />
-
-                    &nbsp; &nbsp; &nbsp;
-                    <input type="reset" value="Reset" name="reset_login" class="btn btn-info" onclick='' />
-                </div>
-            </div>
-        </div>
     </div>
 </div>
-<div class="col-sm-12">
-    <div class="widget-box transparent">
-        <div class="widget-header widget-header-flat">
-            <h4 class="widget-title lighter">
-                <i class="ace-icon fa fa-signal"></i>
-                Selected Voucher Details
-            </h4>
-
-            <div class="widget-toolbar">
-                <a href="#" data-action="collapse">
-                    <i class="ace-icon fa fa-chevron-up"></i>
-                </a>
-            </div>
+<!-- Modal -->
+@using (@Html.BeginForm("Index", "TransferVoucher", FormMethod.Post))
+{
+    if (ViewBag.alert == "Success")
+    {
+        <div class="alert alert-success fade in">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>Success!</strong> Data Saved successfully.
         </div>
-        <div class="widget-body">
+    }
 
-            <div class="row" style="margin-top:3% !important">
-                @*<div class="form-control">*@
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
-                    @Html.TextBox("Voucher Name", null, new { @id = "txt_clientName", @class = "col-md-4", placeholder = "Voucher Name", style = "width:100%" })
+    if (ViewBag.alert == "Error")
+    {
+        <div class="alert alert-danger fade in">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>Error!</strong>  while submitting your data.
+        </div>
+    }
+    <div class="col-sm-12">
+        <div class="widget-box transparent">
+            <div class="widget-header widget-header-flat">
+                <h4 class="widget-title lighter">
+                    <i class="ace-icon fa fa-signal"></i>
+                    Transfer Voucher Details
+                </h4>
+                <div class="widget-toolbar">
+                    <a href="#" data-action="collapse">
+                        <i class="ace-icon fa fa-chevron-up"></i>
+                    </a>
                 </div>
-                @*</div>*@
             </div>
-            <div class="row" style="margin-top:3% !important">
-                @*<div class="form-control">*@
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
-                    <div class="input-daterange input-group">
-
-                        @Html.TextBox("start", null, new { @id = "txt_start", @class = "input-sm form-control", placeholder = "Valid From", style = "width:100%" })
-                        <span class="input-group-addon">
-                            <i class="fa fa-exchange"></i>
-                        </span>
-                        @Html.TextBox("end", null, new { @id = "txt_end", @class = "input-sm form-control", placeholder = "Valid To", style = "width:100%" })
+            <div class="widget-body">
+                <div class="row">
+                    <div class="form-control">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(model => model.TransferFromCustomerID, new SelectList(ViewBag.TransferFrom, "Value", "Text"), "- Voucher Transfer From -", new { @class = "chosen-select form-control", @id = "transferfromddl", @name = "transferfromddl" })
+                        </div>
                     </div>
                 </div>
-                @*</div>*@
-            </div>
-            <div class="row" style="margin-top:3% !important">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
-                    @Html.TextArea("Voucher Description", null, new { @id = "txt_VoucherDescription", @class = "autosize-transition form-control", placeholder = "Voucher Description", style = "width:100%;border:1px solid" })
-                </div>
-                <div class="col-md-4">
-                        @Html.Label("lbl_active", "Active", new { @class = "control-label no-padding-right" })
+                <div class="row">
+                    <div class="form-control">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(model => model.TransferToCustomerID, new SelectList(ViewBag.TransferTo, "Value", "Text"), "- Voucher Transfer To -", new { @class = "chosen-select form-control", @id = "transfertoddl", @name = "transfertoddl" })
+                        </div>
                     </div>
-                <div class="col-md-4">
-                        <label>
-                            <input name="switch-field-1" class="ace ace-switch ace-switch-2" type="checkbox" />
-                            <span class="lbl"></span>
-                        </label>
+                </div>
+                <div class="row">
+                    <div class="form-control">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(model => model.VoucherID, new SelectList(ViewBag.VoucherDd, "Value", "Text"), "- Please Choose Voucher -", new { @class = "chosen-select form-control", @id = "voucherddl", @name = "voucherid" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:3% !important">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <input type="submit" value="Submit" name="submit_login" class="btn btn-info" onclick='' />
+                        &nbsp; &nbsp; &nbsp;
+                        <input type="reset" value="Reset" name="reset_login" class="btn btn-info" onclick='' />
                     </div>
                 </div>
             </div>
         </div>
     </div>
-<div class="col-sm-12">
-    <div class="widget-box transparent">
-        <div class="widget-header widget-header-flat">
-            <h4 class="widget-title lighter">
-                <i class="ace-icon fa fa-signal"></i>
-                Data
-            </h4>
+  
+    <div class="col-sm-12">
+        <div class="widget-box transparent">
+            <div class="widget-header widget-header-flat">
+                <h4 class="widget-title lighter">
+                    <i class="ace-icon fa fa-signal"></i>
+                    Selected Voucher Details
+                </h4>
 
-            <div class="widget-toolbar">
-                <a href="#" data-action="collapse">
-                    <i class="ace-icon fa fa-chevron-up"></i>
-                </a>
+                <div class="widget-toolbar">
+                    <a href="#" data-action="collapse">
+                        <i class="ace-icon fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="widget-body">
+
+                <div class="row" style="margin-top:3% !important">
+                    @*<div class="form-control">*@
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
+                        @Html.TextBox("Voucher Name", null, new { @id = "txt_VoucherName", @class = "col-md-4", placeholder = "Voucher Name", style = "width:100%", @readonly = "readonly" })
+                    </div>
+                    @*</div>*@
+                </div>
+                <div class="row" style="margin-top:3% !important">
+                    @*<div class="form-control">*@
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
+                        <div class="input-daterange input-group">
+
+                            @Html.TextBox("start", null, new { @id = "txt_start", @class = "input-sm form-control", placeholder = "Valid From", style = "width:100%", @readonly = "readonly" })
+                            <span class="input-group-addon">
+                                <i class="fa fa-exchange"></i>
+                            </span>
+                            @Html.TextBox("end", null, new { @id = "txt_end", @class = "input-sm form-control", placeholder = "Valid To", style = "width:100%", @readonly = "readonly" })
+                        </div>
+                    </div>
+                    @*</div>*@
+                </div>
+                <div class="row" style="margin-top:3% !important">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
+                        @Html.TextArea("Voucher Description", null, new { @id = "txt_VoucherDescription", @class = "autosize-transition form-control", placeholder = "Voucher Description", style = "width:100%;border:1px solid", @readonly = "readonly" })
+                    </div>
+                    
+                   
+                </div>
             </div>
         </div>
-        <div class="widget-body">
-            <table id="jqGrid_category"></table>
-            <div id="jqControls_category"></div>
-        </div><!-- /.widget-body -->
     </div>
-</div>
 
+    <div class="col-sm-12">
+        <div class="widget-box transparent">
+            <div class="widget-header widget-header-flat">
+                <h4 class="widget-title lighter">
+                    <i class="ace-icon fa fa-signal"></i>
+                    Data
+                </h4>
+
+                <div class="widget-toolbar">
+                    <a href="#" data-action="collapse">
+                        <i class="ace-icon fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="widget-body">
+                <table id="jqGrid_transfer"></table>
+                <div id="jqControls_transfer"></div>
+            </div><!-- /.widget-body -->
+        </div>
+    </div>
+
+}
 
 <script src="~/Content/Dashboard/js/jquery-1.9.1.min.js"></script>
 
@@ -246,7 +252,6 @@
 </script>
 <script type="text/javascript">
     $(document).ready(function () {
-
         if (!ace.vars['touch']) {
             $('.chosen-select').chosen({ allow_single_deselect: true });
             //resize the chosen on window resize
@@ -295,22 +300,26 @@
         $("#link").click(function () {
 
         })
-        $("#jqGrid_category").jqGrid({
-            url: 'GetCategory',
+        $("#jqGrid_transfer").jqGrid({
+            url: 'GetVoucherClient',
             datatype: 'json',
             mtype: 'Get',
-            colNames: ['CategoryId', 'CategoryName'],
+            colNames: ['CategoryId', 'ClientFrom', 'ClientTo', 'VoucherName', 'ValidFrom', 'ValidTo'],
             colModel: [
-                { key: true, hidden: false, name: 'CategoryId', index: 'CategoryId', editable: true },
-                { key: false, name: 'CategoryName', index: 'CategoryName', editable: true }
+                { key: true, hidden: true, name: 'CategoryId', index: 'CategoryId', editable: true },
+                { key: false, name: 'Tranfer From', index: 'ClientFrom', editable: true },
+                { key: false, name: 'Transfer To', index: 'ClientTo', editable: true },
+                { key: false, name: 'VoucherName', index: 'VoucherName', editable: true },
+                { key: false, name: 'ValidFrom', index: 'ValidFrom', editable: true },
+                { key: false, name: 'ValidTo', index: 'ValidTo', editable: true }
             ],
-            pager: jQuery('#jqControls_category'),
+            pager: jQuery('#jqGrid_transfer'),
             rowNum: 10,
             rowList: [10, 20, 30, 40, 50],
             height: '100%',
             viewrecords: true,
             caption: 'Client Records',
-            emptyrecords: 'No Clients Records are Available to Display',
+            emptyrecords: 'No Clients Voucher Transfer Records are Available to Display',
             jsonReader: {
                 root: "rows",
                 page: "page",
@@ -321,7 +330,7 @@
             },
             autowidth: true,
             multiselect: false
-        }).navGrid('#jqControls_category', { edit: true, add: false, del: true, search: false, refresh: true },
+        }).navGrid('#GetVoucherClient', { edit: true, add: false, del: true, search: false, refresh: true },
             {
                 zIndex: 100,
                 url: "EditCategory",
@@ -349,5 +358,78 @@
             });
     });
 </script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#transferfromddl").change(function () {
+            $.ajax({
+                type: 'POST',
+                url: '@(Url.Action("GetTransferFrom", "TransferVoucher"))',
+                datatype: JSON,
+                data: {
+                    'customerId': $("#transferfromddl").val()
+                },
+                success: function (data) {
+                    $.each(data, function (i, item) {
+                        $("#txt_clientName").val(item.Name);
+                        $("#txt_clientAddress").val(item.Address);
+                        $("#txt_clientMobileNumber").val(item.MobileNo);
+                        $(".modal-title").text("Transfer From Customer");
+                        if (item.ImageInt == 1) {
+                            $("#profile").attr("src", "/../../Images/ClientProfile/" + item.Id + ".jpg");
+                        }
+                        $('#myModal').modal('show');
+                    });
+                },
+                error: function (data) { }
+            });
+        });
 
+        $("#transfertoddl").change(function () {
+            $.ajax({
+                type: 'POST',
+                url: '@(Url.Action("GetTransferTo", "TransferVoucher"))',
+                datatype: JSON,
+                data: {
+                    'customerId': $("#transfertoddl").val()
+                },
+                success: function (data) {
+                    $.each(data, function (i, item) {
+                        $(".modal-title").text("Transfer To Customer");
+                        $("#txt_clientName").val(item.Name);
+                        $("#txt_clientAddress").val(item.Address);
+                        $("#txt_clientMobileNumber").val(item.MobileNo);
+                        if (item.ImageInt == 1) {
+                            $("#profile").attr("src", "/../../Images/ClientProfile/" + item.Id + ".jpg");
+                        }
+                        //<img src="~/Images/ClientProfile/3003.jpg" />
+                        $('#myModal').modal('show');
+                    });
+                },
+                error: function (data) { }
+            });
+        });
+
+        $("#voucherddl").change(function () {
+
+            $.ajax({
+                type: 'POST',
+                url: '@(Url.Action("GetVoucher", "TransferVoucher"))',
+                datatype: JSON,
+                data: {
+                    'voucherId': $("#voucherddl").val()
+                },
+                success: function (data) {
+                    $.each(data, function (i, item) {
+                        $("#txt_VoucherName").val(item.VoucherName);
+                        $("#txt_start").val(item.ValidFrom);
+                        $("#txt_end").val(item.ValidTo);
+                        $("#txt_VoucherDescription").val(item.Description);
+                    });
+                },
+                error: function (data) { }
+            });
+        });
+    })
+
+</script>
 

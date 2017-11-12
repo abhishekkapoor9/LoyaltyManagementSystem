@@ -23,6 +23,7 @@ namespace LMS_Datas
         public int DiscountPerId { get; set; }
         public Nullable<int> Persons { get; set; }
         public Nullable<int> DiscountRate { get; set; }
+        public Nullable<bool> Activate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Voucher> Vouchers { get; set; }

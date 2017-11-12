@@ -21,7 +21,6 @@
     <NavigationProperty Name="AdminLogins" Relationship="Self.FK__AdminLogi__Passw__5070F446" FromRole="Admin" ToRole="AdminLogin" />
     <NavigationProperty Name="CustomerCards" Relationship="Self.FK__CustomerC__Admin__3D5E1FD2" FromRole="Admin" ToRole="CustomerCard" />
     <NavigationProperty Name="CustomerPoints" Relationship="Self.FK__CustomerP__Admin__619B8048" FromRole="Admin" ToRole="CustomerPoints" />
-    <NavigationProperty Name="CustomerVouchers" Relationship="Self.FK__CustomerV__Admin__4BAC3F29" FromRole="Admin" ToRole="CustomerVouchers" />
     <NavigationProperty Name="TransactionDetails" Relationship="Self.FK__Transacti__Admin__2180FB33" FromRole="Admin" ToRole="TransactionDetails" />
   </EntityType>
   <EntityType Name="AdminLogin">
@@ -111,8 +110,11 @@
     <NavigationProperty Name="CustomerCards" Relationship="Self.FK__CustomerC__Custo__3A81B327" FromRole="Customer" ToRole="CustomerCard" />
     <NavigationProperty Name="CustomerLogins" Relationship="Self.FK__CustomerL__Passw__5629CD9C" FromRole="Customer" ToRole="CustomerLogin" />
     <NavigationProperty Name="CustomerPoints" Relationship="Self.FK__CustomerP__Point__60A75C0F" FromRole="Customer" ToRole="CustomerPoints" />
-    <NavigationProperty Name="CustomerVouchers" Relationship="Self.FK__CustomerV__Admin__48CFD27E" FromRole="Customer" ToRole="CustomerVouchers" />
     <NavigationProperty Name="TransactionDetails" Relationship="Self.FK__Transacti__PayMo__5AEE82B9" FromRole="Customer" ToRole="TransactionDetails" />
+    <NavigationProperty Name="CustomerVouchers3" Relationship="LoyaltyManagementSystemModel.FK__CustomerV__Custo__756D6ECB" FromRole="Customer" ToRole="CustomerVoucher" />
+    <NavigationProperty Name="CustomerVouchers" Relationship="LoyaltyManagementSystemModel.FK__CustomerV__Custo__756D6ECB1" FromRole="Customer" ToRole="CustomerVoucher1" />
+    <NavigationProperty Name="TransferVouchers" Relationship="LoyaltyManagementSystemModel.FK_TransferFromID" FromRole="Customer" ToRole="TransferVoucher" />
+    <NavigationProperty Name="TransferVouchers1" Relationship="LoyaltyManagementSystemModel.FK_TransferToID" FromRole="Customer" ToRole="TransferVoucher" />
   </EntityType>
   <EntityType Name="CustomerCard">
     <Key>
@@ -152,21 +154,6 @@
     <NavigationProperty Name="Customer" Relationship="Self.FK__CustomerP__Point__60A75C0F" FromRole="CustomerPoints" ToRole="Customer" />
     <NavigationProperty Name="TransactionDetail" Relationship="Self.FK__CustomerP__Trans__3A4CA8FD" FromRole="CustomerPoints" ToRole="TransactionDetails" />
   </EntityType>
-  <EntityType Name="CustomerVoucher">
-    <Key>
-      <PropertyRef Name="CustomerVoucherId" />
-    </Key>
-    <Property Name="CustomerVoucherId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CustomerId" Type="Int32" />
-    <Property Name="VoucherId" Type="Int32" />
-    <Property Name="DeskId" Type="Int32" />
-    <Property Name="AdminId" Type="Int32" />
-    <Property Name="AssignNo" Type="Int32" />
-    <NavigationProperty Name="Admin" Relationship="Self.FK__CustomerV__Admin__4BAC3F29" FromRole="CustomerVouchers" ToRole="Admin" />
-    <NavigationProperty Name="Customer" Relationship="Self.FK__CustomerV__Admin__48CFD27E" FromRole="CustomerVouchers" ToRole="Customer" />
-    <NavigationProperty Name="Desk" Relationship="Self.FK__CustomerV__DeskI__4AB81AF0" FromRole="CustomerVouchers" ToRole="Desk" />
-    <NavigationProperty Name="Voucher" Relationship="Self.FK__CustomerV__Vouch__49C3F6B7" FromRole="CustomerVouchers" ToRole="Vouchers" />
-  </EntityType>
   <EntityType Name="Desk">
     <Key>
       <PropertyRef Name="DeskId" />
@@ -178,7 +165,6 @@
     <Property Name="Active" Type="Boolean" />
     <Property Name="DeskName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="CustomerCards" Relationship="Self.FK__CustomerC__DeskI__3C69FB99" FromRole="Desk" ToRole="CustomerCard" />
-    <NavigationProperty Name="CustomerVouchers" Relationship="Self.FK__CustomerV__DeskI__4AB81AF0" FromRole="Desk" ToRole="CustomerVouchers" />
     <NavigationProperty Name="TransactionDetails" Relationship="Self.FK__Transacti__DeskI__208CD6FA" FromRole="Desk" ToRole="TransactionDetails" />
   </EntityType>
   <EntityType Name="Discountper">
@@ -189,6 +175,7 @@
     <Property Name="Persons" Type="Int32" />
     <Property Name="DiscountRate" Type="Int32" />
     <NavigationProperty Name="Vouchers" Relationship="Self.FK__Vouchers__Discou__29221CFB" FromRole="Discountper" ToRole="Vouchers" />
+    <Property Name="Activate" Type="Boolean" />
   </EntityType>
   <EntityType Name="Package">
     <Key>
@@ -296,9 +283,10 @@
     <Property Name="Activate" Type="Boolean" />
     <Property Name="PackagesId" Type="Int32" />
     <Property Name="DiscountperId" Type="Int32" />
-    <NavigationProperty Name="CustomerVouchers" Relationship="Self.FK__CustomerV__Vouch__49C3F6B7" FromRole="Vouchers" ToRole="CustomerVouchers" />
     <NavigationProperty Name="Discountper" Relationship="Self.FK__Vouchers__Discou__29221CFB" FromRole="Vouchers" ToRole="Discountper" />
     <NavigationProperty Name="Package" Relationship="Self.FK__Vouchers__Packag__1ED998B2" FromRole="Vouchers" ToRole="Packages" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CustomerVouchers" Relationship="LoyaltyManagementSystemModel.FK__CustomerV__Vouch__540C7B00" FromRole="Voucher" ToRole="CustomerVoucher" />
   </EntityType>
   <Association Name="FK__Admin__cityId__114A936A">
     <End Role="city" Type="Self.city" Multiplicity="0..1" />
@@ -368,18 +356,6 @@
         <PropertyRef Name="AdminId" />
       </Principal>
       <Dependent Role="CustomerPoints">
-        <PropertyRef Name="AdminId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__CustomerV__Admin__4BAC3F29">
-    <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
-    <End Role="CustomerVouchers" Type="Self.CustomerVoucher" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Admin">
-        <PropertyRef Name="AdminId" />
-      </Principal>
-      <Dependent Role="CustomerVouchers">
         <PropertyRef Name="AdminId" />
       </Dependent>
     </ReferentialConstraint>
@@ -576,18 +552,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__CustomerV__Admin__48CFD27E">
-    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
-    <End Role="CustomerVouchers" Type="Self.CustomerVoucher" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Customer">
-        <PropertyRef Name="CustomerId" />
-      </Principal>
-      <Dependent Role="CustomerVouchers">
-        <PropertyRef Name="CustomerId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__Transacti__PayMo__5AEE82B9">
     <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
     <End Role="TransactionDetails" Type="Self.TransactionDetail" Multiplicity="*" />
@@ -621,30 +585,6 @@
       </Principal>
       <Dependent Role="CustomerPoints">
         <PropertyRef Name="TransactionId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__CustomerV__DeskI__4AB81AF0">
-    <End Role="Desk" Type="Self.Desk" Multiplicity="0..1" />
-    <End Role="CustomerVouchers" Type="Self.CustomerVoucher" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Desk">
-        <PropertyRef Name="DeskId" />
-      </Principal>
-      <Dependent Role="CustomerVouchers">
-        <PropertyRef Name="DeskId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__CustomerV__Vouch__49C3F6B7">
-    <End Role="Vouchers" Type="Self.Voucher" Multiplicity="0..1" />
-    <End Role="CustomerVouchers" Type="Self.CustomerVoucher" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Vouchers">
-        <PropertyRef Name="VoucherId" />
-      </Principal>
-      <Dependent Role="CustomerVouchers">
-        <PropertyRef Name="VoucherId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -743,7 +683,6 @@
     <EntitySet Name="CustomerCards" EntityType="Self.CustomerCard" />
     <EntitySet Name="CustomerLogins" EntityType="Self.CustomerLogin" />
     <EntitySet Name="CustomerPoints" EntityType="Self.CustomerPoint" />
-    <EntitySet Name="CustomerVouchers" EntityType="Self.CustomerVoucher" />
     <EntitySet Name="Desks" EntityType="Self.Desk" />
     <EntitySet Name="Discountpers" EntityType="Self.Discountper" />
     <EntitySet Name="Packages" EntityType="Self.Package" />
@@ -777,10 +716,6 @@
     <AssociationSet Name="FK__CustomerP__Admin__619B8048" Association="Self.FK__CustomerP__Admin__619B8048">
       <End Role="Admin" EntitySet="Admins" />
       <End Role="CustomerPoints" EntitySet="CustomerPoints" />
-    </AssociationSet>
-    <AssociationSet Name="FK__CustomerV__Admin__4BAC3F29" Association="Self.FK__CustomerV__Admin__4BAC3F29">
-      <End Role="Admin" EntitySet="Admins" />
-      <End Role="CustomerVouchers" EntitySet="CustomerVouchers" />
     </AssociationSet>
     <AssociationSet Name="FK__Transacti__Admin__2180FB33" Association="Self.FK__Transacti__Admin__2180FB33">
       <End Role="Admin" EntitySet="Admins" />
@@ -846,10 +781,6 @@
       <End Role="Customer" EntitySet="Customers" />
       <End Role="CustomerPoints" EntitySet="CustomerPoints" />
     </AssociationSet>
-    <AssociationSet Name="FK__CustomerV__Admin__48CFD27E" Association="Self.FK__CustomerV__Admin__48CFD27E">
-      <End Role="Customer" EntitySet="Customers" />
-      <End Role="CustomerVouchers" EntitySet="CustomerVouchers" />
-    </AssociationSet>
     <AssociationSet Name="FK__Transacti__PayMo__5AEE82B9" Association="Self.FK__Transacti__PayMo__5AEE82B9">
       <End Role="Customer" EntitySet="Customers" />
       <End Role="TransactionDetails" EntitySet="TransactionDetails" />
@@ -861,14 +792,6 @@
     <AssociationSet Name="FK__CustomerP__Trans__3A4CA8FD" Association="Self.FK__CustomerP__Trans__3A4CA8FD">
       <End Role="TransactionDetails" EntitySet="TransactionDetails" />
       <End Role="CustomerPoints" EntitySet="CustomerPoints" />
-    </AssociationSet>
-    <AssociationSet Name="FK__CustomerV__DeskI__4AB81AF0" Association="Self.FK__CustomerV__DeskI__4AB81AF0">
-      <End Role="Desk" EntitySet="Desks" />
-      <End Role="CustomerVouchers" EntitySet="CustomerVouchers" />
-    </AssociationSet>
-    <AssociationSet Name="FK__CustomerV__Vouch__49C3F6B7" Association="Self.FK__CustomerV__Vouch__49C3F6B7">
-      <End Role="Vouchers" EntitySet="Vouchers" />
-      <End Role="CustomerVouchers" EntitySet="CustomerVouchers" />
     </AssociationSet>
     <AssociationSet Name="FK__Transacti__DeskI__208CD6FA" Association="Self.FK__Transacti__DeskI__208CD6FA">
       <End Role="Desk" EntitySet="Desks" />
@@ -1077,18 +1000,30 @@
       <Parameter Name="AMode" Mode="In" Type="Int32" />
       <Parameter Name="Active" Mode="In" Type="Boolean" />
     </FunctionImport>
+    <EntitySet Name="CustomerVouchers" EntityType="LoyaltyManagementSystemModel.CustomerVoucher" />
+    <AssociationSet Name="FK__CustomerV__Vouch__540C7B00" Association="LoyaltyManagementSystemModel.FK__CustomerV__Vouch__540C7B00">
+      <End EntitySet="Vouchers" Role="Voucher" />
+      <End EntitySet="CustomerVouchers" Role="CustomerVoucher" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CustomerV__Custo__756D6ECB" Association="LoyaltyManagementSystemModel.FK__CustomerV__Custo__756D6ECB">
+      <End EntitySet="Customers" Role="Customer" />
+      <End EntitySet="CustomerVouchers" Role="CustomerVoucher" />
+    </AssociationSet>
+    <EntitySet Name="CustomerVoucher1" EntityType="LoyaltyManagementSystemModel.CustomerVoucher1" />
+    <EntitySet Name="TransferVouchers" EntityType="LoyaltyManagementSystemModel.TransferVoucher" />
+    <AssociationSet Name="FK__CustomerV__Custo__756D6ECB1" Association="LoyaltyManagementSystemModel.FK__CustomerV__Custo__756D6ECB1">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="CustomerVoucher1" EntitySet="CustomerVoucher1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TransferFromID" Association="LoyaltyManagementSystemModel.FK_TransferFromID">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="TransferVoucher" EntitySet="TransferVouchers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TransferToID" Association="LoyaltyManagementSystemModel.FK_TransferToID">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="TransferVoucher" EntitySet="TransferVouchers" />
+    </AssociationSet>
   </EntityContainer>
-  <ComplexType Name="InsertUpdateSelectAdmin_Result">
-    <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="Address" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="MobileNo" Nullable="true" MaxLength="20" />
-    <Property Type="String" Name="EmailId" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="Gender" Nullable="true" MaxLength="7" />
-    <Property Type="DateTime" Name="DOB" Nullable="true" Precision="23" />
-    <Property Type="Int32" Name="countryid" Nullable="true" />
-    <Property Type="Int32" Name="stateId" Nullable="false" />
-    <Property Type="Int32" Name="cityId" Nullable="false" />
-  </ComplexType>
   <ComplexType Name="InsertUpdateSelectAdminLogin_Result">
     <Property Type="String" Name="UserName" Nullable="true" MaxLength="60" />
     <Property Type="String" Name="Password" Nullable="true" MaxLength="60" />
@@ -1108,10 +1043,10 @@
   </ComplexType>
   <ComplexType Name="InsertUpdateSelectCity_Result">
     <Property Type="String" Name="cityName" Nullable="true" MaxLength="50" />
-    <Property Type="Boolean" Name="Active" Nullable="true" />
+    <!--<Property Type="Boolean" Name="Active" Nullable="true" />-->
     <Property Type="String" Name="countryName" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="stateName" Nullable="true" MaxLength="50" />
-    <Property Type="Boolean" Name="Active1" Nullable="true" />
+    <Property Type="Boolean" Name="Active" Nullable="true" />
   </ComplexType>
   <ComplexType Name="InsertUpdateSelectCountry_Result">
     <Property Type="String" Name="countryName" Nullable="true" MaxLength="50" />
@@ -1204,4 +1139,112 @@
     <Property Type="String" Name="PackageName" Nullable="true" MaxLength="50" />
     <Property Type="Int32" Name="DiscountperId" Nullable="true" />
   </ComplexType>
+  <ComplexType Name="InsertUpdateSelectAdmin_Result">
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="MobileNo" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="EmailId" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Gender" Nullable="true" MaxLength="7" />
+    <Property Type="DateTime" Name="DOB" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="countryid" Nullable="true" />
+    <Property Type="Int32" Name="stateId" Nullable="false" />
+    <Property Type="Int32" Name="cityId" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="CustomerVoucher">
+    <Key>
+      <PropertyRef Name="CustomerVoucherId" />
+    </Key>
+    <Property Name="CustomerVoucherId" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+    <Property Name="VoucherId" Type="Int32" />
+    <Property Name="AssignNo" MaxLength="100" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="AssignOn" Precision="3" Type="DateTime" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="Voucher" Relationship="LoyaltyManagementSystemModel.FK__CustomerV__Vouch__540C7B00" FromRole="CustomerVoucher" ToRole="Voucher" />
+    <Property Name="CustomerId" Type="Int32" />
+    <NavigationProperty Name="Customer3" Relationship="LoyaltyManagementSystemModel.FK__CustomerV__Custo__756D6ECB" FromRole="CustomerVoucher" ToRole="Customer" />
+  </EntityType>
+  <Association Name="FK__CustomerV__Vouch__540C7B00">
+    <End Type="LoyaltyManagementSystemModel.Voucher" Multiplicity="0..1" Role="Voucher" />
+    <End Type="LoyaltyManagementSystemModel.CustomerVoucher" Multiplicity="*" Role="CustomerVoucher" />
+    <ReferentialConstraint>
+      <Principal Role="Voucher">
+        <PropertyRef Name="VoucherId" />
+      </Principal>
+      <Dependent Role="CustomerVoucher">
+        <PropertyRef Name="VoucherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CustomerV__Custo__756D6ECB">
+    <End Type="LoyaltyManagementSystemModel.Customer" Multiplicity="0..1" Role="Customer" />
+    <End Type="LoyaltyManagementSystemModel.CustomerVoucher" Multiplicity="*" Role="CustomerVoucher" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerId" />
+      </Principal>
+      <Dependent Role="CustomerVoucher">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CustomerVoucher1">
+    <Key>
+      <PropertyRef Name="CustomerVoucherId" />
+    </Key>
+    <Property Name="CustomerVoucherId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerId" Type="Int32" />
+    <Property Name="VoucherId" Type="Int32" />
+    <Property Name="AssignNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="AssignOn" Type="DateTime" Precision="3" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="Customer" Relationship="LoyaltyManagementSystemModel.FK__CustomerV__Custo__756D6ECB1" FromRole="CustomerVoucher1" ToRole="Customer" />
+  </EntityType>
+  <EntityType Name="TransferVoucher">
+    <Key>
+      <PropertyRef Name="TransferVoucherID" />
+    </Key>
+    <Property Name="TransferVoucherID" Type="Int32" Nullable="false" />
+    <Property Name="VoucherID" Type="Int32" Nullable="false" />
+    <Property Name="TranferDate" Type="DateTime" Precision="3" />
+    <Property Name="TransferFromCustomerID" Type="Int32" />
+    <Property Name="TransferToCustomerID" Type="Int32" />
+    <NavigationProperty Name="Customer" Relationship="LoyaltyManagementSystemModel.FK_TransferFromID" FromRole="TransferVoucher" ToRole="Customer" />
+    <NavigationProperty Name="Customer1" Relationship="LoyaltyManagementSystemModel.FK_TransferToID" FromRole="TransferVoucher" ToRole="Customer" />
+  </EntityType>
+  <Association Name="FK__CustomerV__Custo__756D6ECB1">
+    <End Type="LoyaltyManagementSystemModel.Customer" Role="Customer" Multiplicity="0..1" />
+    <End Type="LoyaltyManagementSystemModel.CustomerVoucher1" Role="CustomerVoucher1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerId" />
+      </Principal>
+      <Dependent Role="CustomerVoucher1">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TransferFromID">
+    <End Type="LoyaltyManagementSystemModel.Customer" Role="Customer" Multiplicity="0..1" />
+    <End Type="LoyaltyManagementSystemModel.TransferVoucher" Role="TransferVoucher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerId" />
+      </Principal>
+      <Dependent Role="TransferVoucher">
+        <PropertyRef Name="TransferFromCustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TransferToID">
+    <End Type="LoyaltyManagementSystemModel.Customer" Role="Customer" Multiplicity="0..1" />
+    <End Type="LoyaltyManagementSystemModel.TransferVoucher" Role="TransferVoucher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerId" />
+      </Principal>
+      <Dependent Role="TransferVoucher">
+        <PropertyRef Name="TransferToCustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

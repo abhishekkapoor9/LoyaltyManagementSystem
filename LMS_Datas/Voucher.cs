@@ -14,12 +14,6 @@ namespace LMS_Datas
     
     public partial class Voucher
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Voucher()
-        {
-            this.CustomerVouchers = new HashSet<CustomerVoucher>();
-        }
-    
         public int VoucherId { get; set; }
         public string VoucherName { get; set; }
         public Nullable<System.DateTime> ValidFrom { get; set; }
@@ -27,9 +21,8 @@ namespace LMS_Datas
         public Nullable<bool> Activate { get; set; }
         public Nullable<int> PackagesId { get; set; }
         public Nullable<int> DiscountperId { get; set; }
+        public string description { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CustomerVoucher> CustomerVouchers { get; set; }
         public virtual Discountper Discountper { get; set; }
         public virtual Package Package { get; set; }
     }
