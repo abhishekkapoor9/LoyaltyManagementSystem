@@ -16,8 +16,8 @@
         text-align: center;
     }
 </style>
-@*@using (@Html.BeginForm("Index", "Category", FormMethod.Post))
-    {*@
+@using (@Html.BeginForm("Index", "NewTransaction", FormMethod.Post))
+    {
 <div class="col-sm-12">
     <div class="widget-box transparent">
         <div class="widget-header widget-header-flat">
@@ -46,7 +46,7 @@
             <div class="row" style="margin-top:3% !important">
                 <div class="col-md-3"></div>
                 <div class="col-md-8">
-                    <input type="submit" value="Submit" name="submit_login" class="btn btn-info" onclick='' />
+                    <input type="button" value="Search" name="submit_login" class="btn btn-info" onclick='' id="btn_search" />
 
                     &nbsp; &nbsp; &nbsp;
                     <input type="reset" value="Reset" name="reset_login" class="btn btn-info" onclick='' />
@@ -204,7 +204,7 @@
         </div><!-- /.widget-body -->
     </div>
 </div>
-@*}*@
+}
 <script src="~/Content/Dashboard/js/jquery-1.9.1.min.js"></script>
 <script src="~/Content/Dashboard/js/ace-extra.min.js"></script>
 <script src="~/Content/Dashboard/js/jquery-ui-1.10.0.js"></script>
@@ -334,5 +334,25 @@
                     }
                 }
             });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btn_search').click(function () {
+            $.ajax({
+                type: "POST",
+                url: "/NewTransaction/PostMethod",
+                data: "{cardNo:'" + $('#txt_CardNo').val() + "'}",
+                contentType: "application/json; charset=utf-8",
+                datatype: "json",
+                async: "true",
+                success: function (response) {
+                    alert(response.status + ' ' + response.statusText);
+                },
+                error: function (response) {
+                    alert(response.status + ' ' + response.statusText);
+                }
+            });
+        });
     });
 </script>
