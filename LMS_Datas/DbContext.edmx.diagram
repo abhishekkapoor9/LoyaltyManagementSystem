@@ -6,7 +6,6 @@
     <edmx:Diagrams>
       <Diagram DiagramId="149b1fcfd2834c63b2efdc6b84e54a3a" Name="Diagram1">
         <EntityTypeShape EntityType="LoyaltyManagementSystemModel.Admin" Width="1.5" PointX="5.25" PointY="21.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="LoyaltyManagementSystemModel.Card" Width="1.5" PointX="8.25" PointY="14.625" IsExpanded="true" />
         <EntityTypeShape EntityType="LoyaltyManagementSystemModel.CardRecharge" Width="1.5" PointX="15.75" PointY="18.5" IsExpanded="true" />
         <EntityTypeShape EntityType="LoyaltyManagementSystemModel.city" Width="1.5" PointX="8.25" PointY="22.625" IsExpanded="true" />
         <EntityTypeShape EntityType="LoyaltyManagementSystemModel.country" Width="1.5" PointX="0.75" PointY="18.25" IsExpanded="true" />
@@ -30,9 +29,6 @@
         <AssociationConnector Association="LoyaltyManagementSystemModel.FK__CustomerC__Admin__3D5E1FD2" ManuallyRouted="false" />
         <AssociationConnector Association="LoyaltyManagementSystemModel.FK__CustomerP__Admin__619B8048" ManuallyRouted="false" />
         <AssociationConnector Association="LoyaltyManagementSystemModel.FK__Transacti__Admin__2180FB33" ManuallyRouted="false" />
-        <AssociationConnector Association="LoyaltyManagementSystemModel.FK__Card__persons__21B6055D" ManuallyRouted="false" />
-        <AssociationConnector Association="LoyaltyManagementSystemModel.FK__CustomerC__Cardi__3B75D760" ManuallyRouted="false" />
-        <AssociationConnector Association="LoyaltyManagementSystemModel.FK__Transacti__CardI__08B54D69" ManuallyRouted="false" />
         <AssociationConnector Association="LoyaltyManagementSystemModel.FK__CardRecha__Today__3D2915A8" ManuallyRouted="false" />
         <AssociationConnector Association="LoyaltyManagementSystemModel.FK__city__countryNam__02084FDA" ManuallyRouted="false" />
         <AssociationConnector Association="LoyaltyManagementSystemModel.FK__city__stateId__02FC7413" ManuallyRouted="false" />
@@ -57,6 +53,10 @@
         <AssociationConnector ManuallyRouted="false" Association="LoyaltyManagementSystemModel.FK__SuperAdmi__state__05D8E0BE" />
         <AssociationConnector ManuallyRouted="false" Association="LoyaltyManagementSystemModel.FK__SuperAdmi__state__07C12930" />
         <EntityTypeShape EntityType="LoyaltyManagementSystemModel.Login" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="LoyaltyManagementSystemModel.Card1" Width="1.5" PointX="8.25" PointY="26.75" />
+        <AssociationConnector Association="LoyaltyManagementSystemModel.FK__Card__persons__21B6055D1" />
+        <AssociationConnector Association="LoyaltyManagementSystemModel.FK__CustomerC__Cardi__3B75D7601" />
+        <AssociationConnector Association="LoyaltyManagementSystemModel.FK__Transacti__CardI__08B54D691" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,4 +1,4 @@
-﻿
+﻿@model LMS_Datas.Card1
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/SuperAdmin/Views/Shared/_Layout.cshtml";
@@ -16,8 +16,8 @@
         text-align: center;
     }
 </style>
-@*@using (@Html.BeginForm("Index", "Category", FormMethod.Post))
-    {*@
+@using (@Html.BeginForm("Index", "AddCard", FormMethod.Post))
+    {
 <div class="col-sm-12">
     <div class="widget-box transparent">
         <div class="widget-header widget-header-flat">
@@ -33,13 +33,12 @@
             </div>
         </div>
         <div class="widget-body">
-
             <div class="row" style="margin-top:3% !important">
                 @*<div class="form-control">*@
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
                     @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
-                    @Html.TextBox("Card Name", null, new { @id = "txt_clientName", @class = "col-md-4", placeholder = "Card Name", style = "width:100%" })
+                    @Html.TextBoxFor(m=>m.CardName, null, new { @id = "txt_clientName", @class = "col-md-4", placeholder = "Card Name", style = "width:100%" })
                 </div>
                 @*</div>*@
             </div>
@@ -50,11 +49,11 @@
                     @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
                     <div class="input-daterange input-group">
 
-                        @Html.TextBox("start", null, new { @id = "txt_start", @class = "input-sm form-control", placeholder = "Valid From", style = "width:100%" })
+                        @Html.TextBoxFor(m=>m.ValidFrom, null, new { @id = "txt_start", @class = "input-sm form-control", placeholder = "Valid From", style = "width:100%" })
                         <span class="input-group-addon">
                             <i class="fa fa-exchange"></i>
                         </span>
-                        @Html.TextBox("end", null, new { @id = "txt_end", @class = "input-sm form-control", placeholder = "Valid To", style = "width:100%" })
+                        @Html.TextBoxFor(m=>m.ValidTo, null, new { @id = "txt_end", @class = "input-sm form-control", placeholder = "Valid To", style = "width:100%" })
                     </div>
                 </div>
                 @*</div>*@
@@ -62,33 +61,28 @@
             <div class="row" style="margin-top:3% !important">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
-                    @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
-                    @Html.TextArea("Card Description", null, new { @id = "txt_VoucherDescription", @class = "autosize-transition form-control", placeholder = "Card Description", style = "width:100%;border:1px solid" })
+                    @Html.TextBoxFor(m=>m.discountPer, null, new { @id = "txt_Discount%", @class = "input-sm form-control", placeholder = "Discount&%", style = "width:100%;border:1px solid" })
                 </div>
             </div>
             <div class="row" style="margin-top:3% !important">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
-                    @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
-                    @Html.TextBox("Discount%", null, new { @id = "txt_Discount%", @class = "input-sm form-control", placeholder = "Discount&%", style = "width:100%;border:1px solid" })
+                    @Html.DropDownListFor(model => model.PackagesId, new SelectList(ViewBag.Packages, "Value", "Text"), "- Please Choose Package -", new { @class = "chosen-select form-control", @id = "packageddl", @name = "packageid" })
                 </div>
             </div>
             <div class="row" style="margin-top:3% !important">
-                <div class="col-md-2"></div>
+                <div class="col-md-4"></div>
                 <div class="col-md-4">
-                    <div class="col-md-6">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4">
-                            @Html.Label("lbl_active", "Active", new { @class = "control-label no-padding-right" })
-                        </div>
-                        <div class="col-md-4">
-                            <label>
-                                <input name="switch-field-1" class="ace ace-switch ace-switch-2" type="checkbox" />
-                                <span class="lbl"></span>
-                            </label>
-                        </div>
+@Html.DropDownList("Statusddl", new List<SelectListItem>
+{
+    new SelectListItem{ Text="Choose Package Status", Value = "0" },
+    new SelectListItem{ Text="Active", Value = "true" },
+    new SelectListItem{ Text="Inactive", Value = "false" },
+ }, new { @class = "chosen-select form-control", @id = "statudddl", @name = "Statusddl" })
                     </div>
                 </div>
+            <div class="row"  style="margin-top:3% !important">
+                <div class="col-md-4"></div>
                 <div class="col-md-4">
                     <input type="submit" value="Submit" name="submit_login" class="btn btn-info" onclick='' />
                     &nbsp; &nbsp; &nbsp;
@@ -113,15 +107,13 @@
             </div>
         </div>
         <div class="widget-body">
-            <table id="jqGrid_category"></table>
-            <div id="jqControls_category"></div>
+            <table id="jqGrid_addCard"></table>
+            <div id="jqControls_addCard"></div>
         </div><!-- /.widget-body -->
     </div>
 </div>
-
-@*}*@
+}
 <script src="~/Content/Dashboard/js/jquery-1.9.1.min.js"></script>
-
 <script src="~/Content/Dashboard/js/ace-extra.min.js"></script>
 <script src="~/Content/Dashboard/js/jquery-ui-1.10.0.js"></script>
 <script src="~/Content/Dashboard/js/grid.locale-en.js"></script>
@@ -219,22 +211,27 @@
         $("#link").click(function () {
 
         })
-        $("#jqGrid_category").jqGrid({
-            url: 'GetCategory',
+        $("#jqGrid_addCard").jqGrid({
+            url: 'GetCard',
             datatype: 'json',
             mtype: 'Get',
-            colNames: ['CategoryId', 'CategoryName'],
+            colNames: ['CardId', 'CardName', 'ValidFrom', 'ValidTo', 'discountPer', 'PackageName','Activate'],
             colModel: [
-                { key: true, hidden: false, name: 'CategoryId', index: 'CategoryId', editable: true },
-                { key: false, name: 'CategoryName', index: 'CategoryName', editable: true }
+                { key: true, hidden: true, name: 'CardId', index: 'CardId', editable: true },
+                { key: false, name: 'CardName', index: 'CardName', editable: true },
+                 { key: false, name: 'ValidFrom', index: 'ValidFrom', editable: true },
+                 { key: false, name: 'ValidTo', index: 'ValidTo', editable: true },
+                 { key: false, name: 'discountPer', index: 'discountPer', editable: true },
+                 { key: false, name: 'PackageName', index: 'PackageName', editable: true },
+                 { key: false, name: 'Activate', index: 'Activate', editable: true }
             ],
-            pager: jQuery('#jqControls_category'),
+            pager: jQuery('#jqGrid_addCard'),
             rowNum: 10,
             rowList: [10, 20, 30, 40, 50],
             height: '100%',
             viewrecords: true,
-            caption: 'Client Records',
-            emptyrecords: 'No Clients Records are Available to Display',
+            caption: 'Card Records',
+            emptyrecords: 'No Card Records are Available to Display',
             jsonReader: {
                 root: "rows",
                 page: "page",
@@ -245,7 +242,7 @@
             },
             autowidth: true,
             multiselect: false
-        }).navGrid('#jqControls_category', { edit: true, add: false, del: true, search: false, refresh: true },
+        }).navGrid('#jqControls_addCard', { edit: true, add: false, del: true, search: false, refresh: true },
             {
                 zIndex: 100,
                 url: "EditCategory",

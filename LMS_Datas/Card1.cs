@@ -12,10 +12,10 @@ namespace LMS_Datas
     using System;
     using System.Collections.Generic;
     
-    public partial class Card
+    public partial class Card1
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Card()
+        public Card1()
         {
             this.CustomerCards = new HashSet<CustomerCard>();
             this.TransactionDetails = new HashSet<TransactionDetail>();

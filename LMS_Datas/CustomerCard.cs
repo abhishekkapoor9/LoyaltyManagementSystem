@@ -21,8 +21,8 @@ namespace LMS_Datas
         public Nullable<int> Adminid { get; set; }
     
         public virtual Admin Admin { get; set; }
-        public virtual Card Card { get; set; }
         public virtual Customer Customer { get; set; }
         public virtual Desk Desk { get; set; }
+        public virtual Card1 Card1 { get; set; }
     }
 }

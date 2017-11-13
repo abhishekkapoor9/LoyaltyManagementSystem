@@ -32,11 +32,11 @@ namespace LMS_Datas
         public Nullable<int> AdminId { get; set; }
     
         public virtual Admin Admin { get; set; }
-        public virtual Card Card { get; set; }
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CustomerPoint> CustomerPoints { get; set; }
         public virtual Desk Desk { get; set; }
         public virtual PayMode PayMode { get; set; }
+        public virtual Card1 Card1 { get; set; }
     }
 }

@@ -18,20 +18,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Cards">
-      <EntityTypeMapping TypeName="LoyaltyManagementSystemModel.Card">
-        <MappingFragment StoreEntitySet="Card">
-          <ScalarProperty Name="CardId" ColumnName="CardId" />
-          <ScalarProperty Name="CardName" ColumnName="CardName" />
-          <ScalarProperty Name="ValidFrom" ColumnName="ValidFrom" />
-          <ScalarProperty Name="ValidTo" ColumnName="ValidTo" />
-          <ScalarProperty Name="discountPer" ColumnName="discountPer" />
-          <ScalarProperty Name="Activate" ColumnName="Activate" />
-          <ScalarProperty Name="PackagesId" ColumnName="PackagesId" />
-          <ScalarProperty Name="persons" ColumnName="persons" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="CardRecharges">
       <EntityTypeMapping TypeName="LoyaltyManagementSystemModel.CardRecharge">
         <MappingFragment StoreEntitySet="CardRecharge">
@@ -425,6 +411,20 @@
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Card1">
+      <EntityTypeMapping TypeName="LoyaltyManagementSystemModel.Card1">
+        <MappingFragment StoreEntitySet="Card">
+          <ScalarProperty Name="persons" ColumnName="persons" />
+          <ScalarProperty Name="PackagesId" ColumnName="PackagesId" />
+          <ScalarProperty Name="Activate" ColumnName="Activate" />
+          <ScalarProperty Name="discountPer" ColumnName="discountPer" />
+          <ScalarProperty Name="ValidTo" ColumnName="ValidTo" />
+          <ScalarProperty Name="ValidFrom" ColumnName="ValidFrom" />
+          <ScalarProperty Name="CardName" ColumnName="CardName" />
+          <ScalarProperty Name="CardId" ColumnName="CardId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
