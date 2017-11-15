@@ -39,7 +39,8 @@ namespace LMS_Web.Areas.SuperAdmin.Controllers
                             ValidFrom = model.ValidFrom,
                             ValidTo = model.ValidTo,
                             VoucherName = model.VoucherName,
-                            PackagesId = model.PackagesId
+                            PackagesId = model.PackagesId,
+                            persons=model.persons
                         };
                         context.Vouchers.Add(addVoucher);
 
@@ -67,22 +68,21 @@ namespace LMS_Web.Areas.SuperAdmin.Controllers
 
             var voucherList = (from voucher in entity.Vouchers
                               where voucher.Activate == true
-                              join package in entity.Packages on voucher.PackagesId equals package.PackagesId
-                              select new { voucher,package }).AsEnumerable().Select(row => new
+                              select new { voucher }).AsEnumerable().Select(row => new
                               {
                                   VoucherId = row.voucher.VoucherId,
                                   VoucherName = row.voucher.VoucherName,
                                   ValidTo = Convert.ToDateTime(row.voucher.ValidTo).ToString("yyyy-MM-dd"),
                                   ValidFrom = Convert.ToDateTime(row.voucher.ValidFrom).ToString("yyyy-MM-dd"), 
-                                  PackageName=row.package.PackageName,
-                                  Description=row.voucher.description
+                                  Description=row.voucher.description,
+                                  Persons=row.voucher.persons
                               });
             if (_search)
             {
                 switch (searchField)
                 {
-                    case "PackageName":
-                        voucherList = voucherList.Where(t => t.PackageName.Contains(searchString));
+                    case "Persons":
+                        voucherList = voucherList.Where(t => t.Persons==Convert.ToInt32(searchString));
                         break;
                     case "VoucherName":
                         voucherList = voucherList.Where(t => t.VoucherName==(searchString));
@@ -127,9 +127,8 @@ namespace LMS_Web.Areas.SuperAdmin.Controllers
                        description= Model.description,
                        ValidFrom=Model.ValidFrom,
                        ValidTo=Model.ValidTo,
-                       PackagesId=Model.PackagesId,
-                       VoucherId=Model.VoucherId
-                       
+                       VoucherId=Model.VoucherId,
+                       persons=Model.persons
                     };
 
                     entity.Vouchers.Attach(enditedVoucherValue);
@@ -153,7 +152,7 @@ namespace LMS_Web.Areas.SuperAdmin.Controllers
             return msgClient;
         }
 
-        public string DeleteVoucher(Voucher Model)
+        public string DeleteVoucher(int Id)
         {
             string msg;
             try
@@ -162,14 +161,14 @@ namespace LMS_Web.Areas.SuperAdmin.Controllers
                 {
                     var enditedValue = new LMS_Datas.Voucher
                     {
-                        Activate = false,
-                        VoucherId=Model.VoucherId,
-                        VoucherName=Model.VoucherName,
-                        ValidFrom=Model.ValidFrom,
-                        ValidTo=Model.ValidTo,
-                        description=Model.description
+                        VoucherId = Id,
+                        Activate = false
                     };
                     entity.Entry(enditedValue).State = EntityState.Modified;
+                    entity.Entry(enditedValue).Property(x => x.PackagesId).IsModified = false;
+                    entity.Entry(enditedValue).Property(x => x.ValidFrom).IsModified = false;
+                    entity.Entry(enditedValue).Property(x => x.ValidTo).IsModified = false;
+                    entity.Entry(enditedValue).Property(x => x.VoucherName).IsModified = false;
                     entity.SaveChanges();
                     msg = "Delete Successfully";
                 }

@@ -19,10 +19,12 @@ namespace LMS_Datas
         public Nullable<int> Cardid { get; set; }
         public Nullable<int> DeskId { get; set; }
         public Nullable<int> Adminid { get; set; }
+        public string referenceNo { get; set; }
+        public Nullable<bool> Activate { get; set; }
     
         public virtual Admin Admin { get; set; }
+        public virtual Card1 Card { get; set; }
         public virtual Customer Customer { get; set; }
         public virtual Desk Desk { get; set; }
-        public virtual Card1 Card1 { get; set; }
     }
 }

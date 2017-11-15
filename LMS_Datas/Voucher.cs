@@ -22,6 +22,7 @@ namespace LMS_Datas
         public Nullable<int> PackagesId { get; set; }
         public Nullable<int> DiscountperId { get; set; }
         public string description { get; set; }
+        public Nullable<int> persons { get; set; }
     
         public virtual Discountper Discountper { get; set; }
         public virtual Package Package { get; set; }

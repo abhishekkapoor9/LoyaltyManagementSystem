@@ -78,10 +78,15 @@
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
                     @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
-                   @Html.TextAreaFor(m => m.description, new { @id = "txt_VoucherDescription", @class = "autosize-transition form-control", placeholder = "Voucher Description", style = "width:100%;border:1px solid" })
+                    @Html.TextBoxFor(m => m.persons, new { @id = "txt_persons", @class = "autosize-transition form-control", placeholder = "No Of Persons", style = "width:100%;border:1px solid" })
                 </div>
             </div>
             <div class="row" style="margin-top:3% !important">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
+                   @Html.TextAreaFor(m => m.description, new { @id = "txt_VoucherDescription", @class = "autosize-transition form-control", placeholder = "Voucher Description", style = "width:100%;border:1px solid" })
+                </div>
             </div>
             <div class="row" style="margin-top:3% !important" >
                 <div class="col-md-4"></div>
@@ -239,14 +244,14 @@
             url: 'GetVoucher',
             datatype: 'json',
             mtype: 'Get',
-            colNames: ['VoucherId', 'VoucherName', 'ValidTo', 'ValidFrom', 'PackageName', 'Description'],
+            colNames: ['VoucherId', 'VoucherName', 'ValidTo', 'ValidFrom', 'Description', 'Persons'],
             colModel: [
                 { key: true, hidden: true, name: 'VoucherId', index: 'VoucherId', editable: true },
                 { key: false, name: 'VoucherName', index: 'VoucherName', editable: true },
                 { key: false, name: 'ValidTo', index: 'ValidTo', editable: true },
                 { key: false, name: 'ValidFrom', index: 'ValidFrom', editable: true },
-                { key: false, name: 'PackageName', index: 'PackageName', editable: true },
                 { key: false, name: 'Description', index: 'Description', editable: true },
+                { key: false, name: 'Persons', index: 'Persons', editable: true },
             ],
             pager: jQuery('#jqControls_voucher'),
             rowNum: 10,

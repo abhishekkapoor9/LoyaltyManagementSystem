@@ -17,7 +17,7 @@ namespace LMS_Datas
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Discountper()
         {
-            this.Vouchers = new HashSet<Voucher>();
+            this.Vouchers1 = new HashSet<Voucher>();
         }
     
         public int DiscountPerId { get; set; }
@@ -26,6 +26,6 @@ namespace LMS_Datas
         public Nullable<bool> Activate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Voucher> Vouchers { get; set; }
+        public virtual ICollection<Voucher> Vouchers1 { get; set; }
     }
 }

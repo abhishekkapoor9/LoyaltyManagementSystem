@@ -17,9 +17,9 @@ namespace LMS_Datas
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Admin()
         {
-            this.CustomerCards = new HashSet<CustomerCard>();
             this.CustomerPoints = new HashSet<CustomerPoint>();
             this.TransactionDetails = new HashSet<TransactionDetail>();
+            this.CustomerCards = new HashSet<CustomerCard>();
         }
     
         public int AdminId { get; set; }
@@ -38,10 +38,10 @@ namespace LMS_Datas
         public virtual country country { get; set; }
         public virtual state state { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CustomerCard> CustomerCards { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CustomerPoint> CustomerPoints { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TransactionDetail> TransactionDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CustomerCard> CustomerCards { get; set; }
     }
 }

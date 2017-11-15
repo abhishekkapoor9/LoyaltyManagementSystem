@@ -190,8 +190,6 @@
                         @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
                         @Html.TextArea("Voucher Description", null, new { @id = "txt_VoucherDescription", @class = "autosize-transition form-control", placeholder = "Voucher Description", style = "width:100%;border:1px solid", @readonly = "readonly" })
                     </div>
-                    
-                   
                 </div>
             </div>
         </div>
@@ -307,13 +305,13 @@
             colNames: ['CategoryId', 'ClientFrom', 'ClientTo', 'VoucherName', 'ValidFrom', 'ValidTo'],
             colModel: [
                 { key: true, hidden: true, name: 'CategoryId', index: 'CategoryId', editable: true },
-                { key: false, name: 'Tranfer From', index: 'ClientFrom', editable: true },
-                { key: false, name: 'Transfer To', index: 'ClientTo', editable: true },
+                { key: false, name: 'ClientFrom', index: 'ClientFrom', editable: true },
+                { key: false, name: 'ClientTo', index: 'ClientTo', editable: true },
                 { key: false, name: 'VoucherName', index: 'VoucherName', editable: true },
                 { key: false, name: 'ValidFrom', index: 'ValidFrom', editable: true },
                 { key: false, name: 'ValidTo', index: 'ValidTo', editable: true }
             ],
-            pager: jQuery('#jqGrid_transfer'),
+            pager: jQuery('#jqControls_transfer'),
             rowNum: 10,
             rowList: [10, 20, 30, 40, 50],
             height: '100%',

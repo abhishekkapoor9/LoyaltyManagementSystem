@@ -108,68 +108,66 @@ namespace LMS_Web.Areas.SuperAdmin.Controllers
             };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
-
-        public string EditDiscount(Discountper Model)
+        public string EditCard(Card1 Model, FormCollection form)
         {
-            string msgClient;
-            try
+            string msgClient = null;
+            string statusDDLValue = form["PackageName"].ToString();
+            Model.PackagesId = (from pack in entity.Packages where pack.PackageName == statusDDLValue select pack.PackagesId).FirstOrDefault();
+            if (Model.PackagesId != null)
             {
-                if (ModelState.IsValid)
+                try
                 {
-                    var enditedDiscountValue = new LMS_Datas.Discountper
+                    if (ModelState.IsValid)
                     {
-                        DiscountRate = Model.DiscountRate,
-                        Persons = Model.Persons,
-                        Activate = true,
-                        DiscountPerId = Model.DiscountPerId
-                    };
-
-                    entity.Discountpers.Attach(enditedDiscountValue);
-                    entity.Entry(enditedDiscountValue).Property(x => x.DiscountPerId).IsModified = true;
-                    entity.Entry(enditedDiscountValue).Property(x => x.Activate).IsModified = true;
-                    entity.Entry(enditedDiscountValue).Property(x => x.Persons).IsModified = true;
-                    entity.Entry(enditedDiscountValue).Property(x => x.DiscountRate).IsModified = true;
-                    entity.SaveChanges();
-                    msgClient = "Saved Successfully";
+                        var enditedCardValue = new LMS_Datas.Card1
+                        {
+                            Activate = true,
+                            CardName = Model.CardName,
+                            discountPer = Model.discountPer,
+                            ValidFrom = Model.ValidFrom,
+                            ValidTo = Model.ValidTo,
+                            PackagesId = Model.PackagesId
+                        };
+                        entity.Card1.Attach(enditedCardValue);
+                        entity.SaveChanges();
+                    }
+                    else
+                    {
+                        msgClient = "Validation data not successfully";
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    msgClient = "Validation data not successfully";
+                    msgClient = "Error in Retriving Data";
                 }
             }
-            catch (Exception ex)
+            else
             {
-                msgClient = "Error in Retriving Data";
+                msgClient = "Invalid Package Selected";
             }
             return msgClient;
         }
-
-        public string DeleteDiscount(int id)
+        public string DeleteCard(int id)
         {
             string msg;
             try
             {
-                if (ModelState.IsValid)
-                {
-                    var enditedDiscountper = new LMS_Datas.Discountper
+                    var enditedDiscountper = new LMS_Datas.Card1
                     {
-                        DiscountPerId = id,
+                        CardId = id,
                         Activate = false
-
                     };
-                    entity.Discountpers.Attach(enditedDiscountper);
-                    entity.Entry(enditedDiscountper).Property(x => x.DiscountPerId).IsModified = true;
+                    entity.Card1.Attach(enditedDiscountper);
+                    //entity.Entry(enditedDiscountper).Property(x => x.CardId).IsModified = true;
                     entity.Entry(enditedDiscountper).Property(x => x.Activate).IsModified = true;
-                    entity.Entry(enditedDiscountper).Property(x => x.DiscountRate).IsModified = false;
-                    entity.Entry(enditedDiscountper).Property(x => x.Persons).IsModified = false;
-                    //entity.Entry(enditedDiscountper).State = EntityState.Modified;
+                    entity.Entry(enditedDiscountper).Property(x => x.CardName).IsModified = false;
+                    entity.Entry(enditedDiscountper).Property(x => x.ValidFrom).IsModified = false;
+                    entity.Entry(enditedDiscountper).Property(x => x.ValidTo).IsModified = false;
+                    entity.Entry(enditedDiscountper).Property(x => x.persons).IsModified = false;
+                    entity.Entry(enditedDiscountper).Property(x => x.discountPer).IsModified = false;
+                    entity.Entry(enditedDiscountper).Property(x => x.TransactionDetails).IsModified = false;
                     entity.SaveChanges();
                     msg = "Delete Successfully";
-                }
-                else
-                {
-                    msg = "Validation data not successfully";
-                }
                 return msg;
             }
             catch (Exception e1)

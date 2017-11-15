@@ -82,6 +82,8 @@
     <Property Name="Cardid" Type="int" />
     <Property Name="DeskId" Type="int" />
     <Property Name="Adminid" Type="int" />
+    <Property Name="referenceNo" Type="varchar" MaxLength="50" />
+    <Property Name="Activate" Type="bit" />
   </EntityType>
   <EntityType Name="CustomerPoints">
     <Key>
@@ -224,6 +226,7 @@
     <Property Name="PackagesId" Type="int" />
     <Property Name="DiscountperId" Type="int" />
     <Property Name="description" Type="varchar" MaxLength="50" />
+    <Property Name="persons" Type="int" />
   </EntityType>
   <Association Name="FK__Admin__cityId__114A936A">
     <End Role="city" Type="Self.city" Multiplicity="0..1" />

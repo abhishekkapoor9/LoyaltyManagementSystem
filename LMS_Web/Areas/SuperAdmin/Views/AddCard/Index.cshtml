@@ -38,7 +38,7 @@
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
                     @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
-                    @Html.TextBoxFor(m=>m.CardName, null, new { @id = "txt_clientName", @class = "col-md-4", placeholder = "Card Name", style = "width:100%" })
+                    @Html.TextBoxFor(m=>m.CardName, null, new { @id = "txt_cardNo", @class = "col-md-4", placeholder = "Card No", style = "width:100%" })
                 </div>
                 @*</div>*@
             </div>
@@ -61,7 +61,7 @@
             <div class="row" style="margin-top:3% !important">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
-                    @Html.TextBoxFor(m=>m.discountPer, null, new { @id = "txt_Discount%", @class = "input-sm form-control", placeholder = "Discount&%", style = "width:100%;border:1px solid" })
+                    @Html.TextBoxFor(m=>m.discountPer, null, new { @id = "txt_Discount%", @class = "input-sm form-control", placeholder = "Discount%", style = "width:100%;border:1px solid" })
                 </div>
             </div>
             <div class="row" style="margin-top:3% !important">
@@ -113,14 +113,15 @@
     </div>
 </div>
 }
-<script src="~/Content/Dashboard/js/jquery-1.9.1.min.js"></script>
 <script src="~/Content/Dashboard/js/ace-extra.min.js"></script>
 <script src="~/Content/Dashboard/js/jquery-ui-1.10.0.js"></script>
 <script src="~/Content/Dashboard/js/grid.locale-en.js"></script>
 <script src="~/Content/Dashboard/js/jquery.jqGrid.min.js"></script>
 <script src="~/Content/Dashboard/js/jquery.maskedinput.min.js"></script>
 <script src="~/Content/Dashboard/js/jquery.autosize.min.js"></script>
-<script src="~/Content/Dashboard/js/daterangepicker.min.js"></script>
+<script src="~/Content/Dashboard/js/bootstrap-datepicker.min.js"></script>
+<script src="~/Content/Dashboard/js/bootstrap-datepicker.min.js"></script>
+<script src="~/Content/Dashboard/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript">
     jQuery(function ($) {
 
@@ -215,7 +216,7 @@
             url: 'GetCard',
             datatype: 'json',
             mtype: 'Get',
-            colNames: ['CardId', 'CardName', 'ValidFrom', 'ValidTo', 'discountPer', 'PackageName','Activate'],
+            colNames: ['CardId', 'CardNo', 'ValidFrom', 'ValidTo', 'discountPer', 'PackageName','Activate'],
             colModel: [
                 { key: true, hidden: true, name: 'CardId', index: 'CardId', editable: true },
                 { key: false, name: 'CardName', index: 'CardName', editable: true },
@@ -223,9 +224,9 @@
                  { key: false, name: 'ValidTo', index: 'ValidTo', editable: true },
                  { key: false, name: 'discountPer', index: 'discountPer', editable: true },
                  { key: false, name: 'PackageName', index: 'PackageName', editable: true },
-                 { key: false, name: 'Activate', index: 'Activate', editable: true }
+                 { key: false, name: 'Activate', index: 'Activate', editable: false }
             ],
-            pager: jQuery('#jqGrid_addCard'),
+            pager: jQuery('#jqControls_addCard'),
             rowNum: 10,
             rowList: [10, 20, 30, 40, 50],
             height: '100%',
@@ -245,7 +246,7 @@
         }).navGrid('#jqControls_addCard', { edit: true, add: false, del: true, search: false, refresh: true },
             {
                 zIndex: 100,
-                url: "EditCategory",
+                url: "EditCard",
                 closeOnEscape: true,
                 closeAfterEdit: true,
                 recreateForm: true,
@@ -257,7 +258,7 @@
             }, {},
             {
                 zIndex: 100,
-                url: "DeleteCategory",
+                url: "DeleteCard",
                 closeOnEscape: true,
                 closeAfterDelete: true,
                 recreateForm: true,

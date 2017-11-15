@@ -18,12 +18,12 @@ namespace LMS_Datas
         public Customer()
         {
             this.CardRecharges = new HashSet<CardRecharge>();
-            this.CustomerCards = new HashSet<CustomerCard>();
             this.CustomerPoints = new HashSet<CustomerPoint>();
             this.CustomerVouchers = new HashSet<CustomerVoucher>();
             this.TransactionDetails = new HashSet<TransactionDetail>();
             this.TransferVouchers = new HashSet<TransferVoucher>();
             this.TransferVouchers1 = new HashSet<TransferVoucher>();
+            this.CustomerCards = new HashSet<CustomerCard>();
         }
     
         public int CustomerId { get; set; }
@@ -44,8 +44,6 @@ namespace LMS_Datas
         public virtual country country { get; set; }
         public virtual state state { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CustomerCard> CustomerCards { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CustomerPoint> CustomerPoints { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CustomerVoucher> CustomerVouchers { get; set; }
@@ -55,5 +53,7 @@ namespace LMS_Datas
         public virtual ICollection<TransferVoucher> TransferVouchers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TransferVoucher> TransferVouchers1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CustomerCard> CustomerCards { get; set; }
     }
 }
