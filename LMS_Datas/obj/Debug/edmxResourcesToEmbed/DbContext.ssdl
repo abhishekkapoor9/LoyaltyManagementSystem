@@ -38,6 +38,8 @@
     <Property Name="Amount" Type="int" />
     <Property Name="TodayDate" Type="datetime" />
     <Property Name="Status" Type="bit" />
+    <Property Name="CardNo" Type="varchar" MaxLength="50" />
+    <Property Name="PayModeId" Type="int" />
   </EntityType>
   <EntityType Name="city">
     <Key>
@@ -276,7 +278,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__CardRecha__Today__3D2915A8">
+  <Association Name="FK__CardRecha__Custo__41B8C09B">
     <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
     <End Role="CardRecharge" Type="Self.CardRecharge" Multiplicity="*" />
     <ReferentialConstraint>
@@ -285,6 +287,18 @@
       </Principal>
       <Dependent Role="CardRecharge">
         <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CardRecha__PayMo__42ACE4D4">
+    <End Role="PayMode" Type="Self.PayMode" Multiplicity="0..1" />
+    <End Role="CardRecharge" Type="Self.CardRecharge" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PayMode">
+        <PropertyRef Name="PayModeId" />
+      </Principal>
+      <Dependent Role="CardRecharge">
+        <PropertyRef Name="PayModeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -828,8 +842,12 @@
       <End Role="Packages" EntitySet="Packages" />
       <End Role="Card" EntitySet="Card" />
     </AssociationSet>
-    <AssociationSet Name="FK__CardRecha__Today__3D2915A8" Association="Self.FK__CardRecha__Today__3D2915A8">
+    <AssociationSet Name="FK__CardRecha__Custo__41B8C09B" Association="Self.FK__CardRecha__Custo__41B8C09B">
       <End Role="Customer" EntitySet="Customer" />
+      <End Role="CardRecharge" EntitySet="CardRecharge" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CardRecha__PayMo__42ACE4D4" Association="Self.FK__CardRecha__PayMo__42ACE4D4">
+      <End Role="PayMode" EntitySet="PayMode" />
       <End Role="CardRecharge" EntitySet="CardRecharge" />
     </AssociationSet>
     <AssociationSet Name="FK__city__countryNam__02084FDA" Association="Self.FK__city__countryNam__02084FDA">

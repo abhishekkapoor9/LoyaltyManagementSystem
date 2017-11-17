@@ -43,6 +43,8 @@
           <Property Name="Amount" Type="int" />
           <Property Name="TodayDate" Type="datetime" />
           <Property Name="Status" Type="bit" />
+          <Property Name="CardNo" Type="varchar" MaxLength="50" />
+          <Property Name="PayModeId" Type="int" />
         </EntityType>
         <EntityType Name="city">
           <Key>
@@ -281,7 +283,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CardRecha__Today__3D2915A8">
+        <Association Name="FK__CardRecha__Custo__41B8C09B">
           <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
           <End Role="CardRecharge" Type="Self.CardRecharge" Multiplicity="*" />
           <ReferentialConstraint>
@@ -290,6 +292,18 @@
             </Principal>
             <Dependent Role="CardRecharge">
               <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CardRecha__PayMo__42ACE4D4">
+          <End Role="PayMode" Type="Self.PayMode" Multiplicity="0..1" />
+          <End Role="CardRecharge" Type="Self.CardRecharge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PayMode">
+              <PropertyRef Name="PayModeId" />
+            </Principal>
+            <Dependent Role="CardRecharge">
+              <PropertyRef Name="PayModeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -833,8 +847,12 @@
             <End Role="Packages" EntitySet="Packages" />
             <End Role="Card" EntitySet="Card" />
           </AssociationSet>
-          <AssociationSet Name="FK__CardRecha__Today__3D2915A8" Association="Self.FK__CardRecha__Today__3D2915A8">
+          <AssociationSet Name="FK__CardRecha__Custo__41B8C09B" Association="Self.FK__CardRecha__Custo__41B8C09B">
             <End Role="Customer" EntitySet="Customer" />
+            <End Role="CardRecharge" EntitySet="CardRecharge" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CardRecha__PayMo__42ACE4D4" Association="Self.FK__CardRecha__PayMo__42ACE4D4">
+            <End Role="PayMode" EntitySet="PayMode" />
             <End Role="CardRecharge" EntitySet="CardRecharge" />
           </AssociationSet>
           <AssociationSet Name="FK__city__countryNam__02084FDA" Association="Self.FK__city__countryNam__02084FDA">
@@ -972,17 +990,6 @@
           <NavigationProperty Name="TransactionDetails" Relationship="Self.FK__Transacti__Admin__2180FB33" FromRole="Admin" ToRole="TransactionDetails" />
           <NavigationProperty Name="CustomerCards" Relationship="LoyaltyManagementSystemModel.FK__CustomerC__Admin__3D5E1FD2" FromRole="Admin" ToRole="CustomerCard" />
         </EntityType>
-        <EntityType Name="CardRecharge">
-          <Key>
-            <PropertyRef Name="CardRechargeId" />
-          </Key>
-          <Property Name="CardRechargeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CustomerId" Type="Int32" />
-          <Property Name="Amount" Type="Int32" />
-          <Property Name="TodayDate" Type="DateTime" Precision="3" />
-          <Property Name="Status" Type="Boolean" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK__CardRecha__Today__3D2915A8" FromRole="CardRecharge" ToRole="Customer" />
-        </EntityType>
         <EntityType Name="city">
           <Key>
             <PropertyRef Name="cityId" />
@@ -1026,7 +1033,6 @@
           <Property Name="stateId" Type="Int32" />
           <Property Name="cityId" Type="Int32" />
           <Property Name="Active" Type="Boolean" />
-          <NavigationProperty Name="CardRecharges" Relationship="Self.FK__CardRecha__Today__3D2915A8" FromRole="Customer" ToRole="CardRecharge" />
           <NavigationProperty Name="city" Relationship="Self.FK__Customer__cityId__0B91BA14" FromRole="Customer" ToRole="city" />
           <NavigationProperty Name="country" Relationship="Self.FK__Customer__countr__09A971A2" FromRole="Customer" ToRole="country" />
           <NavigationProperty Name="state" Relationship="Self.FK__Customer__stateI__0A9D95DB" FromRole="Customer" ToRole="state" />
@@ -1036,6 +1042,7 @@
           <NavigationProperty Name="TransferVouchers" Relationship="Self.FK_TransferFromID" FromRole="Customer" ToRole="TransferVoucher" />
           <NavigationProperty Name="TransferVouchers1" Relationship="Self.FK_TransferToID" FromRole="Customer" ToRole="TransferVoucher" />
           <NavigationProperty Name="CustomerCards" Relationship="LoyaltyManagementSystemModel.FK__CustomerC__Custo__3A81B327" FromRole="Customer" ToRole="CustomerCard" />
+          <NavigationProperty Name="CardRecharges" Relationship="LoyaltyManagementSystemModel.FK__CardRecha__Custo__41B8C09B" FromRole="Customer" ToRole="CardRecharge" />
         </EntityType>
         <EntityType Name="CustomerPoint">
           <Key>
@@ -1106,6 +1113,7 @@
           <Property Name="PayMode1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Active" Type="Boolean" />
           <NavigationProperty Name="TransactionDetails" Relationship="Self.FK__Transacti__PayMo__5BE2A6F2" FromRole="PayMode" ToRole="TransactionDetails" />
+          <NavigationProperty Name="CardRecharges" Relationship="LoyaltyManagementSystemModel.FK__CardRecha__PayMo__42ACE4D4" FromRole="PayMode" ToRole="CardRecharge" />
         </EntityType>
         <EntityType Name="Point">
           <Key>
@@ -1240,18 +1248,6 @@
             </Principal>
             <Dependent Role="TransactionDetails">
               <PropertyRef Name="AdminId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__CardRecha__Today__3D2915A8">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
-          <End Role="CardRecharge" Type="Self.CardRecharge" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="CustomerId" />
-            </Principal>
-            <Dependent Role="CardRecharge">
-              <PropertyRef Name="CustomerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1473,7 +1469,6 @@
         </Association>
         <EntityContainer Name="LoyaltyManagementSystemEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Admins" EntityType="Self.Admin" />
-          <EntitySet Name="CardRecharges" EntityType="Self.CardRecharge" />
           <EntitySet Name="cities" EntityType="Self.city" />
           <EntitySet Name="countries" EntityType="Self.country" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
@@ -1507,10 +1502,6 @@
           <AssociationSet Name="FK__Transacti__Admin__2180FB33" Association="Self.FK__Transacti__Admin__2180FB33">
             <End Role="Admin" EntitySet="Admins" />
             <End Role="TransactionDetails" EntitySet="TransactionDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CardRecha__Today__3D2915A8" Association="Self.FK__CardRecha__Today__3D2915A8">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="CardRecharge" EntitySet="CardRecharges" />
           </AssociationSet>
           <AssociationSet Name="FK__city__countryNam__02084FDA" Association="Self.FK__city__countryNam__02084FDA">
             <End Role="country" EntitySet="countries" />
@@ -1799,6 +1790,15 @@
             <End Role="Desk" EntitySet="Desks" />
             <End Role="CustomerCard" EntitySet="CustomerCards" />
           </AssociationSet>
+          <EntitySet Name="CardRecharges" EntityType="LoyaltyManagementSystemModel.CardRecharge" />
+          <AssociationSet Name="FK__CardRecha__Custo__41B8C09B" Association="LoyaltyManagementSystemModel.FK__CardRecha__Custo__41B8C09B">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="CardRecharge" EntitySet="CardRecharges" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CardRecha__PayMo__42ACE4D4" Association="LoyaltyManagementSystemModel.FK__CardRecha__PayMo__42ACE4D4">
+            <End Role="PayMode" EntitySet="PayModes" />
+            <End Role="CardRecharge" EntitySet="CardRecharges" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="InsertUpdateSelectAdmin_Result">
           <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
@@ -2066,6 +2066,44 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CardRecharge">
+          <Key>
+            <PropertyRef Name="CardRechargeId" />
+          </Key>
+          <Property Name="CardRechargeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="TodayDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="CardNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PayModeId" Type="Int32" />
+          <NavigationProperty Name="Customer" Relationship="LoyaltyManagementSystemModel.FK__CardRecha__Custo__41B8C09B" FromRole="CardRecharge" ToRole="Customer" />
+          <NavigationProperty Name="PayMode" Relationship="LoyaltyManagementSystemModel.FK__CardRecha__PayMo__42ACE4D4" FromRole="CardRecharge" ToRole="PayMode" />
+        </EntityType>
+        <Association Name="FK__CardRecha__Custo__41B8C09B">
+          <End Type="LoyaltyManagementSystemModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="LoyaltyManagementSystemModel.CardRecharge" Role="CardRecharge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="CardRecharge">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CardRecha__PayMo__42ACE4D4">
+          <End Type="LoyaltyManagementSystemModel.PayMode" Role="PayMode" Multiplicity="0..1" />
+          <End Type="LoyaltyManagementSystemModel.CardRecharge" Role="CardRecharge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PayMode">
+              <PropertyRef Name="PayModeId" />
+            </Principal>
+            <Dependent Role="CardRecharge">
+              <PropertyRef Name="PayModeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2086,17 +2124,6 @@
                 <ScalarProperty Name="countryId" ColumnName="countryId" />
                 <ScalarProperty Name="cityId" ColumnName="cityId" />
                 <ScalarProperty Name="stateId" ColumnName="stateId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CardRecharges">
-            <EntityTypeMapping TypeName="LoyaltyManagementSystemModel.CardRecharge">
-              <MappingFragment StoreEntitySet="CardRecharge">
-                <ScalarProperty Name="CardRechargeId" ColumnName="CardRechargeId" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="TodayDate" ColumnName="TodayDate" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2499,6 +2526,19 @@
                 <ScalarProperty Name="Cardid" ColumnName="Cardid" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="CustomerCardId" ColumnName="CustomerCardId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CardRecharges">
+            <EntityTypeMapping TypeName="LoyaltyManagementSystemModel.CardRecharge">
+              <MappingFragment StoreEntitySet="CardRecharge">
+                <ScalarProperty Name="PayModeId" ColumnName="PayModeId" />
+                <ScalarProperty Name="CardNo" ColumnName="CardNo" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TodayDate" ColumnName="TodayDate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="CardRechargeId" ColumnName="CardRechargeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

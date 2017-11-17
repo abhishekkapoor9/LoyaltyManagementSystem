@@ -17,13 +17,13 @@ namespace LMS_Datas
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Customer()
         {
-            this.CardRecharges = new HashSet<CardRecharge>();
             this.CustomerPoints = new HashSet<CustomerPoint>();
             this.CustomerVouchers = new HashSet<CustomerVoucher>();
             this.TransactionDetails = new HashSet<TransactionDetail>();
             this.TransferVouchers = new HashSet<TransferVoucher>();
             this.TransferVouchers1 = new HashSet<TransferVoucher>();
             this.CustomerCards = new HashSet<CustomerCard>();
+            this.CardRecharges = new HashSet<CardRecharge>();
         }
     
         public int CustomerId { get; set; }
@@ -38,8 +38,6 @@ namespace LMS_Datas
         public Nullable<int> cityId { get; set; }
         public Nullable<bool> Active { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CardRecharge> CardRecharges { get; set; }
         public virtual city city { get; set; }
         public virtual country country { get; set; }
         public virtual state state { get; set; }
@@ -55,5 +53,7 @@ namespace LMS_Datas
         public virtual ICollection<TransferVoucher> TransferVouchers1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CustomerCard> CustomerCards { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CardRecharge> CardRecharges { get; set; }
     }
 }

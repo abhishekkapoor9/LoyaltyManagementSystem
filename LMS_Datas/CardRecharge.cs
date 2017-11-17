@@ -19,7 +19,10 @@ namespace LMS_Datas
         public Nullable<int> Amount { get; set; }
         public Nullable<System.DateTime> TodayDate { get; set; }
         public Nullable<bool> Status { get; set; }
+        public string CardNo { get; set; }
+        public Nullable<int> PayModeId { get; set; }
     
         public virtual Customer Customer { get; set; }
+        public virtual PayMode PayMode { get; set; }
     }
 }

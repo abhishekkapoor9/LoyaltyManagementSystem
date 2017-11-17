@@ -28,7 +28,6 @@ namespace LMS_Datas
         }
     
         public virtual DbSet<Admin> Admins { get; set; }
-        public virtual DbSet<CardRecharge> CardRecharges { get; set; }
         public virtual DbSet<city> cities { get; set; }
         public virtual DbSet<country> countries { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
@@ -47,6 +46,7 @@ namespace LMS_Datas
         public virtual DbSet<Card1> Card1 { get; set; }
         public virtual DbSet<Voucher> Vouchers { get; set; }
         public virtual DbSet<CustomerCard> CustomerCards { get; set; }
+        public virtual DbSet<CardRecharge> CardRecharges { get; set; }
     
         public virtual ObjectResult<InsertUpdateSelectAdmin_Result> InsertUpdateSelectAdmin(Nullable<int> aId, string name, string address, string mobileNo, string emailId, string gender, Nullable<System.DateTime> dOB, Nullable<int> countryId, Nullable<int> stateId, Nullable<int> cityId, Nullable<int> aMode, Nullable<bool> active)
         {

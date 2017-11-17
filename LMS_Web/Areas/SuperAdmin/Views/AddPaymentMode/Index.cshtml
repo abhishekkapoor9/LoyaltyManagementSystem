@@ -51,11 +51,8 @@
         </div>
         <div class="widget-body">
             <div class="row" style="margin-top:3% !important">
-                @*<div class="form-control">*@
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
-                    @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
-                    @*@Html.TextBox("Payment Mode Name", null, new { @id = "txt_clientName", @class = "col-md-4", placeholder = "Payment Mode Name", style = "width:100%" })*@
                     @Html.TextBoxFor(m => m.PayMode1, null, new { @id = "txt_paymode", @class = "col-md-4", placeholder = "Enter PayMode", style = "width:100%", required = "required" })
                  </div>
                 @*</div>*@

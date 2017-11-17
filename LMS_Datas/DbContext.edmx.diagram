@@ -6,7 +6,6 @@
     <edmx:Diagrams>
       <Diagram DiagramId="149b1fcfd2834c63b2efdc6b84e54a3a" Name="Diagram1">
         <EntityTypeShape EntityType="LoyaltyManagementSystemModel.Admin" Width="1.5" PointX="5.25" PointY="21.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="LoyaltyManagementSystemModel.CardRecharge" Width="1.5" PointX="15.75" PointY="18.5" IsExpanded="true" />
         <EntityTypeShape EntityType="LoyaltyManagementSystemModel.city" Width="1.5" PointX="8.25" PointY="22.625" IsExpanded="true" />
         <EntityTypeShape EntityType="LoyaltyManagementSystemModel.country" Width="1.5" PointX="0.75" PointY="18.25" IsExpanded="true" />
         <EntityTypeShape EntityType="LoyaltyManagementSystemModel.Customer" Width="1.5" PointX="13.5" PointY="21.5" IsExpanded="true" />
@@ -26,7 +25,6 @@
         <AssociationConnector Association="LoyaltyManagementSystemModel.FK__Admin__stateId__123EB7A3" ManuallyRouted="false" />
         <AssociationConnector Association="LoyaltyManagementSystemModel.FK__CustomerP__Admin__619B8048" ManuallyRouted="false" />
         <AssociationConnector Association="LoyaltyManagementSystemModel.FK__Transacti__Admin__2180FB33" ManuallyRouted="false" />
-        <AssociationConnector Association="LoyaltyManagementSystemModel.FK__CardRecha__Today__3D2915A8" ManuallyRouted="false" />
         <AssociationConnector Association="LoyaltyManagementSystemModel.FK__city__countryNam__02084FDA" ManuallyRouted="false" />
         <AssociationConnector Association="LoyaltyManagementSystemModel.FK__city__stateId__02FC7413" ManuallyRouted="false" />
         <AssociationConnector Association="LoyaltyManagementSystemModel.FK__Customer__cityId__0B91BA14" ManuallyRouted="false" />
@@ -57,6 +55,9 @@
         <AssociationConnector Association="LoyaltyManagementSystemModel.FK__CustomerC__Cardi__3B75D760" />
         <AssociationConnector Association="LoyaltyManagementSystemModel.FK__CustomerC__Custo__3A81B327" />
         <AssociationConnector Association="LoyaltyManagementSystemModel.FK__CustomerC__DeskI__3C69FB99" />
+        <EntityTypeShape EntityType="LoyaltyManagementSystemModel.CardRecharge" Width="1.5" PointX="18.75" PointY="25.75" />
+        <AssociationConnector Association="LoyaltyManagementSystemModel.FK__CardRecha__Custo__41B8C09B" />
+        <AssociationConnector Association="LoyaltyManagementSystemModel.FK__CardRecha__PayMo__42ACE4D4" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

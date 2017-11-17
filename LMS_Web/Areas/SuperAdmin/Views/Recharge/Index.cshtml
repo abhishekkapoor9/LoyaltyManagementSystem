@@ -1,4 +1,4 @@
-﻿
+﻿@model LMS_Datas.CardRecharge
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/SuperAdmin/Views/Shared/_Layout.cshtml";
@@ -15,9 +15,8 @@
         text-align: center;
     }
 </style>
-@*@using (@Html.BeginForm("Index", "Category", FormMethod.Post))
-    {*@
-
+@using (@Html.BeginForm("Index", "CardRecharge", FormMethod.Post))
+    {
 <div class="col-sm-12">
     <div class="widget-box transparent">
         <div class="widget-header widget-header-flat">
@@ -25,7 +24,6 @@
                 <i class="ace-icon fa fa-signal"></i>
                 Recharge Card No.
             </h4>
-
             <div class="widget-toolbar">
                 <a href="#" data-action="collapse">
                     <i class="ace-icon fa fa-chevron-up"></i>
@@ -33,14 +31,11 @@
             </div>
         </div>
         <div class="widget-body">
-            
-            
             <div class="row">
                 <div class="form-control">
                     <div class="col-md-4"></div>
                     <div class="col-md-4">
-                        @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
-                        @Html.TextBox("Card No", null, new { @id = "txt_CardNo.", @class = "col-md-4", placeholder = "Enter Card No.", style = "width:100%" })
+                        @Html.TextBoxFor(m=>m.CardNo, null, new { @id = "txt_CardNo.", @class = "col-md-4", placeholder = "Enter Card No.", style = "width:100%" })
                     </div>
                     <div class="cpl-md-4"></div>
                 </div>
@@ -51,9 +46,9 @@
                     <div class="clearfix form-actions">
                         <div class="col-md-offset-3 col-md-12">
                             <div class="col-md-offset-3 col-md-9">
-                                <input type="submit" value="Searh" name="submit_search" class="btn btn-info" onclick='' />
+                                <input type="button" value="Search" name="submit_search" class="btn btn-info" id="btn_search" />
                                 &nbsp; &nbsp; &nbsp;
-                                <input type="reset" value="Reset" name="reset_login" class="btn btn-info" onclick='' />
+                                <input type="reset" value="Reset" name="reset_login" class="btn btn-info" />
                             </div>
                         </div>
                     </div>
@@ -200,7 +195,6 @@
                 <i class="ace-icon fa fa-signal"></i>
                 Amount
             </h4>
-
             <div class="widget-toolbar">
                 <a href="#" data-action="collapse">
                     <i class="ace-icon fa fa-chevron-up"></i>
@@ -208,40 +202,20 @@
             </div>
         </div>
         <div class="widget-body">
-            
             <div class="row">
                 <div class="form-control">
                     <div class="col-md-4"></div>
                     <div class="col-md-4">
-                        <select class="chosen-select form-control" id="form-field-select-3" data-placeholder="Choose Payment Mode">
-                            <option value="AL">Choose Payment Mode</option>
-                            <option value="AL">Direct</option>
-                            <option value="IL">Online</option>
-                        </select>
+                        @Html.DropDownListFor(model => model.PayModeId, new SelectList(ViewBag.Payment, "Value", "Text"), "- Please Choose Payment Mode -", new { @class = "chosen-select form-control", @id = "paymentdl", @name = "paymentId" })
                     </div>
-                    <div class="cpl-md-4"></div>
+                    <div class="col-md-4"></div>
                 </div>
             </div>
             <div class="row">
                 <div class="form-control">
                     <div class="col-md-4"></div>
                     <div class="col-md-4">
-                        <select class="chosen-select form-control" id="form-field-select-3" data-placeholder="Choose Card Type">
-                            <option value="AL">Choose Card Type</option>
-                            <option value="AL">Single</option>
-                            <option value="IL">Couple</option>
-                            <option value="IL">Group</option>
-                        </select>
-                    </div>
-                    <div class="cpl-md-4"></div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-control">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4">
-                        @* <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />*@
-                        @Html.TextBox("Amount", null, new { @id = "txt_Amount", @class = "col-md-4", placeholder = "Enter Amount", style = "width:100%" })
+                        @Html.TextBoxFor(m=>m.Amount, null, new { @id = "txt_Amount", @class = "col-md-4", placeholder = "Enter Amount", style = "width:100%" })
                     </div>
                     <div class="cpl-md-4"></div>
                 </div>
@@ -284,9 +258,8 @@
     </div>
 </div>
 
-@*}*@
+}
 <script src="~/Content/Dashboard/js/jquery-1.9.1.min.js"></script>
-
 <script src="~/Content/Dashboard/js/ace-extra.min.js"></script>
 <script src="~/Content/Dashboard/js/jquery-ui-1.10.0.js"></script>
 <script src="~/Content/Dashboard/js/grid.locale-en.js"></script>
@@ -312,8 +285,36 @@
     });
 </script>
 <script type="text/javascript">
-
+    
     $(document).ready(function () {
+        $('#btn_search').click(function () {
+            var cardNo = $("#txt_CardNo").val();
+            $.ajax
+            ({
+                url: '/AddCountry/GetStateDdl',
+                type: 'POST',
+                datatype: 'application/json',
+                rownumbers: true,
+                beforeSend: function () { $("#stateddl").html(""); },
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    cardNo: +cardNo
+                }),
+                success: function (result) {
+                    $.each((result), function (i, state) {
+                        $('.chosen-drop ul.chosen-results').append('<li class="active-result">' + state.Stateid + '</li>');
+                        $("#stateddl").append($('<option></option>').val(state.Stateid).html(state.StateName));
+                        alert(state.Stateid);
+                        $('#stateddl').trigger("chosen:updated");
+                    })
+                },
+                error: function (result) {
+                    alert("Whooaaa! Something went wrong..")
+                },
+            });
+        
+        });
+        })
         $('.input-mask-phone').mask('(99) 99-9999-9999');
         if (!ace.vars['touch']) {
             $('.chosen-select').chosen({ allow_single_deselect: true });

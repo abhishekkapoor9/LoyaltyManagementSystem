@@ -18,6 +18,7 @@ namespace LMS_Datas
         public PayMode()
         {
             this.TransactionDetails = new HashSet<TransactionDetail>();
+            this.CardRecharges = new HashSet<CardRecharge>();
         }
     
         public int PayModeId { get; set; }
@@ -26,5 +27,7 @@ namespace LMS_Datas
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TransactionDetail> TransactionDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CardRecharge> CardRecharges { get; set; }
     }
 }

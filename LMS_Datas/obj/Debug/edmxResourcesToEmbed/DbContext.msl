@@ -18,17 +18,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CardRecharges">
-      <EntityTypeMapping TypeName="LoyaltyManagementSystemModel.CardRecharge">
-        <MappingFragment StoreEntitySet="CardRecharge">
-          <ScalarProperty Name="CardRechargeId" ColumnName="CardRechargeId" />
-          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
-          <ScalarProperty Name="TodayDate" ColumnName="TodayDate" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="cities">
       <EntityTypeMapping TypeName="LoyaltyManagementSystemModel.city">
         <MappingFragment StoreEntitySet="city">
@@ -428,6 +417,19 @@
           <ScalarProperty Name="Cardid" ColumnName="Cardid" />
           <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
           <ScalarProperty Name="CustomerCardId" ColumnName="CustomerCardId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CardRecharges">
+      <EntityTypeMapping TypeName="LoyaltyManagementSystemModel.CardRecharge">
+        <MappingFragment StoreEntitySet="CardRecharge">
+          <ScalarProperty Name="PayModeId" ColumnName="PayModeId" />
+          <ScalarProperty Name="CardNo" ColumnName="CardNo" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="TodayDate" ColumnName="TodayDate" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="CardRechargeId" ColumnName="CardRechargeId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
